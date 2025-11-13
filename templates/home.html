@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block title %}Home - My E-Commerce Site{% endblock %}
+{% block content %}
+
+<h1>Welcome to Our Home Page</h1>
+<p>Explore our latest products and offers.</p>
+
+<div class="row">
+  {% for product in products %}
+  <div class="col-md-3">
+    <div class="card mb-4 shadow-sm">
+      <img
+        src="{{ product.product_image.url }}"
+        class="card-img-top"
+        alt="{{ product.product_name }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ product.product_name }}</h5>
+        <p class="card-text">Price: {{ product.price }}</p>
+        <a href="#" class="btn btn-primary">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

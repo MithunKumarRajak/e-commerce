@@ -1,0 +1,22 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}My E-Commerce Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    {% include "include/navbar.html" %}
+
+    <main>
+        {% block content %}
+        <h1>Welcome to Our Store</h1>
+        <p>Explore our latest products and offers.</p>
+        {% endblock %}
+    </main>
+
+    {% include "include/footer.html" %}
+  </body>
+</html>
