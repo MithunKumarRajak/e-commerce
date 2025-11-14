@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container mt-4">
+  <!-- TOP HEADER -->
+  <header class="border-bottom mb-4 pb-3">
+    <div class="d-flex justify-content-between">
+      <span><b>{{ product_count }}</b> items found</span>
+    </div>
+  </header>
+
+  <div class="row">
+    <!-- LEFT SIDEBAR (Categories) -->
+    <aside class="col-md-3 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white fw-bold">Categories</div>
+
+        <ul class="list-group list-group-flush">
+          <!-- All Products -->
+          <li class="list-group-item">
+            <a href="{% url 'products' %}" class="text-dark fw-semibold">
+              All Products
+            </a>
+          </li>
+
+          <li class="list-group-item bg-light"></li>
+
+          <!-- Dynamic DB Categories -->
+          {% for category in links %}
+          <li class="list-group-item">
+            <a href="{{ category.get_url }}" class="text-dark fw-semibold">
+              {{ category.category_name }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+
+    <!-- RIGHT SIDE — PRODUCT GRID -->
+    <div class="col-md-9">
+      <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img
+              src="{{ product.product_image.url }}"
+              class="card-img-top"
+              alt="{{ product.product_name }}"
+              style="height: 230px; object-fit: cover"
+            />
+
+            <div class="card-body">
+              <h5 class="card-title">{{ product.product_name }}</h5>
+              <p class="card-text">₹{{ product.price }}</p>
+              <a href="#" class="btn btn-primary btn-sm w-100">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% if products|length == 0 %}
+        <div class="alert alert-warning text-center mt-4">
+          No products found.
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

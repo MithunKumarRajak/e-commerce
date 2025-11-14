@@ -1,9 +1,112 @@
-<!-- templates/include/navbar.html -->
-<nav>
-  <ul>
-    <li><a href="{% url 'home' %}">Home</a></li>
-    <li><a href="{% url 'about' %}">About</a></li>
-    <li><a href="#">Products</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
+<!-- Flipkart Style Navbar -->
+<nav
+  class="navbar navbar-expand-lg navbar-dark"
+  style="background-color: #2874f0"
+>
+  <div class="container">
+    <!-- SmartShop Logo -->
+    <a class="navbar-brand fw-bold text-light" href="{% url 'home' %}">
+      SmartShop
+    </a>
+
+    <!-- All Products Button (Only button) -->
+    <a
+      href="{% url 'products' %}"
+      class="btn btn-light text-primary fw-semibold ms-3"
+    >
+      All Products
+    </a>
+
+    <!-- All Categories Dropdown -->
+    <div class="dropdown ms-3">
+      <button
+        class="btn btn-light text-primary fw-semibold dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+      >
+        <i class="fa fa-th-large"></i> All Categories
+      </button>
+
+      <ul class="dropdown-menu">
+        <!-- All Products Shortcut -->
+        <li>
+          <a class="dropdown-item fw-semibold" href="{% url 'products' %}">
+            All Products
+          </a>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+
+        <!-- All categories -->
+        {% for category in links %}
+        <li>
+          <a class="dropdown-item" href="{{ category.get_url }}">
+            {{ category.category_name }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Search Bar -->
+    <form
+      class="d-flex flex-grow-1 mx-3"
+      action="{% url 'products' %}"
+      method="get"
+    >
+      <input
+        class="form-control rounded-0 rounded-start"
+        type="search"
+        name="search"
+        placeholder="Search for products, brands and more"
+      />
+      <button class="btn btn-light rounded-0 rounded-end" type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+
+    <!-- Right Side Section -->
+    <ul class="navbar-nav mb-2 mb-lg-0">
+      <!-- Cart -->
+      <li class="nav-item">
+        <a class="nav-link text-white fw-semibold ms-3" href="#">
+          <i class="fa fa-shopping-cart"></i> Cart
+        </a>
+      </li>
+
+      <!-- Login -->
+      <li class="nav-item">
+        <a class="btn btn-light fw-bold text-primary px-4 ms-3" href="#">
+          Login
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Category Mega Menu (Bottom Bar) -->
+<nav class="bg-white shadow-sm">
+  <div class="container">
+    <ul class="nav py-2 justify-content-between">
+      {% for category in links %}
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link text-dark fw-semibold dropdown-toggle"
+          href="#"
+          data-bs-toggle="dropdown"
+        >
+          {{ category.category_name }}
+        </a>
+
+        <ul class="dropdown-menu p-3" style="width: 300px">
+          <li>
+            <a class="dropdown-item" href="{{ category.get_url }}">
+              All {{ category.category_name }}
+            </a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </nav>
