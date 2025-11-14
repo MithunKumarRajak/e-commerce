@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-4">
+
+  <div class="row">
+
+    <!-- LEFT IMAGE -->
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <img src="{{ product.product_image.url }}" 
+             class="card-img-top" 
+             alt="{{ product.product_name }}"
+             style="height:450px; object-fit:cover;">
+      </div>
+    </div>
+
+    <!-- RIGHT DETAILS -->
+    <div class="col-md-7">
+
+      <h2 class="fw-bold">{{ product.product_name }}</h2>
+
+      <p class="text-muted">
+        Category: 
+        <a href="{{ category.get_url }}" class="text-decoration-none">
+          {{ category.category_name }}
+        </a>
+      </p>
+
+      <h3 class="text-success fw-bold">
+        ₹{{ product.price }}
+      </h3>
+
+      <hr>
+
+      <p class="text-dark">
+        {{ product.description|default:"No description available." }}
+      </p>
+
+      <div class="mt-4 d-flex gap-3">
+        <button class="btn btn-warning btn-lg text-dark">
+          <i class="fa fa-shopping-cart"></i> Add to Cart
+        </button>
+
+        <button class="btn btn-primary btn-lg">
+          <i class="fa fa-bolt"></i> Buy Now
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Related Products Section -->
+  <div class="mt-5">
+    <h4 class="fw-bold mb-3">Related Products</h4>
+
+    <div class="row">
+
+      {% for item in product.category.product_set.all|slice:":4" %}
+        {% if item.id != product.id %}
+        <div class="col-md-3">
+          <div class="card shadow-sm mb-4">
+
+            <img src="{{ item.product_image.url }}"
+                class="card-img-top"
+                style="height:180px; object-fit:cover;">
+
+            <div class="card-body">
+              <h6 class="fw-semibold">{{ item.product_name }}</h6>
+              <p class="text-success fw-bold mb-2">₹{{ item.price }}</p>
+
+              <a href="{% url 'product_detail' item.category.slug item.slug %}"
+                  class="btn btn-primary btn-sm w-100">
+                  View
+              </a>
+            </div>
+
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
