@@ -3,87 +3,61 @@
 {% block content %}
 
 <div class="container mt-4">
-
   <div class="row">
-
-    <!-- LEFT IMAGE -->
+    <!-- LEFT SIDE: MAIN IMAGE + GALLERY -->
     <div class="col-md-5">
       <div class="card shadow-sm">
-        <img src="{{ product.product_image.url }}" 
-             class="card-img-top" 
-             alt="{{ product.product_name }}"
-             style="height:450px; object-fit:cover;">
+        <img
+          id="main-img"
+          src="{{ product.product_image.url }}"
+          class="card-img-top"
+          style="height: 450px; object-fit: cover"
+        />
+      </div>
+
+      <!-- THUMBNAILS -->
+      <div class="d-flex gap-2 mt-2">
+        {% for img in product_gallery %}
+        <img
+          src="{{ img.image.url }}"
+          width="80"
+          style="cursor: pointer; border: 1px solid #ddd; padding: 3px"
+          onclick="document.getElementById('main-img').src='{{ img.image.url }}'"
+        />
+        {% endfor %}
       </div>
     </div>
 
-    <!-- RIGHT DETAILS -->
+    <!-- RIGHT SIDE: PRODUCT DETAILS -->
     <div class="col-md-7">
-
       <h2 class="fw-bold">{{ product.product_name }}</h2>
 
       <p class="text-muted">
-        Category: 
-        <a href="{{ category.get_url }}" class="text-decoration-none">
+        Category:
+        <a href="{{ category.get_url }}" class="fw-semibold">
           {{ category.category_name }}
         </a>
       </p>
 
-      <h3 class="text-success fw-bold">
-        ₹{{ product.price }}
-      </h3>
+      <h3 class="text-success fw-bold">₹{{ product.price }}</h3>
 
-      <hr>
+      {% if product.stock == 0 %}
+      <span class="badge bg-danger mb-2">Out of Stock</span>
+      {% endif %}
 
-      <p class="text-dark">
-        {{ product.description|default:"No description available." }}
-      </p>
+      <hr />
 
-      <div class="mt-4 d-flex gap-3">
-        <button class="btn btn-warning btn-lg text-dark">
-          <i class="fa fa-shopping-cart"></i> Add to Cart
-        </button>
+      <p>{{ product.description }}</p>
 
-        <button class="btn btn-primary btn-lg">
-          <i class="fa fa-bolt"></i> Buy Now
-        </button>
-      </div>
-
+      <!-- ADD TO CART BUTTON -->
+      <a
+        href="{% url 'add_cart' product.id %}"
+        class="btn btn-warning btn-lg mt-3 w-100"
+      >
+        <i class="fa fa-shopping-cart"></i> Add to Cart
+      </a>
     </div>
   </div>
-
-  <!-- Related Products Section -->
-  <div class="mt-5">
-    <h4 class="fw-bold mb-3">Related Products</h4>
-
-    <div class="row">
-
-      {% for item in product.category.product_set.all|slice:":4" %}
-        {% if item.id != product.id %}
-        <div class="col-md-3">
-          <div class="card shadow-sm mb-4">
-
-            <img src="{{ item.product_image.url }}"
-                class="card-img-top"
-                style="height:180px; object-fit:cover;">
-
-            <div class="card-body">
-              <h6 class="fw-semibold">{{ item.product_name }}</h6>
-              <p class="text-success fw-bold mb-2">₹{{ item.price }}</p>
-
-              <a href="{% url 'product_detail' item.category.slug item.slug %}"
-                  class="btn btn-primary btn-sm w-100">
-                  View
-              </a>
-            </div>
-
-          </div>
-        </div>
-        {% endif %}
-      {% endfor %}
-
-    </div>
-  </div>
-
 </div>
 
 {% endblock %}

@@ -1,22 +1,38 @@
-{% extends "base.html" %} {% block title %}Home - My E-Commerce Site{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block title %}Home - My
+E-Commerce Site{% endblock %} {% block content %}
 
 <h1>Welcome to Our Home Page</h1>
 <p>Explore our latest products and offers.</p>
 
-<div class="row">
+<div class="row mt-4">
   {% for product in products %}
   <div class="col-md-3">
-    <div class="card mb-4 shadow-sm">
-      <img
-        src="{{ product.product_image.url }}"
-        class="card-img-top"
-        alt="{{ product.product_name }}"
-      />
-      <div class="card-body">
-        <h5 class="card-title">{{ product.product_name }}</h5>
-        <p class="card-text">Price: {{ product.price }}</p>
-        <a href="#" class="btn btn-primary">Add to Cart</a>
+    <div class="card mb-4 shadow-sm position-relative">
+      <a href="{{ product.get_url }}">
+        <img
+          src="{{ product.product_image.url }}"
+          class="card-img-top"
+          style="height: 230px; object-fit: cover"
+        />
+      </a>
+
+      <div class="card-body text-center">
+        <h5>{{ product.product_name }}</h5>
+        <p class="fw-bold text-success">₹{{ product.price }}</p>
+
+        <a
+          href="{{ product.get_url }}"
+          class="btn btn-primary btn-sm w-100 mb-2"
+        >
+          View Details
+        </a>
+
+        <a
+          href="{% url 'add_cart' product.id %}"
+          class="btn btn-warning btn-sm w-100"
+        >
+          <i class="fa fa-shopping-cart"></i> Add to Cart
+        </a>
       </div>
     </div>
   </div>

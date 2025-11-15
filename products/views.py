@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from category.models import Category
-from .models import Product
+from .models import *
 
 # Create your views here.
 
@@ -32,6 +32,7 @@ def products(request, category_slug=None):
 def product_detail(request, category_slug, product_slug):
     category = get_object_or_404(Category, slug=category_slug)
     product = get_object_or_404(Product, category=category, slug=product_slug)
+    product_gallery = ProductGallery.objects.filter(product=product)
 
     context = {
         'product': product,

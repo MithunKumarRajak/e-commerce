@@ -1,0 +1,120 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div class="container mt-4">
+  <h3 class="fw-bold mb-4">Your Cart</h3>
+
+  {% if not cart_items %}
+  <div class="alert alert-warning text-center">Your cart is empty.</div>
+  <a href="{% url 'products' %}" class="btn btn-primary">Go Shopping</a>
+
+  {% else %}
+
+  <div class="row">
+    <!-- ================= CART ITEMS ================= -->
+    <div class="col-md-8">
+      <table class="table table-bordered shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Product</th>
+            <th width="130">Quantity</th>
+            <th width="120">Subtotal</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for item in cart_items %}
+          <tr>
+            <!-- PRODUCT IMAGE + NAME -->
+            <td>
+              <div class="d-flex align-items-center gap-3">
+                <img
+                  src="{{ item.product.product_image.url }}"
+                  width="70"
+                  height="70"
+                  style="object-fit: cover"
+                />
+
+                <div>
+                  <a
+                    href="{{ item.product.get_url }}"
+                    class="text-decoration-none fw-semibold"
+                  >
+                    {{ item.product.product_name }}
+                  </a>
+
+                  <p class="text-success fw-bold m-0">
+                    ₹{{ item.product.price }}
+                  </p>
+                </div>
+              </div>
+            </td>
+
+            <!-- QUANTITY CONTROL -->
+            <td class="text-center">
+              <div
+                class="d-flex justify-content-center align-items-center gap-2"
+              >
+                <!-- decrease -->
+                <a
+                  href="{% url 'remove_cart' item.product.id %}"
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                  -
+                </a>
+
+                <!-- quantity -->
+                <span class="fw-bold">{{ item.quantity }}</span>
+
+                <!-- increase -->
+                <a
+                  href="{% url 'add_cart' item.product.id %}"
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                  +
+                </a>
+              </div>
+            </td>
+
+            <!-- SUBTOTAL -->
+            <td class="fw-bold">₹{{ item.sub_total }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ================= CART TOTAL ================= -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="fw-bold mb-3">Order Summary</h4>
+
+          <p class="d-flex justify-content-between">
+            <span>Subtotal:</span>
+            <span class="fw-bold">₹{{ total }}</span>
+          </p>
+
+          <p class="d-flex justify-content-between">
+            <span>Tax (5%):</span>
+            <span class="fw-bold">₹{{ tax }}</span>
+          </p>
+
+          <hr />
+
+          <p class="d-flex justify-content-between fs-5">
+            <span>Total:</span>
+            <span class="fw-bold">₹{{ grand_total }}</span>
+          </p>
+
+          <a href="#" class="btn btn-primary w-100 btn-lg mt-3">
+            Proceed to Checkout
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock %}
