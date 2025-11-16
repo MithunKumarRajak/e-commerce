@@ -4,7 +4,11 @@ from .models import *
 from carts.models import CartItem
 from carts.views import _cart_id
 from carts.models import Cart
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+
 # Create your views here
+
+# All products or store page but name changed to products
 
 
 def products(request, category_slug=None):
@@ -15,16 +19,25 @@ def products(request, category_slug=None):
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(
             category=categories, is_available=True)
-        products = Product.objects.filter(
-            category=categories, is_available=True)
+        if not products.exists():
+            print("No products found for the category.")
+        paginator = Paginator(products, 3)
+        page = request.GET.get('page')
+
+        paged_products = paginator.get_page(page)
         product_count = products.count()
     else:
-        products = Product.objects.filter(
-            is_available=True)
+        products = Product.objects.all().filter(
+            is_available=True).order_by('id')
+        if not products.exists():
+            print("No products found.")
+        paginator = Paginator(products, 3)
+        page = request.GET.get('page')
+        paged_products = paginator.get_page(page)
         product_count = products.count()
 
     context = {
-        'products': products,
+        'products': paged_products,
         'product_count': product_count,
     }
     return render(request, 'store/store.html', context)

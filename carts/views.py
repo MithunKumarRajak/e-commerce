@@ -3,6 +3,7 @@ from carts.models import Cart, CartItem
 from .models import Product
 
 
+
 # Define the _cart_id function
 def _cart_id(request):
     cart = request.session.session_key
