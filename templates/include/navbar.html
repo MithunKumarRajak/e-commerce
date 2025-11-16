@@ -50,14 +50,16 @@
     <!-- Search Bar -->
     <form
       class="d-flex flex-grow-1 mx-3"
-      action="{% url 'products' %}"
-      method="get"
+      action="{% url 'search' %}"
+      class="search"
+      method="GET"
     >
       <input
         class="form-control rounded-0 rounded-start"
-        type="search"
-        name="search"
-        placeholder="Search for products, brands and more"
+        type="text"
+        name="keybord"
+        placeholder="Search for products, and more"
+        name="keyword"
       />
       <button class="btn btn-light rounded-0 rounded-end" type="submit">
         <i class="fa fa-search"></i>
