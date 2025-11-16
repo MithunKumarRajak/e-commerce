@@ -1,30 +1,38 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 
 <div class="container mt-4">
   <h3 class="fw-bold mb-4">Your Cart</h3>
 
   {% if not cart_items %}
-  <div class="alert alert-warning text-center">Your cart is empty.</div>
-  <a href="{% url 'products' %}" class="btn btn-primary">Go Shopping</a>
+  <!-- EMPTY CART UI -->
+  <div class="text-center my-5">
+    <h2>Your Shopping Cart is Empty</h2>
+    <a href="{% url 'products' %}" class="btn btn-primary mt-3">
+      Continue Shopping
+    </a>
+  </div>
 
   {% else %}
 
   <div class="row">
-    <!-- ================= CART ITEMS ================= -->
+    <!-- =============== CART ITEMS =============== -->
     <div class="col-md-8">
       <table class="table table-bordered shadow-sm">
         <thead class="table-light">
           <tr>
             <th>Product</th>
-            <th width="130">Quantity</th>
+            <th width="150">Quantity</th>
             <th width="120">Subtotal</th>
+            <th width="120">Action</th>
           </tr>
         </thead>
 
         <tbody>
           {% for item in cart_items %}
           <tr>
-            <!-- PRODUCT IMAGE + NAME -->
+            <!-- PRODUCT -->
             <td>
               <div class="d-flex align-items-center gap-3">
                 <img
@@ -41,20 +49,14 @@
                   >
                     {{ item.product.product_name }}
                   </a>
-
-                  <p class="text-success fw-bold m-0">
-                    ₹{{ item.product.price }}
-                  </p>
+                  <p class="text-success fw-bold m-0">₹{{ item.product.price }}</p>
                 </div>
               </div>
             </td>
 
-            <!-- QUANTITY CONTROL -->
+            <!-- QUANTITY -->
             <td class="text-center">
-              <div
-                class="d-flex justify-content-center align-items-center gap-2"
-              >
-                <!-- decrease -->
+              <div class="d-flex justify-content-center align-items-center gap-2">
                 <a
                   href="{% url 'remove_cart' item.product.id %}"
                   class="btn btn-sm btn-outline-secondary"
@@ -62,10 +64,8 @@
                   -
                 </a>
 
-                <!-- quantity -->
                 <span class="fw-bold">{{ item.quantity }}</span>
 
-                <!-- increase -->
                 <a
                   href="{% url 'add_cart' item.product.id %}"
                   class="btn btn-sm btn-outline-secondary"
@@ -77,13 +77,23 @@
 
             <!-- SUBTOTAL -->
             <td class="fw-bold">₹{{ item.sub_total }}</td>
+
+            <!-- REMOVE BUTTON -->
+            <td>
+              <a
+                href="{% url 'remove_cart_item' item.product.id %}"
+                class="btn btn-danger btn-sm"
+              >
+                Remove
+              </a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
 
-    <!-- ================= CART TOTAL ================= -->
+    <!-- =============== CART TOTAL =============== -->
     <div class="col-md-4">
       <div class="card shadow-sm">
         <div class="card-body">
@@ -95,7 +105,7 @@
           </p>
 
           <p class="d-flex justify-content-between">
-            <span>Tax (5%):</span>
+            <span>Tax (2.5%):</span>
             <span class="fw-bold">₹{{ tax }}</span>
           </p>
 
@@ -107,7 +117,11 @@
           </p>
 
           <a href="#" class="btn btn-primary w-100 btn-lg mt-3">
-            Proceed to Checkout
+            Checkout
+          </a>
+
+          <a href="{% url 'products' %}" class="btn btn-outline-secondary w-100 mt-2">
+            Continue Shopping
           </a>
         </div>
       </div>

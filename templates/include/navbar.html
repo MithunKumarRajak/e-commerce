@@ -68,13 +68,24 @@
     <ul class="navbar-nav mb-2 mb-lg-0">
       <!-- Cart -->
       <li class="nav-item">
-        <a class="nav-link text-white fw-semibold ms-3" href="#">
-          <i class="fa fa-shopping-cart"></i> Cart
+        <a
+          href="{% url 'cart' %}"
+          class="widget-header pl-3 ml-3 nav-link text-white fw-semibold position-relative"
+        >
+          <div class="icon icon-sm rounded-circle">
+            <i class="fa fa-shopping-cart text-white"></i>
+          </div>
+          Cart {% if cart_count > 0 %}
+          <span
+            class="badge badge-pill badge-danger notify position-absolute top-0 start-100 translate-middle"
+          >
+            {{ cart_count }}
+          </span>
+          {% endif %}
         </a>
       </li>
-
       <!-- Login -->
-      <li class="nav-item">
+      <li class="nav-item d-flex align-items-center">
         <a class="btn btn-light fw-bold text-primary px-4 ms-3" href="#">
           Login
         </a>
