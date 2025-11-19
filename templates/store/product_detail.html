@@ -1,32 +1,26 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 
 <div class="container mt-4">
   <div class="row">
     <!-- LEFT SIDE: MAIN IMAGE + GALLERY -->
     <div class="col-md-5">
       <div class="card shadow-sm">
-        <img
-          id="main-img"
-          src="{{ product.product_image.url }}"
-          class="card-img-top"
-          style="height: 450px; object-fit: cover"
-        />
+        <img id="main-img" src="{{ product.product_image.url }}" class="card-img-top"
+          style="height: 450px; object-fit: cover" />
       </div>
 
       <!-- THUMBNAILS -->
       <div class="d-flex gap-2 mt-2">
         {% for img in product_gallery %}
-        <img
-          src="{{ img.image.url }}"
-          width="80"
-          style="cursor: pointer; border: 1px solid #ddd; padding: 3px"
-          onclick="document.getElementById('main-img').src='{{ img.image.url }}'"
-        />
+        <img src="{{ img.image.url }}" width="80" style="cursor: pointer; border: 1px solid #ddd; padding: 3px"
+          onclick="document.getElementById('main-img').src='{{ img.image.url }}'" />
         {% endfor %}
       </div>
     </div>
 
-    <!-- RIGHT SIDE: PRODUCT DETAILS -->
+    <!-- RIGHT: DETAILS + ADD TO CART -->
     <div class="col-md-7">
       <h2 class="fw-bold">{{ product.product_name }}</h2>
 
@@ -39,43 +33,55 @@
 
       <h3 class="text-success fw-bold">₹{{ product.price }}</h3>
 
-      <!--  ADD TO CART / ADDED TO CART) -->
-      {% if product.stock <= 0 %}
-      <span class="badge bg-danger mb-2">Out of Stock</span>
+      <hr>
 
-      {% else %}
-      <div class="d-flex gap-2 mt-3">
-        {% if in_cart %}
-        <!-- ADDED TO CART BUTTON -->
-        <a
-          href="{% url 'cart' %}"
-          class="btn btn-success btn-lg d-flex align-items-center justify-content-center"
-          style="flex: 1"
-        >
-          <i class="fas fa-check me-2"></i> Added to Cart
-        </a>
+      <!-- VARIATIONS FORM -->
+      <form action="{% url 'add_cart' product.id %}" method="POST">
+        {% csrf_token %}
 
-        <!-- VIEW CART BUTTON -->
-        <a
-          href="{% url 'cart' %}"
-          class="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
-          style="flex: 1"
-        >
-          <i class="fa fa-eye me-2"></i> View Cart
-        </a>
+        <!-- COLOR -->
+        <label class="fw-semibold">Select Color</label>
+        <select name="color" class="form-control mb-3" required>
+          <option value="" selected disabled>Choose a color</option>
+          {% for i in product.variation_set.colors %}
+          <option value="{{ i.variation_value|lower }}">
+            {{ i.variation_value|capfirst }}
+          </option>
+          {% endfor %}
+        </select>
 
-        {% else %}
-        <!-- ADD TO CART BUTTON -->
-        <a
-          href="{% url 'add_cart' product.id %}"
-          class="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
-          style="flex: 2"
-        >
-          <i class="fa fa-shopping-cart me-2"></i> Add to Cart
-        </a>
-        {% endif %}
-      </div>
-      {% endif %}
+        <!-- SIZE -->
+        <label class="fw-semibold">Select Size</label>
+        <select name="size" class="form-control mb-3" required>
+          <option value="" selected disabled>Choose a size</option>
+          {% for i in product.variation_set.sizes %}
+          <option value="{{ i.variation_value|lower }}">
+            {{ i.variation_value|capfirst }}
+          </option>
+          {% endfor %}
+        </select>
+
+        <hr>
+
+        {% if product.stock <= 0 %} <span class="badge bg-danger">Out of Stock</span>
+          {% else %}
+          <div class="d-flex gap-2 mt-3">
+            {% if in_cart %}
+            <a href="{% url 'cart' %}" class="btn btn-success btn-lg w-100">
+              <i class="fa fa-check me-2"></i> Added to Cart
+            </a>
+            <a href="{% url 'cart' %}" class="btn btn-warning btn-lg w-100">
+              <i class="fa fa-eye me-2"></i> View Cart
+            </a>
+            {% else %}
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+              <i class="fa fa-shopping-cart me-2"></i> Add to Cart
+            </button>
+            {% endif %}
+          </div>
+          {% endif %}
+      </form>
+
     </div>
   </div>
 </div>

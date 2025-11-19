@@ -8,20 +8,21 @@ class Product(models.Model):
     product_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(max_length=255, blank=True, null=True)
-    price=models.IntegerField()
-    product_image = models.ImageField(upload_to='products/', blank=True, null=True)
-    stock=models.IntegerField()
-    is_available=models.BooleanField(default=True)
-    category=models.ForeignKey('category.Category', on_delete=models.CASCADE)
-    created_date=models.DateTimeField(auto_now_add=True)
-    modified_date=models.DateTimeField(auto_now=True)
+    price = models.IntegerField()
+    product_image = models.ImageField(
+        upload_to='products/', blank=True, null=True)
+    stock = models.IntegerField()
+    is_available = models.BooleanField(default=True)
+    category = models.ForeignKey('category.Category', on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def get_url(self):
+        return reverse('product_detail', args=[self.category.slug, self.slug])
 
     def __str__(self):
         return self.product_name
-    
-    def get_url(self):
-        return reverse('product_detail', args=[self.category.slug, self.slug])
-    
+
 
 class ProductGallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -30,3 +31,32 @@ class ProductGallery(models.Model):
     def __str__(self):
         return self.product.product_name
 
+
+class VariationManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()
+
+    def colors(self):
+        return self.get_queryset().filter(variation_category='color', is_active=True)
+
+    def sizes(self):
+        return self.get_queryset().filter(variation_category='size', is_active=True)
+
+
+class Variation(models.Model):
+    VARIATION_CATEGORY_CHOICES = (
+        ('color', 'Color'),
+        ('size', 'Size'),
+    )
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    variation_category = models.CharField(
+        max_length=100, choices=VARIATION_CATEGORY_CHOICES)
+    variation_value = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    objects = VariationManager()
+
+    def __str__(self):
+        return f"{self.variation_category}: {self.variation_value}"
