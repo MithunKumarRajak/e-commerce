@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content padding-y bg">
+    <div class="container">
+        <h4 class="text-center mb-20">My Orders</h4>
+
+        <div class="card">
+            <div class="card-body">
+                {% if orders %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.order_number }}</td>
+                            <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.order_total }}</td>
+                            <td>
+                                {% if order.payment %}
+                                <a href="{% url 'order_complete' %}?order_number={{ order.order_number }}&payment_id={{ order.payment.payment_id }}" class="btn btn-sm btn-primary">View</a>
+                                {% else %}
+                                <span class="text-muted">No payment</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>You have no completed orders yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

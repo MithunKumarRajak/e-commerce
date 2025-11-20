@@ -1,12 +1,15 @@
 <aside class="col-md-3">
-    <div class="card">
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a href="#">Account Dashboard</a></li>
-                <li class="list-group-item"><a href="#">Edit Profile</a></li>
-                <li class="list-group-item"><a href="#">My Orders</a></li>
-                <li class="list-group-item"><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-        </div>
-    </div>
+    <!--   SIDEBAR   -->
+    <ul class="list-group">
+        <a class="list-group-item {% if '/accounts/' == request.path %}active{% endif %}" href="{% url 'dashboard' %}">
+            Dashboard </a>
+        <a class="list-group-item {% if '/orders/' in request.path %}active{% endif %}" href="{% url 'order_list' %}">
+            My Orders </a>
+        <a class="list-group-item" href="#"> Edit Profile </a>
+        <a class="list-group-item" href="#"> Change Password </a>
+    </ul>
+    <br>
+    <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log
+            out</span> </a>
+    <!--   SIDEBAR .//END   -->
 </aside>

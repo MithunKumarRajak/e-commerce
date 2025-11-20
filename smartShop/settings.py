@@ -14,7 +14,11 @@ SECRET_KEY = 'django-insecure-0@kj(zp#r9v9r#gh=n(1zg(34@d7701c3u-151o1%ow7g@*m3-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'testserver',
+]
 
 
 # Application definition
@@ -156,3 +160,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'admin@gmail.com'
 EMAIL_HOST_PASSWORD = 'admin@99'
 EMAIL_USE_TLS = True
+
+# Use console email backend in development to avoid SMTP auth errors and to
+# keep credentials out of the codebase. In production override these via
+# environment variables or a separate settings file.
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
