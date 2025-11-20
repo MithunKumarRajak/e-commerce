@@ -1,8 +1,5 @@
 <!-- Flipkart Style Navbar -->
-<nav
-  class="navbar navbar-expand-lg navbar-dark"
-  style="background-color: #2874f0"
->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2874f0">
   <div class="container">
     <!-- SmartShop Logo -->
     <a class="navbar-brand fw-bold text-light" href="{% url 'home' %}">
@@ -10,20 +7,13 @@
     </a>
 
     <!-- All Products Button (Only button) -->
-    <a
-      href="{% url 'products' %}"
-      class="btn btn-light text-primary fw-semibold ms-3"
-    >
+    <a href="{% url 'products' %}" class="btn btn-light text-primary fw-semibold ms-3">
       All Products
     </a>
 
     <!-- All Categories Dropdown -->
     <div class="dropdown ms-3">
-      <button
-        class="btn btn-light text-primary fw-semibold dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-      >
+      <button class="btn btn-light text-primary fw-semibold dropdown-toggle" type="button" data-bs-toggle="dropdown">
         <i class="fa fa-th-large"></i> All Categories
       </button>
 
@@ -34,7 +24,9 @@
             All Products
           </a>
         </li>
-        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <hr class="dropdown-divider" />
+        </li>
 
         <!-- All categories -->
         {% for category in links %}
@@ -48,17 +40,9 @@
     </div>
 
     <!-- Search Bar -->
-    <form
-      class="d-flex flex-grow-1 mx-3"
-      action="{% url 'products' %}"
-      method="get"
-    >
-      <input
-        class="form-control rounded-0 rounded-start"
-        type="search"
-        name="search"
-        placeholder="Search for products, brands and more"
-      />
+    <form class="d-flex flex-grow-1 mx-3" action="{% url 'search' %}" class="search" method="GET">
+      <input class="form-control rounded-0 rounded-start" type="text" name="keyword"
+        placeholder="Search for products, and more" name="keyword" />
       <button class="btn btn-light rounded-0 rounded-end" type="submit">
         <i class="fa fa-search"></i>
       </button>
@@ -68,13 +52,19 @@
     <ul class="navbar-nav mb-2 mb-lg-0">
       <!-- Cart -->
       <li class="nav-item">
-        <a class="nav-link text-white fw-semibold ms-3" href="#">
-          <i class="fa fa-shopping-cart"></i> Cart
+        <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3 nav-link text-white fw-semibold position-relative">
+          <div class="icon icon-sm rounded-circle">
+            <i class="fa fa-shopping-cart text-white"></i>
+          </div>
+          {% if cart_count > 0 %}
+          <span class="badge badge-pill badge-danger notify position-absolute top-0 start-100 translate-middle">
+            {{ cart_count }}
+          </span>
+          {% endif %}
         </a>
       </li>
-
       <!-- Login -->
-      <li class="nav-item">
+      <li class="nav-item d-flex align-items-center">
         <a class="btn btn-light fw-bold text-primary px-4 ms-3" href="#">
           Login
         </a>
@@ -89,11 +79,7 @@
     <ul class="nav py-2 justify-content-between">
       {% for category in links %}
       <li class="nav-item dropdown">
-        <a
-          class="nav-link text-dark fw-semibold dropdown-toggle"
-          href="#"
-          data-bs-toggle="dropdown"
-        >
+        <a class="nav-link text-dark fw-semibold dropdown-toggle" href="#" data-bs-toggle="dropdown">
           {{ category.category_name }}
         </a>
 
@@ -103,7 +89,9 @@
               All {{ category.category_name }}
             </a>
           </li>
-          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
         </ul>
       </li>
       {% endfor %}

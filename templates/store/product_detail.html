@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <div class="container mt-4">
   <div class="row">
@@ -41,21 +39,43 @@
 
       <h3 class="text-success fw-bold">₹{{ product.price }}</h3>
 
-      {% if product.stock == 0 %}
+      <!--  ADD TO CART / ADDED TO CART) -->
+      {% if product.stock <= 0 %}
       <span class="badge bg-danger mb-2">Out of Stock</span>
+
+      {% else %}
+      <div class="d-flex gap-2 mt-3">
+        {% if in_cart %}
+        <!-- ADDED TO CART BUTTON -->
+        <a
+          href="{% url 'cart' %}"
+          class="btn btn-success btn-lg d-flex align-items-center justify-content-center"
+          style="flex: 1"
+        >
+          <i class="fas fa-check me-2"></i> Added to Cart
+        </a>
+
+        <!-- VIEW CART BUTTON -->
+        <a
+          href="{% url 'cart' %}"
+          class="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
+          style="flex: 1"
+        >
+          <i class="fa fa-eye me-2"></i> View Cart
+        </a>
+
+        {% else %}
+        <!-- ADD TO CART BUTTON -->
+        <a
+          href="{% url 'add_cart' product.id %}"
+          class="btn btn-primary btn-lg d-flex align-items-center justify-content-center"
+          style="flex: 2"
+        >
+          <i class="fa fa-shopping-cart me-2"></i> Add to Cart
+        </a>
+        {% endif %}
+      </div>
       {% endif %}
-
-      <hr />
-
-      <p>{{ product.description }}</p>
-
-      <!-- ADD TO CART BUTTON -->
-      <a
-        href="{% url 'add_cart' product.id %}"
-        class="btn btn-warning btn-lg mt-3 w-100"
-      >
-        <i class="fa fa-shopping-cart"></i> Add to Cart
-      </a>
     </div>
   </div>
 </div>
