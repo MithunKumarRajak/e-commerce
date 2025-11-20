@@ -50,6 +50,12 @@
                     {{ item.product.product_name }}
                   </a>
                   <p class="text-success fw-bold m-0">₹{{ item.product.price }}</p>
+                  {% if item.variation_color %}
+                  <p class="m-0">Color: <span class="fw-semibold">{{ item.variation_color.variation_value }}</span></p>
+                  {% endif %}
+                  {% if item.variation_size %}
+                  <p class="m-0">Size: <span class="fw-semibold">{{ item.variation_size.variation_value }}</span></p>
+                  {% endif %}
                 </div>
               </div>
             </td>
@@ -58,7 +64,7 @@
             <td class="text-center">
               <div class="d-flex justify-content-center align-items-center gap-2">
                 <a
-                  href="{% url 'remove_cart' item.product.id %}"
+                  href="{% url 'remove_cart' item.product.id %}{% if item.variation_color or item.variation_size %}?{% endif %}{% if item.variation_color %}color_id={{ item.variation_color.id }}{% endif %}{% if item.variation_color and item.variation_size %}&{% endif %}{% if item.variation_size %}size_id={{ item.variation_size.id }}{% endif %}"
                   class="btn btn-sm btn-outline-secondary"
                 >
                   -
@@ -67,7 +73,7 @@
                 <span class="fw-bold">{{ item.quantity }}</span>
 
                 <a
-                  href="{% url 'add_cart' item.product.id %}"
+                  href="{% url 'add_cart' item.product.id %}{% if item.variation_color or item.variation_size %}?{% endif %}{% if item.variation_color %}color_id={{ item.variation_color.id }}{% endif %}{% if item.variation_color and item.variation_size %}&{% endif %}{% if item.variation_size %}size_id={{ item.variation_size.id }}{% endif %}"
                   class="btn btn-sm btn-outline-secondary"
                 >
                   +
@@ -81,7 +87,7 @@
             <!-- REMOVE BUTTON -->
             <td>
               <a
-                href="{% url 'remove_cart_item' item.product.id %}"
+                href="{% url 'remove_cart_item' item.product.id %}{% if item.variation_color or item.variation_size %}?{% endif %}{% if item.variation_color %}color_id={{ item.variation_color.id }}{% endif %}{% if item.variation_color and item.variation_size %}&{% endif %}{% if item.variation_size %}size_id={{ item.variation_size.id }}{% endif %}"
                 class="btn btn-danger btn-sm"
               >
                 Remove

@@ -1,0 +1,46 @@
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+
+        <!-- Message Text -->
+        <span class="message-text">{{ message }}</span>
+
+        <!-- Close Button -->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+        <!-- Countdown Timer -->
+        <small class="text-muted d-block mt-1">
+            This message will disappear in <span class="countdown">5</span> seconds.
+        </small>
+
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Auto Close + Countdown Script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const alerts = document.querySelectorAll(".alert");
+
+    alerts.forEach(alert => {
+        let countdownElement = alert.querySelector(".countdown");
+        let timeLeft = 5; // seconds
+
+        const timer = setInterval(() => {
+            timeLeft--;
+
+            if (countdownElement) {
+                countdownElement.textContent = timeLeft;
+            }
+
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bsAlert.close();
+            }
+        }, 1000);
+    });
+});
+</script>
