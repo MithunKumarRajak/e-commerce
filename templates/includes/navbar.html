@@ -1,0 +1,128 @@
+<!-- Flipkart Style Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2874f0;">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold text-light" href="{% url 'home' %}">
+      SmartShop
+    </a>
+
+    <!-- Toggle Button (Mobile) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Items -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+
+      <!-- Left Section -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- All Products -->
+        <li class="nav-item">
+          <a href="{% url 'products' %}" class="btn btn-light text-primary fw-semibold ms-3">
+            All Products
+          </a>
+        </li>
+
+        <!-- All Categories Dropdown -->
+        <li class="nav-item dropdown ms-3">
+          <button class="btn btn-light text-primary fw-semibold dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="fa fa-th-large"></i> All Categories
+          </button>
+
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item fw-semibold" href="{% url 'products' %}">
+                All Products
+              </a>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            {% for category in links %}
+            <li>
+              <a class="dropdown-item" href="{{ category.get_url }}">
+                {{ category.category_name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+
+      </ul>
+
+      <!-- Search Bar -->
+      <form class="d-flex mx-lg-3 my-2 my-lg-0 flex-grow-1" action="{% url 'search' %}" method="GET">
+        <input class="form-control rounded-start" type="text" name="keyword" placeholder="Search for products..." />
+        <button class="btn btn-light rounded-end" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+
+      <!-- Right Section -->
+      <ul class="navbar-nav ms-lg-3 mb-2 mb-lg-0 align-items-center">
+
+        <!-- Cart -->
+        <li class="nav-item position-relative">
+          <a href="{% url 'cart' %}" class="nav-link text-white fw-semibold">
+            <i class="fa fa-shopping-cart fs-5"></i>
+            {% if cart_count > 0 %}
+            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+              {{ cart_count }}
+            </span>
+            {% endif %}
+          </a>
+        </li>
+
+        <!-- Login / User Info -->
+        <li class="nav-item ms-3">
+          {% if user.id is None %}
+          <div class="text-white small">
+            Welcome guest! <br>
+            <a href="{% url 'login' %}" class="text-white fw-semibold">Sign in</a>
+            <span class="mx-1">|</span>
+            <a href="{% url 'register' %}" class="text-white fw-semibold">Register</a>
+          </div>
+          {% else %}
+          <div class="text-white small">
+            Welcome {{ user.first_name }}! <br>
+            <a href="{% url 'dashboard' %}" class="text-white fw-semibold">Dashboard</a>
+            <span class="mx-1">|</span>
+            <a href="{% url 'logout' %}" class="text-white fw-semibold">Logout</a>
+          </div>
+          {% endif %}
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Category Mega Menu -->
+<nav class="bg-white shadow-sm">
+  <div class="container">
+    <ul class="nav py-2 justify-content-between">
+      {% for category in links %}
+      <li class="nav-item dropdown">
+        <a class="nav-link text-dark fw-semibold dropdown-toggle" data-bs-toggle="dropdown">
+          {{ category.category_name }}
+        </a>
+        <ul class="dropdown-menu p-3" style="width: 260px;">
+          <li>
+            <a class="dropdown-item fw-semibold" href="{{ category.get_url }}">
+              All {{ category.category_name }}
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

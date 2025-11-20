@@ -1,0 +1,21 @@
+
+{% autoescape off %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Verification</title>
+</head>
+<body>
+    <h1>Account Verification</h1>
+    <p>Dear {{ user.first_name }},</p>
+    <p>Thank you for registering with us. To verify your account, please click the link below:</p>
+    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Verify Account</a>
+    <p>If you did not register for an account, please ignore this email.</p>
+    <p>Best regards,<br>The SmartShop Team</p>
+</body>
+</html>
+
+{% endautoescape %}
+
