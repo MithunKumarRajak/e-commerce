@@ -9,11 +9,20 @@ E-Commerce Site{% endblock %} {% block content %}
   <div class="col-md-3">
     <div class="card mb-4 shadow-sm position-relative">
       <a href="{{ product.get_url }}">
+        {% if product.product_image %}
         <img
           src="{{ product.product_image.url }}"
           class="card-img-top"
           style="height: 230px; object-fit: cover"
         />
+        {% else %}
+        <img
+          src="{% static 'images/placeholder.svg' %}"
+          class="card-img-top"
+          style="height: 230px; object-fit: cover"
+          alt="No image"
+        />
+        {% endif %}
       </a>
 
       <div class="card-body text-center">

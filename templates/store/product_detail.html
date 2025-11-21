@@ -7,15 +7,25 @@
     <!-- LEFT SIDE: MAIN IMAGE + GALLERY -->
     <div class="col-md-5">
       <div class="card shadow-sm">
+        {% if product.product_image %}
         <img id="main-img" src="{{ product.product_image.url }}" class="card-img-top"
           style="height: 450px; object-fit: cover" />
+        {% else %}
+        <img id="main-img" src="{% static 'images/placeholder.svg' %}" class="card-img-top"
+          style="height: 450px; object-fit: cover" />
+        {% endif %}
       </div>
 
       <!-- THUMBNAILS -->
       <div class="d-flex gap-2 mt-2">
         {% for img in product_gallery %}
+        {% if img.image %}
         <img src="{{ img.image.url }}" width="80" style="cursor: pointer; border: 1px solid #ddd; padding: 3px"
           onclick="document.getElementById('main-img').src='{{ img.image.url }}'" />
+        {% else %}
+        <img src="{% static 'images/placeholder.svg' %}" width="80" style="cursor: pointer; border: 1px solid #ddd; padding: 3px"
+          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}'" />
+        {% endif %}
         {% endfor %}
       </div>
     </div>

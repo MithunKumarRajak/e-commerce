@@ -5,6 +5,8 @@ from orders.forms import OrderForm
 from .models import Order, Payment, OrderProduct
 from products.models import Product
 from django.core.mail import EmailMessage
+from django.urls import reverse
+from django.http import HttpResponse
 from django.contrib import messages
 from django.template.loader import render_to_string
 import datetime
@@ -83,7 +85,7 @@ def place_order(request, total=0, quantity=0,):
     cart_items = CartItem.objects.filter(user=current_user)
     cart_count = cart_items.count()
     if cart_count <= 0:
-        return redirect('store')
+        return redirect('products')
 
     grand_total = 0
     tax = 0
@@ -118,12 +120,69 @@ def place_order(request, total=0, quantity=0,):
             order_number = datetime.datetime.now().strftime('%Y%m%d%H%M%S') + str(data.id)
             data.order_number = order_number
             data.save()
-
-            # Attach cart items as OrderProduct when payment completes (payments view handles move)
+            # If the user chose Cash on Delivery, finalize the order now
+            payment_method = request.POST.get('payment_method', '').upper()
             order = Order.objects.get(
                 user=current_user, is_ordered=False, order_number=order_number)
 
-            # Render payment page with order and cart summary
+            if payment_method == 'COD' or payment_method == 'CASH_ON_DELIVERY' or payment_method == 'CASH ON DELIVERY':
+                # Create a Payment record to record COD choice
+                payment_id = f"COD{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{order.id}"
+                payment = Payment(
+                    user=current_user,
+                    payment_id=payment_id,
+                    payment_method='Cash On Delivery',
+                    amount_paid=order.order_total,
+                    status='Pending',
+                )
+                payment.save()
+
+                order.payment = payment
+                order.is_ordered = True
+                order.save()
+
+                # Move the cart items to OrderProduct table
+                cart_items = CartItem.objects.filter(user=current_user)
+
+                for item in cart_items:
+                    orderproduct = OrderProduct()
+                    orderproduct.order_id = order.id
+                    orderproduct.payment = payment
+                    orderproduct.user_id = request.user.id
+                    orderproduct.product_id = item.product_id
+                    orderproduct.quantity = item.quantity
+                    orderproduct.product_price = item.product.price
+                    orderproduct.ordered = True
+                    orderproduct.save()
+
+                    product_variation = item.variations.all()
+                    orderproduct = OrderProduct.objects.get(id=orderproduct.id)
+                    orderproduct.variations.set(product_variation)
+                    orderproduct.save()
+
+                    # Reduce stock
+                    product = Product.objects.get(id=item.product_id)
+                    product.stock -= item.quantity
+                    product.save()
+
+                # Clear cart
+                CartItem.objects.filter(user=current_user).delete()
+
+                # Send order received email
+                mail_subject = 'Thank you for your order!'
+                message = render_to_string('orders/order_recieved_email.html', {
+                    'user': request.user,
+                    'order': order,
+                })
+                to_email = request.user.email
+                send_email = EmailMessage(mail_subject, message, to=[to_email])
+                send_email.send()
+
+                # Redirect to order complete page with order_number and payment id
+                redirect_url = reverse('order_complete') + f'?order_number={order.order_number}&payment_id={payment.payment_id}'
+                return redirect(redirect_url)
+
+            # Otherwise render payment page for online payment providers (e.g., PayPal)
             context = {
                 'order': order,
                 'cart_items': cart_items,
@@ -163,6 +222,43 @@ def order_complete(request):
         return render(request, 'orders/order_complete.html', context)
     except (Payment.DoesNotExist, Order.DoesNotExist):
         return redirect('home')
+
+
+@login_required
+def download_invoice(request):
+    """Return an HTML invoice as an attachment for the logged-in user's order.
+
+    This is a simple 'download as HTML' implementation suitable for local
+    use. For PDF generation consider xhtml2pdf/weasyprint later.
+    """
+    order_number = request.GET.get('order_number')
+    payment_id = request.GET.get('payment_id')
+    try:
+        order = Order.objects.get(order_number=order_number, is_ordered=True, user=request.user)
+        payment = Payment.objects.get(payment_id=payment_id)
+        ordered_products = OrderProduct.objects.filter(order_id=order.id)
+
+        subtotal = 0
+        for i in ordered_products:
+            subtotal += i.product_price * i.quantity
+
+        context = {
+            'order': order,
+            'ordered_products': ordered_products,
+            'order_number': order.order_number,
+            'transID': payment.payment_id,
+            'payment': payment,
+            'subtotal': subtotal,
+        }
+
+        html = render(request, 'orders/order_complete.html', context).content
+        filename = f"invoice-{order.order_number}.html"
+        response = HttpResponse(html, content_type='text/html')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
+    except (Order.DoesNotExist, Payment.DoesNotExist):
+        messages.error(request, 'Invoice not found.')
+        return redirect('order_list')
 
 
 @login_required
