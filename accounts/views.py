@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
-import requests
+try:
+    import requests
+except Exception:
+    requests = None
 from carts.models import Cart, CartItem
 from .forms import RegistrationForm
 from .models import Account
@@ -108,22 +111,25 @@ def login(request):
             auth.login(request, user)
             messages.success(request, 'You are logged in.')
             url = request.META.get('HTTP_REFERER')
-            try:
-                query = requests.utils.urlparse(url).query
-                # next=/cart/checkout/
-                params = dict(x.split('=') for x in query.split('&'))
-                if 'next' in params:
-                    nextPage = params['next']
-                    return redirect(nextPage)
-            except:
-                return redirect('dashboard')
+            if requests:
+                try:
+                    query = requests.utils.urlparse(url).query
+                    # next=/cart/checkout/
+                    params = dict(x.split('=') for x in query.split('&'))
+                    if 'next' in params:
+                        nextPage = params['next']
+                        return redirect(nextPage)
+                except Exception:
+                    pass
+            return redirect('dashboard')
         else:
             # Provide clearer feedback: distinguish between inactive accounts
             # (user registered but not activated) and genuinely wrong credentials.
             try:
                 existing = Account.objects.get(email=email)
                 if not existing.is_active:
-                    messages.error(request, 'Account is not activated. Please check your email for the activation link.')
+                    messages.error(
+                        request, 'Account is not activated. Please check your email for the activation link.')
                 else:
                     messages.error(request, 'Invalid login credentials')
             except Account.DoesNotExist:

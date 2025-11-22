@@ -1,3 +1,4 @@
+from django.contrib.messages import constants as messages
 from django.contrib.auth import get_user_model
 from pathlib import Path
 
@@ -37,7 +38,6 @@ EXTERNAL_APPS = [
     'products',
     'carts',
     'orders',
-    'payments',
     'rest_framework',
 
 
@@ -146,8 +146,6 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-
-from django.contrib.messages import constants as messages
 
 MESSAGE_TAGS = {
     messages.ERROR: "danger",

@@ -14,6 +14,7 @@ import json
 from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def payments(request):
     body = json.loads(request.body)
     order = Order.objects.get(
@@ -76,6 +77,75 @@ def payments(request):
         'transID': payment.payment_id,
     }
     return JsonResponse(data)
+
+
+@login_required
+def cod_payments(request):
+    if request.method != 'POST':
+        return redirect('products')
+
+    order_id = request.POST.get('orderID')
+    try:
+        order = Order.objects.get(
+            user=request.user, is_ordered=False, order_number=order_id)
+    except Order.DoesNotExist:
+        messages.error(request, 'Order not found.')
+        return redirect('checkout')
+
+    # Create COD payment record
+    payment_id = f"COD{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{order.id}"
+    payment = Payment(
+        user=request.user,
+        payment_id=payment_id,
+        payment_method='Cash On Delivery',
+        amount_paid=order.order_total,
+        status='Pending',
+    )
+    payment.save()
+
+    order.payment = payment
+    order.is_ordered = True
+    order.save()
+
+    # Move cart items to OrderProduct table and adjust stock
+    cart_items = CartItem.objects.filter(user=request.user)
+    for item in cart_items:
+        orderproduct = OrderProduct()
+        orderproduct.order_id = order.id
+        orderproduct.payment = payment
+        orderproduct.user_id = request.user.id
+        orderproduct.product_id = item.product_id
+        orderproduct.quantity = item.quantity
+        orderproduct.product_price = item.product.price
+        orderproduct.ordered = True
+        orderproduct.save()
+
+        product_variation = item.variations.all()
+        orderproduct = OrderProduct.objects.get(id=orderproduct.id)
+        orderproduct.variations.set(product_variation)
+        orderproduct.save()
+
+        product = Product.objects.get(id=item.product_id)
+        product.stock -= item.quantity
+        product.save()
+
+    # Clear cart
+    CartItem.objects.filter(user=request.user).delete()
+
+    # Send confirmation email
+    mail_subject = 'Thank you for your order!'
+    message = render_to_string('orders/order_recieved_email.html', {
+        'user': request.user,
+        'order': order,
+    })
+    to_email = request.user.email
+    send_email = EmailMessage(mail_subject, message, to=[to_email])
+    send_email.send()
+
+    # Redirect to order complete
+    redirect_url = reverse(
+        'order_complete') + f'?order_number={order.order_number}&payment_id={payment.payment_id}'
+    return redirect(redirect_url)
 
 
 def place_order(request, total=0, quantity=0,):
@@ -179,7 +249,8 @@ def place_order(request, total=0, quantity=0,):
                 send_email.send()
 
                 # Redirect to order complete page with order_number and payment id
-                redirect_url = reverse('order_complete') + f'?order_number={order.order_number}&payment_id={payment.payment_id}'
+                redirect_url = reverse(
+                    'order_complete') + f'?order_number={order.order_number}&payment_id={payment.payment_id}'
                 return redirect(redirect_url)
 
             # Otherwise render payment page for online payment providers (e.g., PayPal)
@@ -234,7 +305,8 @@ def download_invoice(request):
     order_number = request.GET.get('order_number')
     payment_id = request.GET.get('payment_id')
     try:
-        order = Order.objects.get(order_number=order_number, is_ordered=True, user=request.user)
+        order = Order.objects.get(
+            order_number=order_number, is_ordered=True, user=request.user)
         payment = Payment.objects.get(payment_id=payment_id)
         ordered_products = OrderProduct.objects.filter(order_id=order.id)
 
@@ -264,7 +336,8 @@ def download_invoice(request):
 @login_required
 def order_list(request):
     """List the current user's completed orders."""
-    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    orders = Order.objects.filter(
+        user=request.user, is_ordered=True).order_by('-created_at')
     context = {
         'orders': orders,
     }

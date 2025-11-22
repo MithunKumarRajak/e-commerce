@@ -8,10 +8,8 @@
     <center><i class="fas fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745;"></i></center>
     <h2 class="text-center">Payment Successful</h2>
     <br>
-        <div class="text-center">
-            <a href="{% url 'products' %}" class="btn btn-success">Shop more</a>
-            <button class="btn btn-outline-secondary" id="printBtn">Print</button>
-            <a href="{% url 'download_invoice' %}?order_number={{ order.order_number }}&payment_id={{ payment.payment_id }}" class="btn btn-outline-primary">Download Invoice</a>
+    <div class="text-center">
+        <a href="{% url 'products' %}" class="btn btn-success">Shop more</a>
     </div>
 </div>
 
@@ -27,8 +25,8 @@
                         <!-- Start .row -->
                         <div class="col-lg-6">
                             <!-- col-lg-6 start here -->
-                            <div class="invoice-logo"><img src="{% static '/images/logo.png' %}" alt="Invoice logo"
-                                    style="max-height: 40px;"></div>
+                            <div class="invoice-smartshop-logo"><img src="{% static '/images/smartshop-logo.png' %}"
+                                    alt="Invoice smartshop-logo" style="max-height: 40px;"></div>
                         </div>
                         <!-- col-lg-6 end here -->
                         <div class="col-lg-6">
@@ -63,41 +61,32 @@
                                         <thead>
                                             <tr>
                                                 <th class="per70 text-center">Products</th>
-                                                <th class="per5 text-center">Qty</th>
+                                                <th class="per5 text-center">Quantity</th>
                                                 <th class="per25 text-center">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {% for item in ordered_products %}
                                             <tr>
-                                                <td>{{item.product.product_name}}
-                                                    <p class="text-muted small">
-                                                        {% if item.variations.all %}
-                                                        {% for i in item.variations.all %}
-                                                        {{ i.variation_category | capfirst }} : {{ i.variation_value |
-                                                        capfirst }} <br>
-                                                        {% endfor %}
-                                                        {% endif %}
-                                                    </p>
-                                                </td>
+                                                <td class="text-center">{{item.product.product_name}}</td>
                                                 <td class="text-center">{{item.quantity}}</td>
-                                                <td class="text-center">${{item.product_price}} USD</td>
+                                                <td class="text-center">₹{{item.product_price}} INR</td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th colspan="2" class="text-right">Sub Total:</th>
-                                                <th class="text-center">${{subtotal}} USD</th>
+                                                <th class="text-center">₹{{subtotal}} INR</th>
                                             </tr>
                                             <tr>
                                                 <th colspan="2" class="text-right">Tax:</th>
-                                                <th class="text-center">${{order.tax}} USD</th>
+                                                <th class="text-center">₹{{order.tax}} INR</th>
                                             </tr>
 
                                             <tr>
                                                 <th colspan="2" class="text-right">Grand Total:</th>
-                                                <th class="text-center">${{order.order_total}} USD</th>
+                                                <th class="text-center">₹{{order.order_total}} INR</th>
                                             </tr>
                                         </tfoot>
                                     </table>
