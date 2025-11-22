@@ -66,3 +66,7 @@ def search(request):
         'product_count': products.count(),
     }
     return render(request, 'store/store.html', context)
+
+
+
+
