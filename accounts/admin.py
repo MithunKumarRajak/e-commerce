@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from accounts.models import Account
+from django.utils.html import format_html
+from .models import UserProfile
 # Register your models here.
 
 
-class DisplayOnAdminPanel(UserAdmin):
+class AccountAdmin(UserAdmin):
     list_display = (
         'email', 'username', 'first_name', 'last_name',
         'phone_number', 'is_admin', 'is_staff',
@@ -20,4 +22,16 @@ class DisplayOnAdminPanel(UserAdmin):
     fieldsets = ()
 
 
-admin.site.register(Account, DisplayOnAdminPanel)
+# user profile admin panel
+class UserProfileAdmin(admin.ModelAdmin):
+    def thumbnail(self, obj):
+        if obj.profile_picture:
+            return format_html('<img src="{}" width="40" style="border-radius: 50px;" />'.format(obj.profile_picture.url))
+        return '-'
+
+    thumbnail.short_description = 'Profile Picture'
+    list_display = ('thumbnail', 'user', 'city', 'state', 'country')
+
+
+admin.site.register(Account, AccountAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)

@@ -341,4 +341,5 @@ def order_list(request):
     context = {
         'orders': orders,
     }
-    return render(request, 'orders/order_list.html', context)
+    # Reuse the account-facing orders template to avoid duplicates
+    return render(request, 'accounts/my_orders.html', context)

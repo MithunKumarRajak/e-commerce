@@ -7,16 +7,16 @@
     </p>
 
     <div class="d-flex justify-content-center gap-4 mb-3">
-      <a href="#" class="text-white text-decoration-none">Privacy Policy</a>
-      <a href="#" class="text-white text-decoration-none">Terms & Conditions</a>
-      <a href="#" class="text-white text-decoration-none">Contact Us</a>
+      <a href="policy.html" class="text-white text-decoration-none">Privacy Policy</a>
+      <a href="terms.html" class="text-white text-decoration-none">Terms & Conditions</a>
+      <a href="contact.html" class="text-white text-decoration-none">Contact Us</a>
     </div>
 
     <div class="mb-3">
-      <a href="#" class="text-white me-3"><i class="fa-brands fa-facebook"></i></a>
-      <a href="#" class="text-white me-3"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#" class="text-white me-3"><i class="fa-brands fa-twitter"></i></a>
-      <a href="#" class="text-white"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://www.facebook.com" class="text-white me-3"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://www.instagram.com" class="text-white me-3"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.twitter.com" class="text-white me-3"><i class="fa-brands fa-twitter"></i></a>
+      <a href="https://www.linkedin.com" class="text-white"><i class="fa-brands fa-linkedin"></i></a>
     </div>
 
     <p class="mb-0">
@@ -24,3 +24,18 @@
     </p>
   </div>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  ₹(document).ready(function () {
+    // Thumbnail click to replace main image
+    ₹('ul.thumb li a').on('click', function (e) {
+      e.preventDefault();
+      var newSrc = ₹(this).find('img').attr('src');
+      ₹('.mainImage img').attr('src', newSrc);
+    });
+  });
+</script>
+
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 from django.contrib.messages import constants as messages
 from django.contrib.auth import get_user_model
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,16 +11,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0@kj(zp#r9v9r#gh=n(1zg(34@d7701c3u-151o1%ow7g@*m3-'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'testserver',
-]
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS', default='localhost,127.0.0.1,127.0.0.1:8000').split(',')
 
 
 # Application definition
@@ -31,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # added - safe, provides humanize filters (intcomma, naturaltime, etc.)
+    'django.contrib.humanize',
 ]
 EXTERNAL_APPS = [
     'category',
@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links',
                 'carts.context_processors.counter',
+                'smartShop.context_processors.paypal',
             ],
         },
     },
@@ -153,14 +154,16 @@ MESSAGE_TAGS = {
 
 
 # Email Backend configuration
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'admin@gmail.com'
-EMAIL_HOST_PASSWORD = 'admin@99'
-EMAIL_USE_TLS = True
-
-# Use console email backend in development to avoid SMTP auth errors and to
-# keep credentials out of the codebase. In production override these via
-# environment variables or a separate settings file.
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='admin@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='admin@99')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+# Allow overriding the email backend from environment. If not provided,
+# use console backend in DEBUG and SMTP backend in production.
+EMAIL_BACKEND = config('EMAIL_BACKEND', default=None)
+if not EMAIL_BACKEND:
+    if DEBUG:
+        EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    else:
+        EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

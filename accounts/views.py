@@ -1,12 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
-try:
-    import requests
-except Exception:
-    requests = None
+from orders.models import Order, OrderProduct
 from carts.models import Cart, CartItem
-from .forms import RegistrationForm
-from .models import Account
+from .forms import RegistrationForm, UserForm, UserProfileForm
+from .models import Account, UserProfile
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 # Verification email
@@ -17,6 +14,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from carts.views import _cart_id
+import requests
 
 
 # Create your views here.
@@ -36,6 +34,13 @@ def register(request):
                 first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_number = phone_number
             user.save()
+
+            # Create user profile automatically
+            profile = UserProfile(user=user)
+            profile.user_id = user.id
+            profile.profile_picture = 'default/user-default.png'
+            profile.save()
+
             # User Activation can be added here
             current_site = get_current_site(request)
             mail_subject = 'Please activate your account'
@@ -145,10 +150,6 @@ def logout(request):
     return redirect('login')
 
 
-@login_required(login_url='login')
-def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
-
 # Account Activation
 
 
@@ -243,22 +244,129 @@ def resetPassword(request):
         return render(request, 'accounts/resetPassword.html')
 
 
+def resend_activation(request):
+    """Allow a user to request a new activation email if their token expired."""
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = Account.objects.get(email=email)
+        except Account.DoesNotExist:
+            messages.error(
+                request, 'No account found with that email address.')
+            return render(request, 'accounts/resend_activation.html')
+
+        if user.is_active:
+            messages.info(
+                request, 'Account is already active. You can log in.')
+            return redirect('login')
+
+        # Build activation email
+        current_site = get_current_site(request)
+        mail_subject = 'Please activate your account'
+        message = render_to_string('accounts/account_verification_email.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': default_token_generator.make_token(user),
+        })
+        to_email = email
+        send_email = EmailMessage(mail_subject, message, to=[to_email])
+        send_email.send()
+
+        # Redirect to login with an informational query param
+        return redirect(f"/accounts/login/?command=verification&email={email}")
+
+    return render(request, 'accounts/resend_activation.html')
+
+# Dashboard
+
+
 @login_required(login_url='login')
 def dashboard(request):
+    orders = Order.objects.order_by('-created_at').filter(
+        user_id=request.user.id, is_ordered=True)
     # Provide safe context expected by the template
-    orders_count = 0
-    # userprofile may not exist in this project; provide fallback
-
-    class _Profile:
-        class _Pic:
-            url = '/static/images/default_profile.png'
-
-        profile_picture = _Pic()
-
-    userprofile = getattr(request.user, 'userprofile', _Profile())
-
+    orders_count = orders.count()
+# user profile picture
+    userprofile = UserProfile.objects.get(user_id=request.user.id)
     context = {
         'orders_count': orders_count,
         'userprofile': userprofile,
+
     }
     return render(request, 'accounts/dashboard.html', context)
+
+
+#
+def my_orders(request):
+    """List completed orders for the logged-in user."""
+    orders = Order.objects.filter(
+        user=request.user, is_ordered=True).order_by('-created_at')
+    context = {
+        'orders': orders,
+    }
+    return render(request, 'accounts/my_orders.html', context)
+
+
+# edit_profile
+@login_required(login_url='login')
+def edit_profile(request):
+    userprofile = get_object_or_404(UserProfile, user=request.user)
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(
+            request.POST, request.FILES, instance=userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Your profile has been updated.')
+            return redirect('edit_profile')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=userprofile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+    }
+    return render(request, 'accounts/edit_profile.html', context)
+
+
+# change password
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'Password updated successfully.')
+                return redirect('change_password')
+            else:
+                messages.error(request, 'Please enter valid current password')
+                return redirect('change_password')
+        else:
+            messages.error(
+                request, 'New password and confirm password does not match!')
+            return redirect('change_password')
+    return render(request, 'accounts/change_password.html')
+
+
+# order detail
+@login_required(login_url='login')
+def order_detail(request, order_id):
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    order = Order.objects.get(order_number=order_id)
+    context = {
+        'order_detail': order_detail,
+        'order': order,
+    }
+    return render(request, 'accounts/order_detail.html', context)

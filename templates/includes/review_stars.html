@@ -1,0 +1,15 @@
+{# Render star rating for a review #}
+
+{% with rating_val=rating|default:0 %}
+{% with rounded=rating_val|floatformat:0 %}
+
+    {% for i in "12345"|make_list %}
+        {% if forloop.counter <= rounded|floatformat:0 %}
+            <i class="fas fa-star" style="color:#ffb503"></i>
+        {% else %}
+            <i class="far fa-star" style="color:#ccc"></i>
+        {% endif %}
+    {% endfor %}
+
+{% endwith %}
+{% endwith %}
