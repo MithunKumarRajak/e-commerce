@@ -2,46 +2,63 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}My E-Commerce Site{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-<head>
-  <meta charset="UTF-8" />
-  <title>{% block title %}My E-Commerce Site{% endblock %}</title>
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom styles -->
+    <link
+      href="{% static 'css/style.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="{% static 'css/responsive.css' %}"
+      rel="stylesheet"
+      media="only screen and (max-width: 1200px)"
+    />
+    <!-- Font awesome 5 -->
+    <link
+      href="{% static 'fonts/fontawesome/css/all.min.css' %}"
+      type="text/css"
+      rel="stylesheet"
+    />
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Custom styles -->
-  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-  <!-- Font awesome 5 -->
-  <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+    <!-- jQuery -->
+    <!-- jQuery (CDN) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-  <!-- jQuery -->
-  <!-- jQuery (CDN) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- PayPal Script (client id from environment via context processor) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZcoVlxT3Fb6Zq6A-E-4ZFxLFD14eXqGYqwkuTSV5IxuuUrNDyHEHaTQx2AvKUFZDmZTAqf-KIb7VOt1&currency=USD"></script>
+  </head>
 
-  <!-- PayPal Script (client id from environment via context processor) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=ATZg-ZlpmIfsiEkM7cp2QEh4qQ52uRPnBzSj0xQc2L7R6yZzpjeZh9J1KTn02PAEZYGT3rO41EhPLKrj&currency=USD"></script>
+  <body>
+    {% include "includes/navbar.html" %}
 
+    <main>
+      {% block content %}
+      <h1>Welcome to Our Store</h1>
+      <p>Explore our latest products and offers.</p>
+      {% endblock %}
+    </main>
 
-</head>
-
-<body>
-  {% include "includes/navbar.html" %}
-
-  <main>
-    {% block content %}
-    <h1>Welcome to Our Store</h1>
-    <p>Explore our latest products and offers.</p>
-    {% endblock %}
-  </main>
-
-  {% include "includes/footer.html" %}
-</body>
-
+    {% include "includes/footer.html" %}
+  </body>
 </html>
