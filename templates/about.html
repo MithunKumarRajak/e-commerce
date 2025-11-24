@@ -1,12 +1,49 @@
 <!-- templates/about.html -->
-{% extends "base.html" %} 
-{% block title %}
-About Us - My E-Commerce Site
-{% endblock %}
-
-
+{% extends "base.html" %} {% block title %} About Us - SmartShop {% endblock %}
 {% block content %}
-<h1>About Us</h1>
-<p>We are passionate about delivering quality products at great prices.</p>
-{% endblock %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <h1 class="mb-4 fw-bold text-primary">About SmartShop</h1>
 
+      <p class="lead">
+        Welcome to <strong>SmartShop</strong> — your trusted online destination
+        for quality products, unbeatable prices, and a seamless shopping
+        experience. We aim to make online shopping simple, affordable, and
+        enjoyable for every customer.
+      </p>
+
+      <hr class="my-4" />
+
+      <h3 class="fw-semibold mt-4">Our Mission</h3>
+      <p>
+        Our mission is to provide a wide range of premium products while
+        maintaining fair pricing, fast delivery, and reliable support. We
+        believe in customers first, honesty, and providing value that speaks for
+        itself.
+      </p>
+
+      <h3 class="fw-semibold mt-4">What We Offer</h3>
+      <ul>
+        <li>High-quality products across multiple categories</li>
+        <li>Secure checkout and multiple payment options</li>
+        <li>Fast and reliable delivery services</li>
+        <li>Easy returns & customer-friendly policies</li>
+        <li>Professional support and assistance</li>
+      </ul>
+
+      <h3 class="fw-semibold mt-4">Why Choose SmartShop?</h3>
+      <p>
+        At SmartShop, we are dedicated to blending quality, trust, and
+        convenience. Whether you’re shopping for fashion, electronics, home
+        essentials, or lifestyle products, we ensure a smooth journey from
+        browsing to checkout.
+      </p>
+
+      <div class="alert alert-primary mt-4">
+        <strong>SmartShop</strong> — Smart Shopping Begins Here.
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,9 +1,7 @@
 
 from django.shortcuts import render
 from products.models import Product
-
 # Create your views here.
-from django.shortcuts import render
 from category.models import Category
 from products.models import Product  # or your app name
 
@@ -23,3 +21,15 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+
+def contact(request):
+    return render(request, 'contact.html')
+
+
+def policy(request):
+    return render(request, 'policy.html')
+
+
+def terms(request):
+    return render(request, 'terms.html')

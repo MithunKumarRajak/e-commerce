@@ -7,9 +7,10 @@
     </p>
 
     <div class="d-flex justify-content-center gap-4 mb-3">
-      <a href="policy.html" class="text-white text-decoration-none">Privacy Policy</a>
-      <a href="terms.html" class="text-white text-decoration-none">Terms & Conditions</a>
-      <a href="contact.html" class="text-white text-decoration-none">Contact Us</a>
+      <a href="{% url 'policy' %}" class="text-white text-decoration-none">Privacy Policy</a>
+      <a href="{% url 'terms' %}" class="text-white text-decoration-none">Terms & Conditions</a>
+      <a href="{% url 'about' %}" class="text-white text-decoration-none">About Us</a>
+      <a href="{% url 'contact' %}" class="text-white text-decoration-none">Contact Us</a>
     </div>
 
     <div class="mb-3">
@@ -26,15 +27,16 @@
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-  ₹(document).ready(function () {
+  $(document).ready(function () {
     // Thumbnail click to replace main image
-    ₹('ul.thumb li a').on('click', function (e) {
+    $('ul.thumb li a').on('click', function (e) {
       e.preventDefault();
-      var newSrc = ₹(this).find('img').attr('src');
-      ₹('.mainImage img').attr('src', newSrc);
+      var newSrc = $(this).find('img').attr('src');
+      $('.mainImage img').attr('src', newSrc);
     });
   });
 </script>
+
 
 </body>
 
