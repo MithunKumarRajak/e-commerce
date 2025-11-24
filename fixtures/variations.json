@@ -1,0 +1,739 @@
+[
+    {
+        "model": "products.variation",
+        "pk": 1,
+        "fields": {
+            "product": 1,
+            "variation_category": "color",
+            "variation_value": "Gold",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 2,
+        "fields": {
+            "product": 1,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 3,
+        "fields": {
+            "product": 1,
+            "variation_category": "color",
+            "variation_value": "Rose Gold",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 4,
+        "fields": {
+            "product": 2,
+            "variation_category": "color",
+            "variation_value": "Gold",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 5,
+        "fields": {
+            "product": 2,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 6,
+        "fields": {
+            "product": 2,
+            "variation_category": "color",
+            "variation_value": "Rose Gold",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 7,
+        "fields": {
+            "product": 3,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 8,
+        "fields": {
+            "product": 3,
+            "variation_category": "color",
+            "variation_value": "Gold",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 9,
+        "fields": {
+            "product": 4,
+            "variation_category": "size",
+            "variation_value": "Standard",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 10,
+        "fields": {
+            "product": 4,
+            "variation_category": "size",
+            "variation_value": "Medium",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 11,
+        "fields": {
+            "product": 5,
+            "variation_category": "size",
+            "variation_value": "Standard",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 12,
+        "fields": {
+            "product": 5,
+            "variation_category": "size",
+            "variation_value": "Medium",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 13,
+        "fields": {
+            "product": 6,
+            "variation_category": "size",
+            "variation_value": "Standard",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 14,
+        "fields": {
+            "product": 7,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 15,
+        "fields": {
+            "product": 7,
+            "variation_category": "color",
+            "variation_value": "Brown",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 16,
+        "fields": {
+            "product": 7,
+            "variation_category": "color",
+            "variation_value": "Blue",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 17,
+        "fields": {
+            "product": 8,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 18,
+        "fields": {
+            "product": 8,
+            "variation_category": "color",
+            "variation_value": "Brown",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 19,
+        "fields": {
+            "product": 9,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 20,
+        "fields": {
+            "product": 9,
+            "variation_category": "color",
+            "variation_value": "Blue",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 21,
+        "fields": {
+            "product": 31,
+            "variation_category": "size",
+            "variation_value": "S",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 22,
+        "fields": {
+            "product": 31,
+            "variation_category": "size",
+            "variation_value": "M",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 23,
+        "fields": {
+            "product": 31,
+            "variation_category": "size",
+            "variation_value": "L",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 24,
+        "fields": {
+            "product": 31,
+            "variation_category": "size",
+            "variation_value": "XL",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 25,
+        "fields": {
+            "product": 31,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 26,
+        "fields": {
+            "product": 31,
+            "variation_category": "color",
+            "variation_value": "Blue",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 27,
+        "fields": {
+            "product": 31,
+            "variation_category": "color",
+            "variation_value": "White",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 28,
+        "fields": {
+            "product": 32,
+            "variation_category": "size",
+            "variation_value": "S",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 29,
+        "fields": {
+            "product": 32,
+            "variation_category": "size",
+            "variation_value": "M",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 30,
+        "fields": {
+            "product": 32,
+            "variation_category": "size",
+            "variation_value": "L",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 31,
+        "fields": {
+            "product": 32,
+            "variation_category": "size",
+            "variation_value": "XL",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 32,
+        "fields": {
+            "product": 32,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 33,
+        "fields": {
+            "product": 32,
+            "variation_category": "color",
+            "variation_value": "Blue",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 34,
+        "fields": {
+            "product": 32,
+            "variation_category": "color",
+            "variation_value": "White",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 35,
+        "fields": {
+            "product": 33,
+            "variation_category": "size",
+            "variation_value": "S",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 36,
+        "fields": {
+            "product": 33,
+            "variation_category": "size",
+            "variation_value": "M",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 37,
+        "fields": {
+            "product": 33,
+            "variation_category": "size",
+            "variation_value": "L",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 38,
+        "fields": {
+            "product": 33,
+            "variation_category": "size",
+            "variation_value": "XL",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 39,
+        "fields": {
+            "product": 33,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 40,
+        "fields": {
+            "product": 33,
+            "variation_category": "color",
+            "variation_value": "Blue",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 41,
+        "fields": {
+            "product": 33,
+            "variation_category": "color",
+            "variation_value": "White",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 42,
+        "fields": {
+            "product": 16,
+            "variation_category": "size",
+            "variation_value": "Small",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 43,
+        "fields": {
+            "product": 16,
+            "variation_category": "size",
+            "variation_value": "Medium",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 44,
+        "fields": {
+            "product": 16,
+            "variation_category": "size",
+            "variation_value": "Large",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 45,
+        "fields": {
+            "product": 17,
+            "variation_category": "size",
+            "variation_value": "Small",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 46,
+        "fields": {
+            "product": 17,
+            "variation_category": "size",
+            "variation_value": "Medium",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 47,
+        "fields": {
+            "product": 18,
+            "variation_category": "size",
+            "variation_value": "Small",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 48,
+        "fields": {
+            "product": 18,
+            "variation_category": "size",
+            "variation_value": "Medium",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 49,
+        "fields": {
+            "product": 18,
+            "variation_category": "size",
+            "variation_value": "Large",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 50,
+        "fields": {
+            "product": 19,
+            "variation_category": "size",
+            "variation_value": "5kg",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 51,
+        "fields": {
+            "product": 19,
+            "variation_category": "size",
+            "variation_value": "10kg",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 52,
+        "fields": {
+            "product": 19,
+            "variation_category": "size",
+            "variation_value": "20kg",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 53,
+        "fields": {
+            "product": 20,
+            "variation_category": "size",
+            "variation_value": "5kg",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 54,
+        "fields": {
+            "product": 21,
+            "variation_category": "size",
+            "variation_value": "10kg",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 55,
+        "fields": {
+            "product": 21,
+            "variation_category": "size",
+            "variation_value": "20kg",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 56,
+        "fields": {
+            "product": 25,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 57,
+        "fields": {
+            "product": 25,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 58,
+        "fields": {
+            "product": 26,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 59,
+        "fields": {
+            "product": 26,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 60,
+        "fields": {
+            "product": 27,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 61,
+        "fields": {
+            "product": 34,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 62,
+        "fields": {
+            "product": 34,
+            "variation_category": "color",
+            "variation_value": "White",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 63,
+        "fields": {
+            "product": 34,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 64,
+        "fields": {
+            "product": 35,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 65,
+        "fields": {
+            "product": 35,
+            "variation_category": "color",
+            "variation_value": "White",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 66,
+        "fields": {
+            "product": 36,
+            "variation_category": "color",
+            "variation_value": "Black",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "products.variation",
+        "pk": 67,
+        "fields": {
+            "product": 36,
+            "variation_category": "color",
+            "variation_value": "Silver",
+            "is_active": true,
+            "created_date": "2025-01-01T00:00:00Z"
+        }
+    }
+]

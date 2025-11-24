@@ -1,120 +1,145 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 
 <div class="container mt-4">
-
   <div class="row">
     <!-- LEFT: Main Image + Gallery -->
     <div class="col-md-5">
-
       <!-- Main Image -->
       <div class="card shadow-sm">
         {% if product.product_image %}
-        <img id="main-img" src="{{ product.product_image.url }}" class="card-img-top"
-          style="height: 450px; object-fit: cover;">
+        <img
+          id="main-img"
+          src="{{ product.product_image.url }}"
+          class="card-img-top"
+          style="height: 450px; object-fit: cover"
+        />
         {% else %}
-        <img id="main-img" src="{% static 'images/placeholder.svg' %}" class="card-img-top"
-          style="height: 450px; object-fit: cover;">
+        <img
+          id="main-img"
+          src="{% static 'images/placeholder.svg' %}"
+          class="card-img-top"
+          style="height: 450px; object-fit: cover"
+        />
         {% endif %}
       </div>
 
       <!-- Thumbnails -->
       <div class="d-flex gap-2 mt-2 flex-wrap">
-
+        <!-- Product main image as thumbnail -->
         {% if product.product_image %}
-        <img src="{{ product.product_image.url }}" width="80"
-          onclick="document.getElementById('main-img').src='{{ product.product_image.url }}'" class="gallery-thumb">
+        <img
+          src="{{ product.product_image.url }}"
+          width="80"
+          onclick="document.getElementById('main-img').src='{{ product.product_image.url }}'"
+          class="gallery-thumb"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/placeholder.svg' %}"
+          width="80"
+          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}'"
+          class="gallery-thumb"
+        />
+
         {% endif %}
 
-        {% for img in product_gallery %}
-        <img src="{{ img.image.url }}" width="80"
-          onclick="document.getElementById('main-img').src='{{ img.image.url }}'" class="gallery-thumb">
-        {% endfor %}
-      </div>
+        <!-- Product gallery thumbnails -->
+        {% for img in product_gallery %} {% if img.image %}
+        <img
+          src="{{ img.image.url }}"
+          width="80"
+          onclick="document.getElementById('main-img').src='{{ img.image.url }}'"
+          class="gallery-thumb"
+        />
+        {% else %}
+        <img
+          src="{% static 'images/placeholder.svg' %}"
+          width="80"
+          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}'"
+          class="gallery-thumb"
+        />
 
+        {% endif %} {% endfor %}
+      </div>
     </div>
 
     <!-- RIGHT: Product Info -->
     <div class="col-md-7">
-
       <h2 class="fw-bold">{{ product.product_name }}</h2>
 
-      <!-- Rating -->
       <div class="rating-star mb-2">
         <span>
-          {% include "includes/star_rating.html" with avg=product.averageReview %}
+          {% include "includes/star_rating.html" with avg=product.averageReview
+          %}
           <span class="ms-2">{{ product.countReview }} reviews</span>
         </span>
       </div>
 
-      <!-- Category -->
       <p class="text-muted">
         Category:
-        <a href="{{ category.get_url }}" class="fw-semibold">{{ category.category_name }}</a>
+        <a href="{{ category.get_url }}" class="fw-semibold">
+          {{ category.category_name }}
+        </a>
       </p>
 
-      <!-- Price -->
       <h3 class="text-success fw-bold">₹{{ product.price }}</h3>
 
-      <hr>
+      <hr />
 
       <!-- Add to Cart -->
       <form action="{% url 'add_cart' product.id %}" method="POST">
         {% csrf_token %}
 
-        <!-- Color -->
         <label class="fw-semibold">Select Color</label>
         <select name="color" class="form-control mb-3" required>
           <option value="" disabled selected>Choose a color</option>
           {% for i in product.variation_set.colors %}
-          <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
+          <option value="{{ i.variation_value|lower }}">
+            {{ i.variation_value|capfirst }}
+          </option>
           {% endfor %}
         </select>
 
-        <!-- Size -->
         <label class="fw-semibold">Select Size</label>
         <select name="size" class="form-control mb-3" required>
           <option value="" disabled selected>Choose a size</option>
           {% for i in product.variation_set.sizes %}
-          <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
+          <option value="{{ i.variation_value|lower }}">
+            {{ i.variation_value|capfirst }}
+          </option>
           {% endfor %}
         </select>
 
-        <hr>
+        <hr />
 
-        {% if product.stock <= 0 %} <span class="badge bg-danger">Out of Stock</span>
-
+        {% if product.stock <= 0 %}
+        <span class="badge bg-danger">Out of Stock</span>
+        {% else %}
+        <div class="d-flex gap-2">
+          {% if in_cart %}
+          <a href="{% url 'cart' %}" class="btn btn-success btn-lg w-100">
+            <i class="fa fa-check me-2"></i> Added to Cart
+          </a>
+          <a href="{% url 'cart' %}" class="btn btn-warning btn-lg w-100">
+            <i class="fa fa-eye me-2"></i> View Cart
+          </a>
           {% else %}
-          <div class="d-flex gap-2">
-            {% if in_cart %}
-            <a href="{% url 'cart' %}" class="btn btn-success btn-lg w-100">
-              <i class="fa fa-check me-2"></i> Added to Cart
-            </a>
-            <a href="{% url 'cart' %}" class="btn btn-warning btn-lg w-100">
-              <i class="fa fa-eye me-2"></i> View Cart
-            </a>
-
-            {% else %}
-            <button class="btn btn-primary btn-lg w-100">
-              <i class="fa fa-shopping-cart me-2"></i> Add to Cart
-            </button>
-            {% endif %}
-          </div>
+          <button class="btn btn-primary btn-lg w-100">
+            <i class="fa fa-shopping-cart me-2"></i> Add to Cart
+          </button>
           {% endif %}
+        </div>
+        {% endif %}
       </form>
-
     </div>
   </div>
 
-  <hr class="my-4">
+  <hr class="my-4" />
 
-  <!-- DESCRIPTION -->
   <h4>Description</h4>
   <p>{{ product.description }}</p>
 
-  <hr>
+  <hr />
 
   <!-- REVIEW FORM -->
   <div class="mt-4">
@@ -125,41 +150,70 @@
 
       <label class="fw-semibold">Rating:</label>
 
-      <!-- 10-step rating (from first code) -->
       <div class="rate mb-3">
-        <input type="radio" id="rating10" name="rating" value="5" required /><label for="rating10"></label>
-        <input type="radio" id="rating9" name="rating" value="4.5" /><label class="half" for="rating9"></label>
-        <input type="radio" id="rating8" name="rating" value="4" /><label for="rating8"></label>
-        <input type="radio" id="rating7" name="rating" value="3.5" /><label class="half" for="rating7"></label>
-        <input type="radio" id="rating6" name="rating" value="3" /><label for="rating6"></label>
-        <input type="radio" id="rating5" name="rating" value="2.5" /><label class="half" for="rating5"></label>
-        <input type="radio" id="rating4" name="rating" value="2" /><label for="rating4"></label>
-        <input type="radio" id="rating3" name="rating" value="1.5" /><label class="half" for="rating3"></label>
-        <input type="radio" id="rating2" name="rating" value="1" /><label for="rating2"></label>
-        <input type="radio" id="rating1" name="rating" value="0.5" /><label class="half" for="rating1"></label>
+        <input
+          type="radio"
+          id="rating10"
+          name="rating"
+          value="5"
+          required
+        /><label for="rating10"></label>
+        <input type="radio" id="rating9" name="rating" value="4.5" /><label
+          class="half"
+          for="rating9"
+        ></label>
+        <input type="radio" id="rating8" name="rating" value="4" /><label
+          for="rating8"
+        ></label>
+        <input type="radio" id="rating7" name="rating" value="3.5" /><label
+          class="half"
+          for="rating7"
+        ></label>
+        <input type="radio" id="rating6" name="rating" value="3" /><label
+          for="rating6"
+        ></label>
+        <input type="radio" id="rating5" name="rating" value="2.5" /><label
+          class="half"
+          for="rating5"
+        ></label>
+        <input type="radio" id="rating4" name="rating" value="2" /><label
+          for="rating4"
+        ></label>
+        <input type="radio" id="rating3" name="rating" value="1.5" /><label
+          class="half"
+          for="rating3"
+        ></label>
+        <input type="radio" id="rating2" name="rating" value="1" /><label
+          for="rating2"
+        ></label>
+        <input type="radio" id="rating1" name="rating" value="0.5" /><label
+          class="half"
+          for="rating1"
+        ></label>
       </div>
-      <input type="text" name="subject" class="form-control mb-3">
+
+      <input type="text" name="subject" class="form-control mb-3" />
 
       <label class="fw-semibold">Review</label>
       <textarea name="review" rows="3" class="form-control mb-3"></textarea>
 
-      {% if user.is_authenticated %}
-      {% if orderproduct %}
+      {% if user.is_authenticated %} {% if orderproduct %}
       <button class="btn btn-primary">Submit Review</button>
       {% else %}
       <p>You must purchase this product to post a review.</p>
-      {% endif %}
-      {% else %}
-      <p>You must be logged in to post a review. <a href="{% url 'login' %}">Login now</a></p>
+      {% endif %} {% else %}
+      <p>
+        You must be logged in to post a review.
+        <a href="{% url 'login' %}">Login now</a>
+      </p>
       {% endif %}
     </form>
 
     {% include "includes/alerts.html" %}
   </div>
 
-  <hr>
+  <hr />
 
-  <!-- CUSTOMER REVIEWS -->
   <h4 class="mt-4">Customer Reviews</h4>
 
   <div class="rating-star mb-2">
@@ -172,7 +226,6 @@
   {% for review in reviews %}
   <div class="card mb-3">
     <div class="card-body">
-
       <h6 class="fw-bold">
         {{ review.user.full_name }}
         <small class="text-muted float-end">{{ review.updated_at }}</small>
@@ -186,11 +239,9 @@
 
       <h6>{{ review.subject }}</h6>
       <p>{{ review.review }}</p>
-
     </div>
   </div>
   {% endfor %}
-
 </div>
 
 <style>
@@ -200,7 +251,6 @@
     padding: 3px;
     border-radius: 4px;
   }
-
   .gallery-thumb:hover {
     border-color: #007bff;
   }

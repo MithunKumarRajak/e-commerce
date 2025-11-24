@@ -1,0 +1,578 @@
+[
+    {
+        "model": "products.product",
+        "pk": 1,
+        "fields": {
+            "product_name": "Zaveri Pearls Premium Gold-Plated Necklace Set",
+            "slug": "zaveri-pearls-gold-plated-necklace",
+            "description": "A premium handcrafted gold-plated necklace set featuring intricate Kundan-style detailing, matching earrings, and lightweight design ideal for weddings, festive occasions, and traditional attire. Tarnish-resistant finish and skin-friendly alloy ensure all-day comfort.",
+            "price": 1299,
+            "product_image": null,
+            "stock": 25,
+            "is_available": true,
+            "category": 1,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 2,
+        "fields": {
+            "product_name": "Malabar Gold & Diamonds 22K Elegant Earrings",
+            "slug": "malabar-22k-elegant-earrings",
+            "description": "Elegant 22K gold-plated earrings inspired by South Indian temple jewellery. Designed with a lightweight yet premium build, these earrings offer ethnic charm suitable for daily wear as well as festive occasions.",
+            "price": 1599,
+            "product_image": null,
+            "stock": 18,
+            "is_available": true,
+            "category": 1,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 3,
+        "fields": {
+            "product_name": "Titan Sterling Silver Charm Bracelet",
+            "slug": "titan-silver-charm-bracelet",
+            "description": "A premium sterling silver charm bracelet from Titan featuring anti-tarnish coating and interchangeable charms. Ideal for modern wearers who prefer minimalist yet elegant accessories.",
+            "price": 999,
+            "product_image": null,
+            "stock": 30,
+            "is_available": true,
+            "category": 1,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 4,
+        "fields": {
+            "product_name": "NIVIA 1000 Professional Football – Size 5",
+            "slug": "nivia-1000-football-size5",
+            "description": "A professional-grade, hand-stitched football designed for durability and superior flight control. Made using high-quality PU material with reinforced bladder for consistent rebound during training and matches.",
+            "price": 899,
+            "product_image": null,
+            "stock": 40,
+            "is_available": true,
+            "category": 2,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 5,
+        "fields": {
+            "product_name": "Yonex NanoFlare 001 Badminton Racquet",
+            "slug": "yonex-nanoflare-001-racquet",
+            "description": "Lightweight graphite racquet from Yonex engineered for fast swings, powerful smashes, and reduced vibration. Ideal for intermediate players seeking speed, control, and enhanced aero-frame performance.",
+            "price": 1699,
+            "product_image": null,
+            "stock": 20,
+            "is_available": true,
+            "category": 2,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 6,
+        "fields": {
+            "product_name": "Cosco Premier Volleyball",
+            "slug": "cosco-premier-volleyball",
+            "description": "A soft-touch volleyball made with synthetic leather panels for indoor and outdoor play. Features strong stitching, deep grip grooves, and high-air-retention bladder suitable for school, college, and training sessions.",
+            "price": 749,
+            "product_image": null,
+            "stock": 34,
+            "is_available": true,
+            "category": 2,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 7,
+        "fields": {
+            "product_name": "Fastrack Unisex UV-Protected Sunglasses",
+            "slug": "fastrack-premium-sunglasses",
+            "description": "Stylish UV-protected sunglasses from Fastrack featuring scratch-resistant lenses and lightweight polycarbonate frame. Perfect for daily outdoor use, driving, and long travel comfort.",
+            "price": 1299,
+            "product_image": null,
+            "stock": 32,
+            "is_available": true,
+            "category": 3,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 8,
+        "fields": {
+            "product_name": "WildHorn Men’s Genuine Leather Wallet",
+            "slug": "wildhorn-genuine-leather-wallet",
+            "description": "Handcrafted premium leather wallet made from top-grain natural hide. Includes multiple card slots, currency compartments, and RFID-blocking security for modern users.",
+            "price": 899,
+            "product_image": null,
+            "stock": 45,
+            "is_available": true,
+            "category": 3,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 9,
+        "fields": {
+            "product_name": "Titan Classic Stainless Steel Analog Watch",
+            "slug": "titan-classic-metal-watch",
+            "description": "A premium stainless steel analog watch from Titan featuring a scratch-resistant mineral glass dial, water resistance, and elegant classic finish suitable for daily and formal wear.",
+            "price": 2599,
+            "product_image": null,
+            "stock": 20,
+            "is_available": true,
+            "category": 3,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 10,
+        "fields": {
+            "product_name": "Wakefit Premium Ergonomic Office Chair",
+            "slug": "wakefit-ergonomic-office-chair",
+            "description": "The Wakefit ergonomic office chair is engineered with a breathable mesh backrest, height-adjustable lumbar support, and cushioned seating designed to promote healthy posture during long working hours. Equipped with a smooth 360° swivel, sturdy nylon base, and noise-free wheels for effortless movement.",
+            "price": 5499,
+            "product_image": null,
+            "stock": 15,
+            "is_available": true,
+            "category": 4,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 11,
+        "fields": {
+            "product_name": "Sleepwell Ortho Comfort Mattress – 6 Inch",
+            "slug": "sleepwell-ortho-comfort-mattress",
+            "description": "This premium Sleepwell orthopedic mattress features advanced memory foam that adapts to body contours for optimal spinal alignment and pressure relief. The multi-layered construction ensures durability, comfort, and long-lasting support for individuals suffering from back pain.",
+            "price": 8999,
+            "product_image": null,
+            "stock": 12,
+            "is_available": true,
+            "category": 4,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 12,
+        "fields": {
+            "product_name": "Home Centre Solid Wood Side Table",
+            "slug": "home-centre-wooden-side-table",
+            "description": "A contemporary solid wood side table crafted with a smooth matte finish and sturdy construction. Ideal as a bedside table, lamp stand, or living room accessory, offering both aesthetic appeal and long-term durability.",
+            "price": 2499,
+            "product_image": null,
+            "stock": 20,
+            "is_available": true,
+            "category": 4,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 13,
+        "fields": {
+            "product_name": "Atomic Habits by James Clear (Paperback Edition)",
+            "slug": "atomic-habits-james-clear",
+            "description": "A globally acclaimed self-help book that explains the science of habit-building using actionable strategies. James Clear highlights how tiny improvements made consistently can transform personal and professional life. Ideal for students, professionals, and lifelong learners.",
+            "price": 399,
+            "product_image": null,
+            "stock": 50,
+            "is_available": true,
+            "category": 5,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 14,
+        "fields": {
+            "product_name": "Classmate A4 Softcover Notebook – 240 Pages",
+            "slug": "classmate-a4-notebook-240-pages",
+            "description": "A smooth-writing A4-size notebook featuring 240 high-quality ruled pages, durable soft cover, and superior binding. Ideal for school, college, project notes, and everyday writing tasks.",
+            "price": 129,
+            "product_image": null,
+            "stock": 80,
+            "is_available": true,
+            "category": 5,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 15,
+        "fields": {
+            "product_name": "Faber-Castell Professional Sketching Kit (25 Pieces)",
+            "slug": "faber-castell-artist-sketch-kit",
+            "description": "A premium 25-piece artist sketching kit containing graphite pencils, charcoal sticks, erasers, blenders, and tools suitable for aspiring artists and professionals. Offers exceptional sketch control, shading depth, and smooth stroke response.",
+            "price": 699,
+            "product_image": null,
+            "stock": 35,
+            "is_available": true,
+            "category": 5,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 16,
+        "fields": {
+            "product_name": "Himalaya Gentle Baby Bath – 700ml",
+            "slug": "himalaya-gentle-baby-bath",
+            "description": "A mild and tear-free baby bath formula enriched with chickpea, fenugreek, and green gram extracts. Designed to keep your baby's skin soft, nourished, and thoroughly cleansed without stripping natural moisture.",
+            "price": 345,
+            "product_image": null,
+            "stock": 45,
+            "is_available": true,
+            "category": 6,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 17,
+        "fields": {
+            "product_name": "Mee Mee Premium Baby Diapers – Pack of 64",
+            "slug": "mee-mee-baby-diapers-64",
+            "description": "Super-soft and breathable baby diapers with fast absorption, leak-lock technology, and stretchable waistband for superior comfort. Dermatologically tested and suitable for infants with sensitive skin.",
+            "price": 599,
+            "product_image": null,
+            "stock": 60,
+            "is_available": true,
+            "category": 6,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 18,
+        "fields": {
+            "product_name": "Fisher-Price Interactive Learning Toy Set",
+            "slug": "fisher-price-educational-toy-set",
+            "description": "A colourful interactive learning toy set that helps children develop motor skills, hand–eye coordination, and early cognitive abilities through sound, lights, shapes, and activity modules.",
+            "price": 1299,
+            "product_image": null,
+            "stock": 25,
+            "is_available": true,
+            "category": 6,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 19,
+        "fields": {
+            "product_name": "Strauss Adjustable Dumbbell Set – 20kg",
+            "slug": "strauss-adjustable-dumbbell-20kg",
+            "description": "A durable and versatile 20kg adjustable dumbbell set featuring high-quality cast iron plates, anti-slip grip rods, and secure spinlock collars. Perfect for home workouts targeting multiple muscle groups including chest, arms, shoulders, and back.",
+            "price": 1899,
+            "product_image": null,
+            "stock": 30,
+            "is_available": true,
+            "category": 7,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 20,
+        "fields": {
+            "product_name": "Boldfit Premium Anti-Slip Yoga Mat – 6mm",
+            "slug": "boldfit-premium-yoga-mat",
+            "description": "A 6mm extra-thick yoga mat designed with textured anti-slip surface for perfect grip. Made from eco-friendly EVA material, it provides optimal cushioning for yoga, pilates, meditation, and stretching exercises.",
+            "price": 999,
+            "product_image": null,
+            "stock": 45,
+            "is_available": true,
+            "category": 7,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 21,
+        "fields": {
+            "product_name": "Optimum Nutrition Gold Standard Whey – 1Kg",
+            "slug": "on-gold-standard-whey-1kg",
+            "description": "The world’s leading whey protein supplement containing high-quality whey isolate and concentrate. Supports muscle recovery, lean muscle building, and athletic performance with fast absorption and rich flavour.",
+            "price": 2999,
+            "product_image": null,
+            "stock": 22,
+            "is_available": true,
+            "category": 7,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 22,
+        "fields": {
+            "product_name": "Aashirvaad Select Sharbati Atta – 10Kg",
+            "slug": "aashirvaad-select-atta-10kg",
+            "description": "Premium-quality wheat flour made from 100% Sharbati wheat sourced from Madhya Pradesh. Known for its soft texture, rich aroma, and fluffy chapatis, this atta is processed using advanced hygienic techniques.",
+            "price": 499,
+            "product_image": null,
+            "stock": 120,
+            "is_available": true,
+            "category": 8,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 23,
+        "fields": {
+            "product_name": "Tata Tea Premium – 1Kg",
+            "slug": "tata-tea-premium-1kg",
+            "description": "A strong and flavourful tea blend made using the finest Assam and Darjeeling leaves. Provides rich aroma and perfect colour, making it one of India’s most trusted household tea brands.",
+            "price": 525,
+            "product_image": null,
+            "stock": 70,
+            "is_available": true,
+            "category": 8,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 24,
+        "fields": {
+            "product_name": "Amul Pure Ghee – 1 Litre",
+            "slug": "amul-pure-ghee-1l",
+            "description": "Pure and aromatic ghee prepared from premium-quality dairy cream. Ideal for traditional Indian cooking, sweets, frying, and Ayurvedic consumption. Known for its authentic taste and nutritional richness.",
+            "price": 575,
+            "product_image": null,
+            "stock": 65,
+            "is_available": true,
+            "category": 8,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 25,
+        "fields": {
+            "product_name": "Prestige Omega Deluxe Granite Cookware Set",
+            "slug": "prestige-omega-deluxe-cookware",
+            "description": "A durable granite-coated non-stick cookware set from Prestige offering superior heat distribution and minimal oil cooking. Includes multiple pans with scratch-resistant surface suitable for gas and induction stoves.",
+            "price": 2199,
+            "product_image": null,
+            "stock": 20,
+            "is_available": true,
+            "category": 9,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 26,
+        "fields": {
+            "product_name": "Pigeon 1.5L Stainless Steel Electric Kettle",
+            "slug": "pigeon-electric-kettle-1-5l",
+            "description": "A fast-boil stainless steel electric kettle featuring automatic cut-off, concealed heating element, and ergonomic handle for safety. Ideal for tea, coffee, noodles, and quick heating needs.",
+            "price": 799,
+            "product_image": null,
+            "stock": 35,
+            "is_available": true,
+            "category": 9,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 27,
+        "fields": {
+            "product_name": "Milton Thermosteel Hot & Cold Flask – 1L",
+            "slug": "milton-thermosteel-flask-1l",
+            "description": "A premium insulated steel flask that keeps beverages hot or cold for up to 24 hours. Features double-walled vacuum insulation, rust-proof body, and leak-proof cap for everyday use and travel.",
+            "price": 899,
+            "product_image": null,
+            "stock": 28,
+            "is_available": true,
+            "category": 9,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 28,
+        "fields": {
+            "product_name": "NIVEA Men Deep Impact Face Wash – 100ml",
+            "slug": "nivea-men-deep-impact-face-wash",
+            "description": "A deep-cleansing face wash formulated with black carbon technology to remove dirt, oil, and impurities from deep within the pores. Provides long-lasting freshness and clear, energized skin suitable for daily use.",
+            "price": 189,
+            "product_image": null,
+            "stock": 55,
+            "is_available": true,
+            "category": 10,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 29,
+        "fields": {
+            "product_name": "Dove Intense Repair Shampoo – 1L",
+            "slug": "dove-intense-repair-shampoo-1l",
+            "description": "A nourishing and strengthening shampoo infused with keratin actives that help repair damaged hair from the roots. Leaves hair smooth, shiny, and frizz-free with regular use. Suitable for daily hair care routines.",
+            "price": 499,
+            "product_image": null,
+            "stock": 48,
+            "is_available": true,
+            "category": 10,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 30,
+        "fields": {
+            "product_name": "Colgate Visible White Toothpaste – 100g",
+            "slug": "colgate-visible-white-100g",
+            "description": "A whitening toothpaste designed to brighten teeth within one week of regular use. Contains enamel-safe micro-polishers that help remove stains while maintaining oral freshness throughout the day.",
+            "price": 119,
+            "product_image": null,
+            "stock": 65,
+            "is_available": true,
+            "category": 10,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 31,
+        "fields": {
+            "product_name": "Levi's Men 511 Slim Fit Jeans",
+            "slug": "levis-men-511-slim-fit-jeans",
+            "description": "Premium slim-fit denim jeans crafted from high-stretch cotton fabric for maximum comfort and flexibility. Designed with a modern tapered silhouette and classic Levi's styling suitable for everyday and casual wear.",
+            "price": 2999,
+            "product_image": null,
+            "stock": 38,
+            "is_available": true,
+            "category": 11,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 32,
+        "fields": {
+            "product_name": "Allen Solly Premium Cotton Polo T-Shirt",
+            "slug": "allen-solly-cotton-polo-tshirt",
+            "description": "A soft and breathable premium cotton polo t-shirt from Allen Solly featuring fine knitting, elegant collar design, and all-day comfort. Ideal for office, casual outings, and daily wear.",
+            "price": 1099,
+            "product_image": null,
+            "stock": 45,
+            "is_available": true,
+            "category": 11,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 33,
+        "fields": {
+            "product_name": "H&M Women Floral Printed Summer Dress",
+            "slug": "hm-women-floral-summer-dress",
+            "description": "A lightweight and stylish floral printed summer dress from H&M with a breathable fabric blend, flared design, and comfortable fit. Perfect for vacations, weekend outings, and casual summer wear.",
+            "price": 1499,
+            "product_image": null,
+            "stock": 28,
+            "is_available": true,
+            "category": 11,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 34,
+        "fields": {
+            "product_name": "Samsung Crystal 4K Ultra HD Smart TV – 43 Inch",
+            "slug": "samsung-crystal-4k-smart-tv-43",
+            "description": "A premium 43-inch Samsung Crystal 4K UHD Smart TV equipped with PurColor technology, Crystal Processor 4K, HDR10+, and ultra-thin bezels for immersive viewing. Includes smart features like Voice Assistants, Smart Hub, Screen Mirroring, and multiple OTT app support.",
+            "price": 25999,
+            "product_image": null,
+            "stock": 14,
+            "is_available": true,
+            "category": 12,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 35,
+        "fields": {
+            "product_name": "BoAt Airdopes 141 True Wireless Earbuds",
+            "slug": "boat-airdopes-141-tws",
+            "description": "High-performance wireless earbuds featuring ENx noise reduction, 42-hour playback, booming bass, and ultra-low latency for gaming. Equipped with fast charging, IPX4 water resistance, and smooth touch controls.",
+            "price": 1399,
+            "product_image": null,
+            "stock": 60,
+            "is_available": true,
+            "category": 12,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    },
+    {
+        "model": "products.product",
+        "pk": 36,
+        "fields": {
+            "product_name": "Redmi Note 13 Pro 5G – 128GB",
+            "slug": "redmi-note-13-pro-5g-128gb",
+            "description": "A feature-rich 5G smartphone with a 6.67-inch AMOLED display, 200MP camera system, Snapdragon processor, 128GB storage, and 67W turbo fast charging. Designed for power users who need performance, speed, and cutting-edge features.",
+            "price": 23999,
+            "product_image": null,
+            "stock": 25,
+            "is_available": true,
+            "category": 12,
+            "created_date": "2025-11-24T21:19:00Z",
+            "modified_date": "2025-11-24T21:19:00Z"
+        }
+    }
+]

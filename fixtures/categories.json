@@ -1,0 +1,122 @@
+[
+    {
+        "model": "category.category",
+        "pk": 1,
+        "fields": {
+            "category_name": "Jewellery",
+            "slug": "jewellery",
+            "description": "Explore premium jewellery collections including necklaces, earrings, bracelets, and accessories crafted for elegance and style.",
+            "category_image": "categories/Jewellery.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 2,
+        "fields": {
+            "category_name": "Sports & Outdoor",
+            "slug": "sports-outdoor",
+            "description": "Top-quality sports gear and outdoor equipment designed for fitness, training, and adventure.",
+            "category_image": "categories/Sports & Outdoor.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 3,
+        "fields": {
+            "category_name": "Accessories",
+            "slug": "accessories",
+            "description": "Stylish and functional accessories such as watches, sunglasses, wallets, and more.",
+            "category_image": "categories/Accessories.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 4,
+        "fields": {
+            "category_name": "Furniture & Furnishings",
+            "slug": "furniture-furnishings",
+            "description": "Comfortable and modern furniture collections including chairs, tables, and home décor.",
+            "category_image": "categories/Furniture & Furnishings.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 5,
+        "fields": {
+            "category_name": "Books & Stationery",
+            "slug": "books-stationery",
+            "description": "Books across genres and top-quality stationery for students, professionals, and creators.",
+            "category_image": "categories/Books & Stationery.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 6,
+        "fields": {
+            "category_name": "Kids Essentials",
+            "slug": "kids-essentials",
+            "description": "All essentials for kids including toys, baby care, learning tools, and more.",
+            "category_image": "categories/Kids Essentials.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 7,
+        "fields": {
+            "category_name": "Fitness & Wellness",
+            "slug": "fitness-wellness",
+            "description": "Fitness gear, supplements, yoga accessories, and wellness essentials for a healthy lifestyle.",
+            "category_image": "categories/Fitness & Wellness.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 8,
+        "fields": {
+            "category_name": "Groceries",
+            "slug": "groceries",
+            "description": "Daily essentials including grains, spices, beverages, oils, and household groceries.",
+            "category_image": "categories/Groceries & Daily Essentials.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 9,
+        "fields": {
+            "category_name": "Home & Kitchen",
+            "slug": "home-kitchen",
+            "description": "Cookware, appliances, and home improvement items designed for everyday convenience.",
+            "category_image": "categories/Home & Kitchen.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 10,
+        "fields": {
+            "category_name": "Personal Care",
+            "slug": "personal-care",
+            "description": "Skincare, haircare, hygiene, and grooming products for personal wellness.",
+            "category_image": "categories/Personal Care.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 11,
+        "fields": {
+            "category_name": "Fashion",
+            "slug": "fashion",
+            "description": "Latest fashion apparel for men, women, and kids featuring premium quality and trending styles.",
+            "category_image": "categories/Fashion.png"
+        }
+    },
+    {
+        "model": "category.category",
+        "pk": 12,
+        "fields": {
+            "category_name": "Electronics",
+            "slug": "electronics",
+            "description": "Smartphones, laptops, audio devices, televisions, gadgets, and more.",
+            "category_image": "categories/Electronics.png"
+        }
+    }
+]
