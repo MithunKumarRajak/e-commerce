@@ -13,6 +13,8 @@ db.sqlite3
 .vscode/
 
 # Environment files
+.env
+*.env
 
 # Virtual environment
 env/
