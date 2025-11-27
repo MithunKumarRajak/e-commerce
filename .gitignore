@@ -1,11 +1,3 @@
-
-# VS Code settings
-.vscode/
-
 # Environment files
 .env
 *.env
-
-# Virtual environment
-env/
-venv/
