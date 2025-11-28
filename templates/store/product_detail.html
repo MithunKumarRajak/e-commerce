@@ -37,7 +37,7 @@
         <img
           src="{% static 'images/placeholder.svg' %}"
           width="80"
-          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}'"
+          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}';"
           class="gallery-thumb"
         />
 
@@ -55,7 +55,7 @@
         <img
           src="{% static 'images/placeholder.svg' %}"
           width="80"
-          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}'"
+          onclick="document.getElementById('main-img').src='{% static 'images/placeholder.svg' %}';"
           class="gallery-thumb"
         />
 
@@ -69,8 +69,7 @@
 
       <div class="rating-star mb-2">
         <span>
-          {% include "includes/star_rating.html" with avg=product.averageReview
-          %}
+          {% include "includes/star_rating.html" with avg=product.averageReview %}
           <span class="ms-2">{{ product.countReview }} reviews</span>
         </span>
       </div>
@@ -90,6 +89,7 @@
       <form action="{% url 'add_cart' product.id %}" method="POST">
         {% csrf_token %}
 
+        {% if product.variation_set.colors %}
         <label class="fw-semibold">Select Color</label>
         <select name="color" class="form-control mb-3" required>
           <option value="" disabled selected>Choose a color</option>
@@ -99,7 +99,9 @@
           </option>
           {% endfor %}
         </select>
+        {% endif %}
 
+        {% if product.variation_set.sizes %}
         <label class="fw-semibold">Select Size</label>
         <select name="size" class="form-control mb-3" required>
           <option value="" disabled selected>Choose a size</option>
@@ -109,6 +111,7 @@
           </option>
           {% endfor %}
         </select>
+        {% endif %}
 
         <hr />
 
@@ -137,7 +140,7 @@
   <hr class="my-4" />
 
   <h4>Description</h4>
-  <p>{{ product.description }}</p>
+  <p>{{ product.description|linebreaks }}</p>
 
   <hr />
 
@@ -218,8 +221,8 @@
 
   <div class="rating-star mb-2">
     <span>
-      {% include "includes/star_rating.html" with avg=product.averageReview %}
-      <span class="ms-2">{{ product.countReview }} reviews</span>
+          {% include "includes/star_rating.html" with avg=product.averageReview %}
+          <span class="ms-2">{{ product.countReview }} reviews</span>
     </span>
   </div>
 

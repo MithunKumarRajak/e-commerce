@@ -1,0 +1,95 @@
+/* Badges */
+.badge {
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, .btn {
+    transition: all 0.3s ease;
+}
+
+/* Navbar enhancements */
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+/* Cart badge animation */
+.badge.bg-danger {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Form controls */
+.form-control:focus,
+.form-select:focus {
+    border-color: #2874f0;
+    box-shadow: 0 0 0 0.2rem rgba(40, 116, 240, 0.25);
+}
+
+/* Product detail enhancements */
+.gallery-thumb {
+    cursor: pointer;
+    border: 2px solid #ddd;
+    padding: 3px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.gallery-thumb:hover {
+    border-color: #2874f0;
+    transform: scale(1.05);
+}
+
+/* Table hover effects */
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Pagination styling */
+.pagination .page-link {
+    color: #2874f0;
+    border-color: #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: #f1f3f6;
+    color: #1e60d2;
+    border-color: #2874f0;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #2874f0;
+    border-color: #2874f0;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .hero-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-text p {
+        font-size: 1rem;
+    }
+    
+    .card-product-grid .img-wrap {
+        height: 200px;
+    }
+    
+    .hero-banner {
+        height: 200px;
+    }
+}

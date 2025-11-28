@@ -3,7 +3,7 @@ from django.shortcuts import render
 from products.models import Product
 # Create your views here.
 from category.models import Category
-from products.models import Product  # or your app name
+
 
 
 def home(request):

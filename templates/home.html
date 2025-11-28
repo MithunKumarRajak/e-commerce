@@ -1,51 +1,49 @@
 {% extends "base.html" %} {% load static %} {% block title %}Home - My
 E-Commerce Site{% endblock %} {% block content %}
 
-<h1>Welcome to Our Home Page</h1>
-<p>Explore our latest products and offers.</p>
-
-<div class="row mt-4">
-  {% for product in products %}
-  <div class="col-md-3">
-    <div class="card mb-4 shadow-sm position-relative">
-      <a href="{{ product.get_url }}">
-        {% if product.product_image %}
-        <img
-          src="{{ product.product_image.url }}"
-          class="card-img-top"
-          style="height: 230px; object-fit: cover"
-        />
-        {% else %}
-        <img
-          src="{% static 'images/placeholder.svg' %}"
-          class="card-img-top"
-          style="height: 230px; object-fit: cover"
-          alt="No image"
-        />
-        {% endif %}
-      </a>
-
-      <div class="card-body text-center">
-        <h5>{{ product.product_name }}</h5>
-        <p class="fw-bold text-success">₹{{ product.price }}</p>
-
-        <a
-          href="{{ product.get_url }}"
-          class="btn btn-primary btn-sm w-100 mb-2"
-        >
-          View Details
-        </a>
-
-        <a
-          href="{% url 'add_cart' product.id %}"
-          class="btn btn-warning btn-sm w-100"
-        >
-          <i class="fa fa-shopping-cart"></i> Add to Cart
-        </a>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-banner">
+      <!-- You can replace this with a real image later -->
+      <img src="{% static 'images/banner-main.jpg' %}" alt="Big Sale" onerror="this.style.display='none'">
+      <div class="hero-text">
+        <h2>Big Sale! Up to 50% Off</h2>
+        <p>Get the best deals on your favorite products.</p>
+        <a href="{% url 'products' %}" class="btn btn-primary btn-lg mt-3">Shop Now</a>
       </div>
     </div>
   </div>
-  {% endfor %}
+</section>
+
+<div class="container">
+  <h3 class="section-heading">Latest Products</h3>
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-3">
+      <div class="card card-product-grid">
+        <a href="{{ product.get_url }}" class="img-wrap">
+          {% if product.product_image %}
+          <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+          {% else %}
+          <img src="{% static 'images/placeholder.svg' %}" alt="No image">
+          {% endif %}
+        </a>
+        <div class="info-wrap">
+          <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+          <div class="price mt-1">₹{{ product.price }}</div>
+          
+          <div class="d-grid gap-2 mt-3">
+            <a href="{{ product.get_url }}" class="btn btn-primary btn-sm">View Details</a>
+            <a href="{% url 'add_cart' product.id %}" class="btn btn-warning btn-sm">
+              <i class="fa fa-shopping-cart"></i> Add to Cart
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}

@@ -12,19 +12,22 @@
           </header>
           <div class="card-body">
             <div class="text-right">
-              {% if userprofile.profile_picture %}
+              {% if userprofile.profile_picture and userprofile.profile_picture.name %}
               <img
                 src="{{ userprofile.profile_picture.url }}"
                 alt="Profile Picture"
                 width="100"
-                style="border-radius: 50px"
+                height="100"
+                style="border-radius: 50px; object-fit: cover;"
               />
               {% else %}
               <img
-                src="{% static 'default/user-default.png' %}"
+                src="{% static 'images/default_profile.png' %}"
                 alt="Profile Picture"
                 width="100"
-                style="border-radius: 50px"
+                height="100"
+                style="border-radius: 50px; object-fit: cover;"
+                onerror="this.src='/media/default/user-default.png';"
               />
               {% endif %}
             </div>

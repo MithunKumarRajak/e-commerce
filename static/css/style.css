@@ -65,3 +65,146 @@ ul.thumb li img {
     height: 80px;
     border: 1px solid grey;
 }
+
+/* ============================
+   Custom UI Enhancements
+   ============================ */
+
+/* General Body */
+body {
+    background-color: #f1f3f6; /* Light gray background like Flipkart */
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Product Cards */
+.card-product-grid {
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px; /* Slightly rounded corners */
+    background: #fff;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.card-product-grid:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-product-grid .img-wrap {
+    height: 250px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-product-grid .img-wrap img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.card-product-grid:hover .img-wrap img {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+.card-product-grid .info-wrap {
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.card-product-grid .title {
+    font-weight: 500;
+    color: #212121;
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-product-grid .price {
+    font-weight: 600;
+    color: #212121;
+    font-size: 18px;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #2874f0;
+    border-color: #2874f0;
+}
+
+.btn-primary:hover {
+    background-color: #1e60d2;
+    border-color: #1e60d2;
+}
+
+.btn-warning {
+    background-color: #ff9f00;
+    border-color: #ff9f00;
+    color: #fff;
+    font-weight: 500;
+}
+
+.btn-warning:hover {
+    background-color: #f39400;
+    border-color: #f39400;
+    color: #fff;
+}
+
+/* Hero Section */
+.hero-section {
+    background: #fff;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.hero-banner {
+    background-color: #e0f7fa; /* Light cyan placeholder */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text {
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+}
+
+.hero-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Section Headings */
+.section-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: #212121;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}

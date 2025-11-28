@@ -25,21 +25,22 @@
               <div class="col-md-6">
                 <div class="card" style="text-align: center">
                   <div class="card-body">
-                    {% if userprofile.profile_picture %}
+                    {% if userprofile.profile_picture and userprofile.profile_picture.name %}
                     <img
                       src="{{ userprofile.profile_picture.url }}"
                       alt="User Profile Picture"
                       width="50"
                       height="50"
-                      style="border-radius: 50%"
+                      style="border-radius: 50%; object-fit: cover;"
                     />
                     {% else %}
                     <img
-                      src="{% static 'default/user-default.png' %}"
+                      src="{% static 'images/default_profile.png' %}"
                       alt="User Profile Picture"
                       width="50"
                       height="50"
-                      style="border-radius: 50%"
+                      style="border-radius: 50%; object-fit: cover;"
+                      onerror="this.src='/media/default/user-default.png';"
                     />
                     {% endif %}
                     <p class="mb-0">{{user.email}}</p>

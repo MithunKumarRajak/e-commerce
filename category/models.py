@@ -11,6 +11,7 @@ class Category(models.Model):
     description = models.TextField(blank=True, null=True)
     category_image = models.ImageField(
         upload_to='categories/', blank=True, null=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='children')
 
     class Meta:
         verbose_name = "Category"
