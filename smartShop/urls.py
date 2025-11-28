@@ -36,6 +36,16 @@ urlpatterns = [
     path('contact/' , contact, name='contact'),
     path('policy/' , policy, name='policy'),    
     path('terms/' , terms, name='terms'),
+    
+    # Footer Links
+    path('careers/', careers, name='careers'),
+    path('press/', press, name='press'),
+    path('payments/', payments, name='payments'),
+    path('shipping/', shipping, name='shipping'),
+    path('cancellation/', cancellation, name='cancellation'),
+    path('faq/', faq, name='faq'),
+    path('security/', security, name='security'),
+    path('privacy/', privacy, name='privacy'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

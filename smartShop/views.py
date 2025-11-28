@@ -33,3 +33,29 @@ def policy(request):
 
 def terms(request):
     return render(request, 'terms.html')
+
+# New Views for Footer Links
+def careers(request):
+    return render(request, 'pages/careers.html')
+
+def press(request):
+    return render(request, 'pages/press.html')
+
+def payments(request):
+    return render(request, 'pages/payments.html')
+
+def shipping(request):
+    return render(request, 'pages/shipping.html')
+
+def cancellation(request):
+    return render(request, 'pages/cancellation.html')
+
+def faq(request):
+    return render(request, 'pages/faq.html')
+
+def security(request):
+    return render(request, 'pages/security.html')
+
+def privacy(request):
+    return render(request, 'pages/privacy.html')
+
