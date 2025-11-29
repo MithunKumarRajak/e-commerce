@@ -19,6 +19,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(
                 user=request.user, is_active=True)
+            print(f"DEBUG: Cart items for user {request.user}: {cart_items}")
         else:
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
@@ -107,6 +108,7 @@ def add_cart(request, product_id):
                 cart_item.variations.clear()
                 cart_item.variations.add(*product_variation)
             cart_item.save()
+            print(f"DEBUG: Created new CartItem for user {current_user}: {cart_item}")
         return redirect('cart')
     # If the user is not authenticated
     else:
