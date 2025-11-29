@@ -21,10 +21,12 @@ services:
       - media_volume:/app/media
     ports:
       - "8000:8000"
-    env_file:
-      - .env
     environment:
+      - DEBUG=False
+      - SECRET_KEY=django-insecure-docker-dev-key-change-in-production-12345678901234567890
       - DATABASE_URL=postgresql://ecommerce_user:ecommerce_password@db:5432/ecommerce_db
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+      - EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
     depends_on:
       - db
 

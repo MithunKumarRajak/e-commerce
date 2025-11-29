@@ -20,17 +20,20 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Copy project
+# Copy project files
 COPY . /app/
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
+# Create necessary directories
+RUN mkdir -p /app/media /app/staticfiles
 
-# Create media directory
-RUN mkdir -p /app/media
+# Make entrypoint script executable
+RUN chmod +x /app/docker-entrypoint.sh
 
 # Expose port
 EXPOSE 8000
 
-# Run gunicorn
+# Use entrypoint script
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+
+# Default command (can be overridden)
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", "smartShop.wsgi:application"]
