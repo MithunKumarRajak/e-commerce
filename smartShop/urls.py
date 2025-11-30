@@ -26,8 +26,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('products/', include('products.urls')),
     path('cart/', include('carts.urls')),
-    # Provide a root-level alias for checkout to match previous projects
-    path('checkout/', include('carts.urls')),
     path('accounts/', include('accounts.urls')),
     # Orders
     path('orders/', include('orders.urls')),
@@ -42,6 +40,8 @@ urlpatterns = [
     path('press/', press, name='press'),
     path('payments/', payments, name='payments'),
     path('shipping/', shipping, name='shipping'),
+    path('returns/', returns, name='returns'),
+    path('support/', support, name='support'),
     path('cancellation/', cancellation, name='cancellation'),
     path('faq/', faq, name='faq'),
     path('security/', security, name='security'),

@@ -1,17 +1,49 @@
 <aside class="col-md-3">
     <!--   SIDEBAR   -->
-    <ul class="list-group">
-        <a class="list-group-item {% if '/accounts/' == request.path %}active{% endif %}" href="{% url 'dashboard' %}">
-            Dashboard </a>
-        <a class="list-group-item {% if '/orders/' in request.path %}active{% endif %}" href="{% url 'order_list' %}">
-            My Orders </a>
-        <a class="list-group-item {% if '/accounts/edit_profile/' in request.path %}active{% endif %}"
-            href="{% url 'edit_profile' %}"> Edit Profile </a>
-        <a class="list-group-item {% if '/accounts/change_password/' in request.path %}active{% endif %}"
-            href="{% url 'change_password' %}"> Change Password </a>
-    </ul>
-    <br>
-    <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log
-            out</span> </a>
+    <div class="card shadow-sm mb-3">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action {% if '/accounts/dashboard/' in request.path or request.path == '/accounts/' %}active{% endif %}" 
+               href="{% url 'dashboard' %}">
+                <i class="fa fa-tachometer-alt me-2"></i> Dashboard 
+            </a>
+            <a class="list-group-item list-group-item-action {% if '/orders/' in request.path or 'my_orders' in request.path %}active{% endif %}" 
+               href="{% url 'my_orders' %}">
+                <i class="fa fa-shopping-bag me-2"></i> My Orders 
+            </a>
+            <a class="list-group-item list-group-item-action {% if 'edit_profile' in request.path %}active{% endif %}"
+                href="{% url 'edit_profile' %}"> 
+                <i class="fa fa-user-edit me-2"></i> Edit Profile 
+            </a>
+            <a class="list-group-item list-group-item-action {% if 'change_password' in request.path %}active{% endif %}"
+                href="{% url 'change_password' %}"> 
+                <i class="fa fa-key me-2"></i> Change Password 
+            </a>
+        </div>
+    </div>
+    
+    <a class="btn btn-outline-danger w-100" href="{% url 'logout' %}"> 
+        <i class="fa fa-sign-out-alt me-2"></i> Log out 
+    </a>
     <!--   SIDEBAR .//END   -->
 </aside>
+
+<style>
+    .list-group-item.active {
+        background-color: #667eea;
+        border-color: #667eea;
+        color: white;
+        font-weight: 500;
+    }
+    .list-group-item.active i {
+        color: white;
+    }
+    .list-group-item:hover:not(.active) {
+        background-color: #f8f9fa;
+        color: #667eea;
+    }
+    .list-group-item i {
+        width: 20px;
+        text-align: center;
+        color: #6c757d;
+    }
+</style>

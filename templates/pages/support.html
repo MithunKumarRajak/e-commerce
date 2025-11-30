@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}24/7 Support - SmartShop{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="text-center mb-5">
+                <div class="feature-icon-large mb-3">
+                    <i class="fa fa-headset"></i>
+                </div>
+                <h1>24/7 Customer Support</h1>
+                <p class="lead text-muted">Dedicated customer service</p>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3>We're Here to Help!</h3>
+                    <hr>
+
+                    <h5><i class="fa fa-clock text-success me-2"></i>Round-the-Clock Assistance</h5>
+                    <p>Our dedicated customer support team is available <strong>24 hours a day, 7 days a week</strong> to assist you with any questions or concerns.</p>
+
+                    <h5 class="mt-4"><i class="fa fa-phone text-primary me-2"></i>Contact Methods</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <div class="support-card">
+                                <i class="fa fa-phone-alt fa-2x text-primary"></i>
+                                <h6 class="mt-2">Phone Support</h6>
+                                <p class="text-muted mb-1">Call us anytime</p>
+                                <a href="tel:+917631882219"><strong>+91 7631882219</strong></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="support-card">
+                                <i class="fa fa-envelope fa-2x text-danger"></i>
+                                <h6 class="mt-2">Email Support</h6>
+                                <p class="text-muted mb-1">Response within 2 hours</p>
+                                <a href="mailto:support@smartshop.gmail.com"><strong>support@smartshop.gmail.com</strong></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="support-card">
+                                <i class="fa fa-comments fa-2x text-success"></i>
+                                <h6 class="mt-2">Live Chat</h6>
+                                <p class="text-muted mb-1">Instant assistance</p>
+                                <strong>Available on website</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="support-card">
+                                <i class="fa fa-whatsapp fa-2x text-success"></i>
+                                <h6 class="mt-2">WhatsApp</h6>
+                                <p class="text-muted mb-1">Quick responses</p>
+                                <a href="https://wa.me/917631882219"><strong>Chat on WhatsApp</strong></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-4"><i class="fa fa-question-circle text-warning me-2"></i>What We Help With</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Order tracking & status</li>
+                                <li>Product information</li>
+                                <li>Returns & refunds</li>
+                                <li>Payment issues</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>Shipping queries</li>
+                                <li>Account assistance</li>
+                                <li>Technical support</li>
+                                <li>General inquiries</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-4"><i class="fa fa-bolt text-danger me-2"></i>Response Times</h5>
+                    <ul>
+                        <li><strong>Phone:</strong> Immediate connection</li>
+                        <li><strong>Live Chat:</strong> Instant response</li>
+                        <li><strong>Email:</strong> Within 2 hours</li>
+                        <li><strong>WhatsApp:</strong> Within 15 minutes</li>
+                    </ul>
+
+                    <div class="alert alert-primary mt-4">
+                        <h6><i class="fa fa-lightbulb me-2"></i>Self-Service Options</h6>
+                        <p class="mb-2">For quick answers, check out our:</p>
+                        <ul class="mb-0">
+                            <li><a href="{% url 'faq' %}">FAQ Page</a> - Common questions answered</li>
+                            <li><a href="{% url 'my_orders' %}">Order History</a> - Track your orders</li>
+                            <li><a href="{% url 'shipping' %}">Shipping Info</a> - Delivery details</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                            <i class="fa fa-paper-plane me-2"></i>Send Us a Message
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .feature-icon-large {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(250, 112, 154, 0.3);
+    }
+
+    .feature-icon-large i {
+        font-size: 50px;
+        color: white;
+    }
+
+    .support-card {
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .support-card:hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}

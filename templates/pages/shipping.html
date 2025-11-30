@@ -1,19 +1,80 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Free Shipping - SmartShop{% endblock %}
 
 {% block content %}
-<section class="section-content padding-y">
-    <div class="container">
-        <header class="section-heading">
-            <h2 class="section-title">Shipping Information</h2>
-        </header>
-        <article>
-            <h5>Shipping Methods</h5>
-            <p>We offer standard and express shipping options.</p>
-            <h5>Delivery Times</h5>
-            <p>Standard shipping typically takes 3-5 business days. Express shipping takes 1-2 business days.</p>
-            <h5>Shipping Costs</h5>
-            <p>Shipping costs are calculated at checkout based on your location and order weight.</p>
-        </article>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="text-center mb-5">
+                <div class="feature-icon-large mb-3">
+                    <i class="fa fa-shipping-fast"></i>
+                </div>
+                <h1>Free Shipping</h1>
+                <p class="lead text-muted">On orders over ₹500</p>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3>Shipping Policy</h3>
+                    <hr>
+
+                    <h5><i class="fa fa-check-circle text-success me-2"></i>Free Shipping Eligibility</h5>
+                    <p>Enjoy <strong>FREE standard shipping</strong> on all orders above ₹500. No coupon code needed!</p>
+
+                    <h5 class="mt-4"><i class="fa fa-truck text-primary me-2"></i>Delivery Times</h5>
+                    <ul>
+                        <li><strong>Standard Shipping:</strong> 3-5 business days</li>
+                        <li><strong>Express Shipping:</strong> 1-2 business days (additional charges apply)</li>
+                        <li><strong>Same-Day Delivery:</strong> Available in select cities</li>
+                    </ul>
+
+                    <h5 class="mt-4"><i class="fa fa-map-marker-alt text-danger me-2"></i>Shipping Locations</h5>
+                    <p>We ship to all locations across India. International shipping is currently not available.</p>
+
+                    <h5 class="mt-4"><i class="fa fa-box text-warning me-2"></i>Order Processing</h5>
+                    <p>Orders are processed within 24 hours (excluding weekends and holidays). You will receive tracking information via email once your order ships.</p>
+
+                    <h5 class="mt-4"><i class="fa fa-info-circle text-info me-2"></i>Important Notes</h5>
+                    <ul>
+                        <li>Free shipping is automatically applied at checkout for eligible orders</li>
+                        <li>Shipping charges for orders below ₹500: ₹50</li>
+                        <li>During sale periods, delivery may take 1-2 extra days</li>
+                        <li>Remote locations may require additional delivery time</li>
+                    </ul>
+
+                    <div class="alert alert-success mt-4">
+                        <strong>Pro Tip:</strong> Combine items to reach ₹500 and enjoy free shipping!
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'products' %}" class="btn btn-primary">
+                            <i class="fa fa-shopping-bag me-2"></i>Start Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
+</div>
+
+<style>
+    .feature-icon-large {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .feature-icon-large i {
+        font-size: 50px;
+        color: white;
+    }
+</style>
 {% endblock %}

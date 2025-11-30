@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fa fa-truck me-2"></i>Order Tracking</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Order Info -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Order #{{ order.order_number }}</h5>
+                            <p class="text-muted mb-1">
+                                <strong>Order Date:</strong> {{ order.created_at|date:"d M, Y" }}
+                            </p>
+                            <p class="text-muted mb-1">
+                                <strong>Last Updated:</strong> {{ order.updated_at|date:"d M, Y H:i" }}
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <h5>Total: ₹{{ order.order_total }}</h5>
+                            <span class="badge 
+                                {% if order.status == 'New' %}bg-info
+                                {% elif order.status == 'Accepted' %}bg-warning
+                                {% elif order.status == 'Completed' %}bg-success
+                                {% elif order.status == 'Cancelled' %}bg-danger
+                                {% endif %} fs-6">
+                                {{ order.status }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Order Tracking Timeline -->
+                    <div class="order-tracking">
+                        <h5 class="mb-4">Order Status</h5>
+                        <div class="tracking-steps">
+                            <!-- Step 1: Order Placed -->
+                            <div class="tracking-step {% if order.status == 'New' or order.status == 'Accepted' or order.status == 'Completed' %}completed{% endif %}">
+                                <div class="tracking-icon">
+                                    <i class="fa fa-check-circle"></i>
+                                </div>
+                                <div class="tracking-content">
+                                    <h6>Order Placed</h6>
+                                    <p class="text-muted small">{{ order.created_at|date:"d M, Y H:i" }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Order Accepted -->
+                            <div class="tracking-step {% if order.status == 'Accepted' or order.status == 'Completed' %}completed{% elif order.status == 'Cancelled' %}cancelled{% endif %}">
+                                <div class="tracking-icon">
+                                    <i class="fa fa-{% if order.status == 'Accepted' or order.status == 'Completed' %}check-circle{% elif order.status == 'Cancelled' %}times-circle{% else %}circle{% endif %}"></i>
+                                </div>
+                                <div class="tracking-content">
+                                    <h6>Order Confirmed</h6>
+                                    <p class="text-muted small">
+                                        {% if order.status == 'Accepted' or order.status == 'Completed' %}
+                                            Confirmed and being processed
+                                        {% elif order.status == 'Cancelled' %}
+                                            Order Cancelled
+                                        {% else %}
+                                            Waiting for confirmation
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Shipped -->
+                            <div class="tracking-step {% if order.status == 'Completed' %}completed{% endif %}">
+                                <div class="tracking-icon">
+                                    <i class="fa fa-{% if order.status == 'Completed' %}check-circle{% else %}circle{% endif %}"></i>
+                                </div>
+                                <div class="tracking-content">
+                                    <h6>Shipped</h6>
+                                    <p class="text-muted small">
+                                        {% if order.status == 'Completed' %}
+                                            Order shipped
+                                        {% else %}
+                                            Preparing for shipment
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Delivered -->
+                            <div class="tracking-step {% if order.status == 'Completed' %}completed{% endif %}">
+                                <div class="tracking-icon">
+                                    <i class="fa fa-{% if order.status == 'Completed' %}check-circle{% else %}circle{% endif %}"></i>
+                                </div>
+                                <div class="tracking-content">
+                                    <h6>Delivered</h6>
+                                    <p class="text-muted small">
+                                        {% if order.status == 'Completed' %}
+                                            {{ order.updated_at|date:"d M, Y" }}
+                                        {% else %}
+                                            Not delivered yet
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- Order Items -->
+                    <h5 class="mb-3">Order Items</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order_products %}
+                                <tr>
+                                    <td>
+                                        {{ item.product.product_name }}
+                                        {% if item.variations.all %}
+                                        <br>
+                                        <small class="text-muted">
+                                            {% for variation in item.variations.all %}
+                                                {{ variation.variation_category|title }}: <strong>{{ variation.variation_value|title }}</strong>
+                                                {% if not forloop.last %}, {% endif %}
+                                            {% endfor %}
+                                        </small>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>₹{{ item.product_price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Delivery Address -->
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Delivery Address</h5>
+                            <address>
+                                {{ order.full_name }}<br>
+                                {{ order.full_address }}<br>
+                                {{ order.city }}, {{ order.state }}<br>
+                                {{ order.country }}<br>
+                                Phone: {{ order.phone }}
+                            </address>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Payment Information</h5>
+                            {% if order.payment %}
+                            <p class="mb-1"><strong>Payment ID:</strong> {{ order.payment.payment_id }}</p>
+                            <p class="mb-1"><strong>Payment Method:</strong> {{ order.payment.payment_method }}</p>
+                            <p class="mb-1"><strong>Status:</strong> <span class="badge bg-success">{{ order.payment.status }}</span></p>
+                            {% else %}
+                            <p class="text-muted">Payment information not available</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'my_orders' %}" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left me-2"></i>Back to Orders
+                        </a>
+                        <a href="{% url 'products' %}" class="btn btn-primary">
+                            <i class="fa fa-shopping-bag me-2"></i>Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .tracking-steps {
+        position: relative;
+        padding-left: 60px;
+    }
+
+    .tracking-step {
+        position: relative;
+        padding-bottom: 40px;
+    }
+
+    .tracking-step:last-child {
+        padding-bottom: 0;
+    }
+
+    .tracking-step::before {
+        content: '';
+        position: absolute;
+        left: -41px;
+        top: 30px;
+        width: 2px;
+        height: calc(100% - 10px);
+        background: #dee2e6;
+    }
+
+    .tracking-step.completed::before {
+        background: #28a745;
+    }
+
+    .tracking-step.cancelled::before {
+        background: #dc3545;
+    }
+
+    .tracking-step:last-child::before {
+        display: none;
+    }
+
+    .tracking-icon {
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #6c757d;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 2px #dee2e6;
+    }
+
+    .tracking-step.completed .tracking-icon {
+        background: #28a745;
+        color: white;
+        box-shadow: 0 0 0 2px #28a745;
+    }
+
+    .tracking-step.cancelled .tracking-icon {
+        background: #dc3545;
+        color: white;
+        box-shadow: 0 0 0 2px #dc3545;
+    }
+
+    .tracking-content h6 {
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .tracking-content p {
+        margin: 5px 0 0;
+    }
+</style>
+
+{% endblock %}

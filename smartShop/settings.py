@@ -5,9 +5,9 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# ======================================================================
+
 # SECURITY SETTINGS
-# ======================================================================
+
 
 SECRET_KEY = config(
     'SECRET_KEY',
@@ -43,9 +43,9 @@ if not DEBUG:
     X_FRAME_OPTIONS = "DENY"
 
 
-# ======================================================================
+
 # APPLICATIONS
-# ======================================================================
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,11 +54,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django.contrib.humanize',
 ]
 
 EXTERNAL_APPS = [
+    'smartShop',
     'category',
     'accounts',
     'products',
@@ -70,9 +70,9 @@ EXTERNAL_APPS = [
 INSTALLED_APPS += EXTERNAL_APPS
 
 
-# ======================================================================
+
 # MIDDLEWARE
-# ======================================================================
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,9 +91,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'smartShop.urls'
 
 
-# ======================================================================
+
 # TEMPLATES
-# ======================================================================
+
 
 TEMPLATES = [
     {
@@ -119,9 +119,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'smartShop.wsgi.application'
 
 
-# ======================================================================
+
 # DATABASE
-# ======================================================================
+
 
 DATABASES = {
     "default": {
@@ -136,9 +136,9 @@ if DATABASE_URL:
     DATABASES["default"] = dj_database_url.parse(DATABASE_URL)
 
 
-# ======================================================================
+
 # PASSWORD VALIDATION
-# ======================================================================
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -148,9 +148,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ======================================================================
+
 # INTERNATIONALIZATION
-# ======================================================================
+
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
@@ -159,9 +159,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-# ======================================================================
+
 # STATIC & MEDIA FILES
-# ======================================================================
+
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
@@ -182,9 +182,9 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# ======================================================================
+
 # AUTHENTICATION
-# ======================================================================
+
 
 AUTH_USER_MODEL = "accounts.Account"
 
@@ -197,9 +197,9 @@ MESSAGE_TAGS = {
 }
 
 
-# ======================================================================
+
 # EMAIL CONFIGURATION
-# ======================================================================
+
 
 EMAIL_HOST = config("EMAIL_HOST", default="smtp.gmail.com")
 EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)

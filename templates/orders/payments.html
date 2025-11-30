@@ -67,10 +67,11 @@
                           >{{ cart_item.product.product_name }}</a
                         >
                         <p class="text-muted small">
-                          {% for item in cart_item.variations.all %} {{
-                          item.variation_category|capfirst }} : {{
-                          item.variation_value|capfirst }} <br />
-                          {% endfor %}
+                          {% if cart_item.variations.all %}
+                            {% for variation in cart_item.variations.all %}
+                              {{ variation.variation_category|capfirst }} : {{ variation.variation_value|capfirst }} <br>
+                            {% endfor %}
+                          {% endif %}
                         </p>
                       </figcaption>
                     </figure>

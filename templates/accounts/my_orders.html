@@ -25,7 +25,9 @@
                                             <th scope="col">Billing Name</th>
                                             <th scope="col">Phone</th>
                                             <th scope="col">Order Total</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -37,7 +39,23 @@
                                             <td>{{order.full_name}}</td>
                                             <td>{{order.phone}}</td>
                                             <td>₹{{order.order_total}}</td>
-                                            <td>{{order.created_at}}</td>
+                                            <td>
+                                                <span class="badge 
+                                                    {% if order.status == 'New' %}bg-info
+                                                    {% elif order.status == 'Accepted' %}bg-warning
+                                                    {% elif order.status == 'Completed' %}bg-success
+                                                    {% elif order.status == 'Cancelled' %}bg-danger
+                                                    {% endif %}">
+                                                    {{ order.status }}
+                                                </span>
+                                            </td>
+                                            <td>{{order.created_at|date:"d M, Y"}}</td>
+                                            <td>
+                                                <a href="{% url 'order_tracking' order.order_number %}" 
+                                                   class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-truck me-1"></i>Track
+                                                </a>
+                                            </td>
                                         </tr>
                                         {% endfor %}
 

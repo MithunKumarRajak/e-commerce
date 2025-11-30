@@ -36,6 +36,12 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Password does not match !"
             )
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if Account.objects.filter(email=email).exists():
+            raise forms.ValidationError('An account with this email already exists.')
+        return email
 
 # User Form for updating user info
 class UserForm(forms.ModelForm):

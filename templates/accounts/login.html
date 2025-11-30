@@ -6,52 +6,82 @@
 
 
 
-<section class="section-conten padding-y" style="min-height:84vh">
+<section class="section-content padding-y bg-light" style="min-height:84vh">
 
     <!-- ============================ COMPONENT LOGIN   ================================= -->
 
     {% if request.GET.command == 'verification' %}
 
-    <div class="container mx-auto alert alert-info text-center" role="alert"
+    <div class="container mx-auto alert alert-info text-center shadow-sm" role="alert"
         style="max-width: 1024px; margin-top:100px;">
+        <i class="fa fa-envelope-open-text fa-2x mb-3"></i><br>
         Thank you for registering with us. We have sent you a verification email to your email address [{{
         request.GET.email }}]
         <br><br>
-        Already verified? <a href="{% url 'login' %}">Login</a>
+        Already verified? <a href="{% url 'login' %}" class="fw-bold">Login</a>
     </div>
 
     {% else %}
 
-    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
-
-        <div class="card-body">
-            <h4 class="card-title mb-4">Sign in</h4>
+    <div class="card mx-auto shadow-sm border-0" style="max-width: 400px; margin-top:60px;">
+        <div class="card-body p-4">
+            <h4 class="card-title mb-4 text-center">Sign in</h4>
             {% include 'includes/alerts.html' %}
             <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email Address" name="email">
-                </div> <!-- form-group// -->
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                </div> <!-- form-group// -->
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="fa fa-envelope text-muted"></i></span>
+                        <input type="email" class="form-control" placeholder="Email Address" name="email" required>
+                    </div>
+                </div> 
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="fa fa-lock text-muted"></i></span>
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    </div>
+                </div> 
 
-                <div class="form-group">
-                    <a href="{% url 'forgotPassword' %}" class="float-right">Forgot password?</a>
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label small" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="{% url 'forgotPassword' %}" class="small text-decoration-none">Forgot password?</a>
+                </div> 
 
-                </div> <!-- form-group form-check .// -->
-                <div class="form-group">
+                <div class="d-grid">
                     <button type="submit" class="btn btn-primary btn-block"> Login </button>
-                </div> <!-- form-group// -->
+                </div> 
             </form>
-        </div> <!-- card-body.// -->
-    </div> <!-- card .// -->
+        </div> 
+    </div> 
 
-    <p class="text-center mt-4">Don't have account? <a href="{% url 'register' %}">Sign up</a></p>
-    <p class="text-center"><a href="{% url 'resend_activation' %}">Resend activation email</a></p>
+    <p class="text-center mt-4 text-muted">Don't have an account? <a href="{% url 'register' %}" class="fw-bold text-primary">Sign up</a></p>
+    <p class="text-center"><a href="{% url 'resend_activation' %}" class="small text-muted">Resend activation email</a></p>
     <br><br>
     <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
     {% endif %}
 
 </section>
+
+<style>
+    .input-group-text {
+        border-right: none;
+    }
+    .form-control {
+        border-left: none;
+    }
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+    }
+    .input-group:focus-within .input-group-text,
+    .input-group:focus-within .form-control {
+        border-color: #667eea;
+    }
+    .input-group:focus-within .input-group-text i {
+        color: #667eea !important;
+    }
+</style>
 {% endblock %}

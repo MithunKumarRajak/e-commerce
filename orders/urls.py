@@ -7,6 +7,7 @@ urlpatterns = [
     path('cod_payments/', views.cod_payments, name='cod_payments'),
     path('order_complete/', views.order_complete, name='order_complete'),
     path('download_invoice/', views.download_invoice, name='download_invoice'),
+    path('track/<str:order_number>/', views.order_tracking, name='order_tracking'),
 
 
 ]

@@ -1,8 +1,10 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from products.models import Product
 # Create your views here.
 from category.models import Category
+from .models import Contact
+from django.contrib import messages
 
 
 
@@ -24,6 +26,25 @@ def about(request):
 
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        phone = request.POST.get('phone', '')
+        
+        # Save to database
+        Contact.objects.create(
+            name=name,
+            email=email,
+            subject=subject,
+            message=message,
+            phone=phone
+        )
+        
+        messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
+        return redirect('contact')
+    
     return render(request, 'contact.html')
 
 
@@ -58,4 +79,10 @@ def security(request):
 
 def privacy(request):
     return render(request, 'pages/privacy.html')
+
+def returns(request):
+    return render(request, 'pages/returns.html')
+
+def support(request):
+    return render(request, 'pages/support.html')
 

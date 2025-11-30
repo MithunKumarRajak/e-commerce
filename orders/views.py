@@ -343,3 +343,25 @@ def order_list(request):
     }
     # Reuse the account-facing orders template to avoid duplicates
     return render(request, 'accounts/my_orders.html', context)
+
+
+@login_required
+def order_tracking(request, order_number):
+    """Display order tracking page with status timeline."""
+    try:
+        order = Order.objects.get(
+            order_number=order_number, 
+            user=request.user, 
+            is_ordered=True
+        )
+        order_products = OrderProduct.objects.filter(order_id=order.id)
+        
+        context = {
+            'order': order,
+            'order_products': order_products,
+        }
+        return render(request, 'orders/order_tracking.html', context)
+    except Order.DoesNotExist:
+        messages.error(request, 'Order not found.')
+        return redirect('my_orders')
+

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Easy Returns - SmartShop{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="text-center mb-5">
+                <div class="feature-icon-large mb-3">
+                    <i class="fa fa-undo"></i>
+                </div>
+                <h1>Easy Returns</h1>
+                <p class="lead text-muted">30-day return policy</p>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <h3>Return & Refund Policy</h3>
+                    <hr>
+
+                    <h5><i class="fa fa-calendar-check text-success me-2"></i>30-Day Return Window</h5>
+                    <p>We offer a hassle-free <strong>30-day return policy</strong> from the date of delivery. If you're not satisfied with your purchase, you can return it for a full refund or exchange.</p>
+
+                    <h5 class="mt-4"><i class="fa fa-clipboard-list text-primary me-2"></i>Return Requirements</h5>
+                    <p>To be eligible for a return, the item must be:</p>
+                    <ul>
+                        <li>Unused and in the same condition that you received it</li>
+                        <li>In the original packaging with all tags intact</li>
+                        <li>Accompanied by proof of purchase (order number or receipt)</li>
+                    </ul>
+
+                    <h5 class="mt-4"><i class="fa fa-exchange-alt text-warning me-2"></i>How to Return</h5>
+                    <ol>
+                        <li><strong>Initiate Return:</strong> Go to <a href="{% url 'my_orders' %}">My Orders</a> and select the item</li>
+                        <li><strong>Select Reason:</strong> Choose why you want to return</li>
+                        <li><strong>Schedule Pickup:</strong> We'll arrange free pickup from your address</li>
+                        <li><strong>Get Refund:</strong> Refund processed within 7-10 business days</li>
+                    </ol>
+
+                    <h5 class="mt-4"><i class="fa fa-money-bill-wave text-success me-2"></i>Refund Method</h5>
+                    <ul>
+                        <li><strong>Original Payment Method:</strong> Refund to the same method used for purchase</li>
+                        <li><strong>Store Credit:</strong> Optional instant store credit for faster processing</li>
+                        <li><strong>Processing Time:</strong> 7-10 business days after we receive the item</li>
+                    </ul>
+
+                    <h5 class="mt-4"><i class="fa fa-times-circle text-danger me-2"></i>Non-Returnable Items</h5>
+                    <ul>
+                        <li>Personalized or custom-made products</li>
+                        <li>Hygiene products (opened)</li>
+                        <li>Sale items (final sale)</li>
+                        <li>Gift cards</li>
+                    </ul>
+
+                    <h5 class="mt-4"><i class="fa fa-shipping-fast text-info me-2"></i>Return Shipping</h5>
+                    <p>We provide <strong>FREE return pickup</strong> for all eligible returns. Our courier will collect the package from your doorstep at no additional cost.</p>
+
+                    <div class="alert alert-info mt-4">
+                        <strong>Need Help?</strong> Contact our customer support at <a href="mailto:support@smartshop.gmail.com">support@smartshop.gmail.com</a> or call +91 7631882219
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'my_orders' %}" class="btn btn-primary me-2">
+                            <i class="fa fa-list me-2"></i>My Orders
+                        </a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-primary">
+                            <i class="fa fa-envelope me-2"></i>Contact Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .feature-icon-large {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+    }
+
+    .feature-icon-large i {
+        font-size: 50px;
+        color: white;
+    }
+</style>
+{% endblock %}
