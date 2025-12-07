@@ -1,42 +1,581 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<section class="section-content padding-y">
-    <div class="container">
-        <header class="section-heading">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-        </header>
 
-        <div class="accordion" id="faqAccordion">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                            How do I track my order?
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseOne" class="collapse show" data-bs-parent="#faqAccordion">
-                    <div class="card-body">
-                        You can track your order by logging into your account and visiting the 'My Orders' section.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                            What is your return policy?
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" data-bs-parent="#faqAccordion">
-                    <div class="card-body">
-                        We accept returns within 30 days of purchase. Please visit our Return Policy page for more details.
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- FAQ Section with Professional Styling -->
+<section class="faq-section py-5">
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="faq-header text-center mb-5">
+      <div class="faq-icon mb-3">
+        <i class="fa fa-question-circle fa-3x text-primary"></i>
+      </div>
+      <h1 class="display-4 fw-bold mb-3">Frequently Asked Questions</h1>
+      <p class="lead text-muted">Find answers to common questions about SmartShop</p>
+      <div class="faq-divider mx-auto"></div>
     </div>
+
+    <!-- Search Box -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8">
+        <div class="faq-search">
+          <div class="input-group input-group-lg shadow-sm">
+            <span class="input-group-text bg-white border-end-0">
+              <i class="fa fa-search text-muted"></i>
+            </span>
+            <input type="text" class="form-control border-start-0 ps-0" id="faqSearchInput" 
+                   placeholder="Search for answers...">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Categories -->
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        
+        <!-- Orders & Shipping Category -->
+        <div class="faq-category mb-4">
+          <div class="category-header mb-3">
+            <h2 class="h3 fw-bold">
+              <i class="fa fa-shipping-fast me-2 text-primary"></i>
+              Orders & Shipping
+            </h2>
+          </div>
+          
+          <div class="accordion" id="ordersAccordion">
+            <!-- Question 1 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="order1">
+                <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseOrder1" aria-expanded="true">
+                  <i class="fa fa-map-marker-alt me-2 text-primary"></i>
+                  How do I track my order?
+                </button>
+              </h3>
+              <div id="collapseOrder1" class="accordion-collapse collapse show" data-bs-parent="#ordersAccordion">
+                <div class="accordion-body bg-light">
+                  <p class="mb-2">Tracking your order is simple and easy:</p>
+                  <ol class="mb-0">
+                    <li>Log into your SmartShop account</li>
+                    <li>Navigate to the <strong>"My Orders"</strong> section in your dashboard</li>
+                    <li>Click on the order you want to track</li>
+                    <li>View real-time tracking information and estimated delivery date</li>
+                  </ol>
+                  <p class="mt-3 mb-0">
+                    <i class="fa fa-info-circle text-primary me-2"></i>
+                    You'll also receive email notifications with tracking updates.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="order2">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseOrder2">
+                  <i class="fa fa-truck me-2 text-primary"></i>
+                  How long does shipping take?
+                </button>
+              </h3>
+              <div id="collapseOrder2" class="accordion-collapse collapse" data-bs-parent="#ordersAccordion">
+                <div class="accordion-body bg-light">
+                  <p>Shipping times vary based on your location and the shipping method selected:</p>
+                  <ul class="mb-3">
+                    <li><strong>Standard Shipping:</strong> 5-7 business days</li>
+                    <li><strong>Express Shipping:</strong> 2-3 business days</li>
+                    <li><strong>Next-Day Delivery:</strong> 1 business day (select locations)</li>
+                  </ul>
+                  <div class="alert alert-info mb-0" role="alert">
+                    <i class="fa fa-clock me-2"></i>
+                    Orders placed before 2 PM are processed the same day!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="order3">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseOrder3">
+                  <i class="fa fa-rupee-sign me-2 text-primary"></i>
+                  What are the shipping charges?
+                </button>
+              </h3>
+              <div id="collapseOrder3" class="accordion-collapse collapse" data-bs-parent="#ordersAccordion">
+                <div class="accordion-body bg-light">
+                  <p class="mb-3">Shipping charges are calculated based on your order value and location:</p>
+                  <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                      <thead class="table-light">
+                        <tr>
+                          <th>Order Value</th>
+                          <th>Shipping Cost</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Below ₹500</td>
+                          <td>₹50</td>
+                        </tr>
+                        <tr>
+                          <td>₹500 - ₹999</td>
+                          <td>₹40</td>
+                        </tr>
+                        <tr>
+                          <td>Above ₹1000</td>
+                          <td class="text-success fw-bold">FREE</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Returns & Refunds Category -->
+        <div class="faq-category mb-4">
+          <div class="category-header mb-3">
+            <h2 class="h3 fw-bold">
+              <i class="fa fa-undo me-2 text-primary"></i>
+              Returns & Refunds
+            </h2>
+          </div>
+          
+          <div class="accordion" id="returnsAccordion">
+            <!-- Question 4 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="return1">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseReturn1">
+                  <i class="fa fa-clock me-2 text-primary"></i>
+                  What is your return policy?
+                </button>
+              </h3>
+              <div id="collapseReturn1" class="accordion-collapse collapse" data-bs-parent="#returnsAccordion">
+                <div class="accordion-body bg-light">
+                  <p>We offer a hassle-free return policy to ensure your satisfaction:</p>
+                  <ul class="mb-3">
+                    <li><strong>30-Day Return Window:</strong> Return any item within 30 days of delivery</li>
+                    <li><strong>Free Returns:</strong> We cover return shipping costs for defective items</li>
+                    <li><strong>Easy Process:</strong> Initiate returns directly from your account</li>
+                    <li><strong>Quality Check:</strong> All returns are inspected upon arrival</li>
+                  </ul>
+                  <div class="alert alert-warning mb-0" role="alert">
+                    <i class="fa fa-exclamation-triangle me-2"></i>
+                    Items must be unused and in original packaging with tags attached.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="return2">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseReturn2">
+                  <i class="fa fa-money-bill-wave me-2 text-primary"></i>
+                  How do I get a refund?
+                </button>
+              </h3>
+              <div id="collapseReturn2" class="accordion-collapse collapse" data-bs-parent="#returnsAccordion">
+                <div class="accordion-body bg-light">
+                  <p>Once your return is received and inspected, we'll process your refund:</p>
+                  <ol class="mb-3">
+                    <li>Initiate a return request from "My Orders"</li>
+                    <li>Ship the item back using the provided return label</li>
+                    <li>We'll inspect the item within 2-3 business days</li>
+                    <li>Refund will be credited to your original payment method</li>
+                  </ol>
+                  <p class="mb-0">
+                    <i class="fa fa-info-circle text-primary me-2"></i>
+                    Refunds typically take 5-7 business days to reflect in your account.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment & Account Category -->
+        <div class="faq-category mb-4">
+          <div class="category-header mb-3">
+            <h2 class="h3 fw-bold">
+              <i class="fa fa-credit-card me-2 text-primary"></i>
+              Payment & Account
+            </h2>
+          </div>
+          
+          <div class="accordion" id="paymentAccordion">
+            <!-- Question 6 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="payment1">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapsePayment1">
+                  <i class="fa fa-wallet me-2 text-primary"></i>
+                  What payment methods do you accept?
+                </button>
+              </h3>
+              <div id="collapsePayment1" class="accordion-collapse collapse" data-bs-parent="#paymentAccordion">
+                <div class="accordion-body bg-light">
+                  <p class="mb-3">We accept multiple secure payment methods:</p>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="payment-method-card p-3 bg-white rounded border">
+                        <h6 class="fw-bold mb-2">
+                          <i class="fa fa-credit-card text-primary me-2"></i>Credit/Debit Cards
+                        </h6>
+                        <p class="small text-muted mb-0">Visa, MasterCard, Amex, Rupay</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="payment-method-card p-3 bg-white rounded border">
+                        <h6 class="fw-bold mb-2">
+                          <i class="fa fa-university text-primary me-2"></i>Net Banking
+                        </h6>
+                        <p class="small text-muted mb-0">All major banks supported</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="payment-method-card p-3 bg-white rounded border">
+                        <h6 class="fw-bold mb-2">
+                          <i class="fa fa-mobile-alt text-primary me-2"></i>UPI
+                        </h6>
+                        <p class="small text-muted mb-0">Google Pay, PhonePe, Paytm</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="payment-method-card p-3 bg-white rounded border">
+                        <h6 class="fw-bold mb-2">
+                          <i class="fa fa-hand-holding-usd text-primary me-2"></i>Cash on Delivery
+                        </h6>
+                        <p class="small text-muted mb-0">Pay when you receive</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="payment2">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapsePayment2">
+                  <i class="fa fa-shield-alt me-2 text-primary"></i>
+                  Is my payment information secure?
+                </button>
+              </h3>
+              <div id="collapsePayment2" class="accordion-collapse collapse" data-bs-parent="#paymentAccordion">
+                <div class="accordion-body bg-light">
+                  <p>Absolutely! Your security is our top priority:</p>
+                  <ul class="mb-3">
+                    <li><strong>SSL Encryption:</strong> All transactions are encrypted with 256-bit SSL</li>
+                    <li><strong>PCI Compliance:</strong> We follow PCI DSS standards</li>
+                    <li><strong>Secure Gateways:</strong> We use trusted payment processors</li>
+                    <li><strong>No Data Storage:</strong> We don't store your card details</li>
+                  </ul>
+                  <div class="d-flex align-items-center gap-3 mt-3">
+                    <img src="{% static 'images/misc/ssl-secure.png' %}" alt="SSL Secure" height="40" 
+                         onerror="this.style.display='none'">
+                    <img src="{% static 'images/misc/pci-compliant.png' %}" alt="PCI Compliant" height="40" 
+                         onerror="this.style.display='none'">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="payment3">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapsePayment3">
+                  <i class="fa fa-user-lock me-2 text-primary"></i>
+                  How do I reset my password?
+                </button>
+              </h3>
+              <div id="collapsePayment3" class="accordion-collapse collapse" data-bs-parent="#paymentAccordion">
+                <div class="accordion-body bg-light">
+                  <p>If you've forgotten your password, follow these steps:</p>
+                  <ol class="mb-3">
+                    <li>Click on "Forgot Password" on the login page</li>
+                    <li>Enter your registered email address</li>
+                    <li>Check your email for a password reset link</li>
+                    <li>Click the link and create a new password</li>
+                  </ol>
+                  <p class="mb-0">
+                    <i class="fa fa-info-circle text-primary me-2"></i>
+                    The reset link is valid for 24 hours. If you need help, contact our support team.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products & Services Category -->
+        <div class="faq-category mb-4">
+          <div class="category-header mb-3">
+            <h2 class="h3 fw-bold">
+              <i class="fa fa-box-open me-2 text-primary"></i>
+              Products & Services
+            </h2>
+          </div>
+          
+          <div class="accordion" id="productsAccordion">
+            <!-- Question 9 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="product1">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseProduct1">
+                  <i class="fa fa-certificate me-2 text-primary"></i>
+                  Are your products genuine?
+                </button>
+              </h3>
+              <div id="collapseProduct1" class="accordion-collapse collapse" data-bs-parent="#productsAccordion">
+                <div class="accordion-body bg-light">
+                  <p class="mb-3">Yes! We guarantee 100% authentic products:</p>
+                  <ul class="mb-0">
+                    <li>All products are sourced directly from authorized distributors and brands</li>
+                    <li>Every item comes with manufacturer warranty and authenticity certificate</li>
+                    <li>We have strict quality control measures in place</li>
+                    <li>Complete transparency in product sourcing and authenticity</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="accordion-item border-0 shadow-sm mb-3">
+              <h3 class="accordion-header" id="product2">
+                <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#collapseProduct2">
+                  <i class="fa fa-bell me-2 text-primary"></i>
+                  How do I get notified when items are back in stock?
+                </button>
+              </h3>
+              <div id="collapseProduct2" class="accordion-collapse collapse" data-bs-parent="#productsAccordion">
+                <div class="accordion-body bg-light">
+                  <p>Never miss out on your favorite products:</p>
+                  <ol class="mb-3">
+                    <li>Visit the product page of the out-of-stock item</li>
+                    <li>Click on "Notify Me When Available" button</li>
+                    <li>Enter your email address</li>
+                    <li>You'll receive an email as soon as it's back in stock</li>
+                  </ol>
+                  <div class="alert alert-success mb-0" role="alert">
+                    <i class="fa fa-check-circle me-2"></i>
+                    You can also enable notifications in your account settings!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Still Have Questions Section -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-10">
+        <div class="card border-0 shadow-sm bg-gradient-primary text-white">
+          <div class="card-body p-5 text-center">
+            <i class="fa fa-headset fa-3x mb-3"></i>
+            <h3 class="h4 fw-bold mb-3">Still Have Questions?</h3>
+            <p class="mb-4">Our customer support team is here to help you 24/7</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+              <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                <i class="fa fa-envelope me-2"></i>Contact Support
+              </a>
+              <a href="tel:+911234567890" class="btn btn-outline-light btn-lg">
+                <i class="fa fa-phone me-2"></i>Call Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
+<!-- Custom CSS for FAQ Page -->
+<style>
+  .faq-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+  }
+
+  .faq-header .faq-icon {
+    animation: fadeInDown 0.8s ease-in-out;
+  }
+
+  .faq-header h1 {
+    color: #212121;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .faq-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2874f0, #5b9cf5);
+    border-radius: 2px;
+    margin-top: 1rem;
+  }
+
+  .faq-search .input-group {
+    border-radius: 50px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .faq-search .input-group-text {
+    border: none;
+    padding-left: 1.5rem;
+  }
+
+  .faq-search .form-control {
+    border: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .faq-search .form-control:focus {
+    box-shadow: none;
+  }
+
+  .faq-category {
+    animation: fadeInUp 0.6s ease-in-out;
+  }
+
+  .category-header h2 {
+    color: #212121;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  .accordion-item {
+    border-radius: 12px !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .accordion-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  }
+
+  .accordion-button {
+    font-size: 1.05rem;
+    padding: 1.2rem 1.5rem;
+    background-color: white !important;
+    color: #212121 !important;
+    border: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%) !important;
+    color: #1565c0 !important;
+    box-shadow: none;
+  }
+
+  .accordion-button:focus {
+    box-shadow: none;
+    border: none;
+  }
+
+  .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%232874f0'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  }
+
+  .accordion-body {
+    padding: 1.5rem;
+    line-height: 1.8;
+    color: #424242;
+  }
+
+  .payment-method-card {
+    transition: all 0.3s ease;
+  }
+
+  .payment-method-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #2874f0 0%, #1565c0 100%) !important;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .faq-header h1 {
+      font-size: 2rem;
+    }
+    
+    .accordion-button {
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+    
+    .accordion-body {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<!-- Simple Search Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('faqSearchInput');
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+
+      accordionItems.forEach(item => {
+        const button = item.querySelector('.accordion-button');
+        const body = item.querySelector('.accordion-body');
+        const text = (button.textContent + body.textContent).toLowerCase();
+
+        if (text.includes(searchTerm) || searchTerm === '') {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 {% endblock %}

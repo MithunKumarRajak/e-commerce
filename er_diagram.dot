@@ -1,0 +1,223 @@
+digraph model_graph {
+    // General Settings
+    graph [
+        rankdir=TB
+        splines=ortho
+        nodesep=0.8
+        ranksep=1.0
+        fontname="Helvetica"
+        fontsize=12
+    ];
+    
+    node [
+        shape=plaintext
+        fontname="Helvetica"
+        fontsize=10
+    ];
+    
+    edge [
+        fontname="Helvetica"
+        fontsize=10
+        arrowhead=crow
+        arrowtail=none
+        dir=both
+    ];
+
+    // Helper to create HTML-like labels
+    // Format: Table with Title, PKs, FKs, Attributes
+    
+    // ---------------------------------------------------------
+    // ACCOUNTS APP
+    // ---------------------------------------------------------
+    
+    Account [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Account</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">email <FONT COLOR="#777777">(EmailField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">username <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">first_name <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">last_name <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    UserProfile [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>UserProfile</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">user_id <FONT COLOR="#777777">(OneToOne)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">address_line_1 <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">city <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">country <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    // ---------------------------------------------------------
+    // CATEGORY APP
+    // ---------------------------------------------------------
+
+    Category [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Category</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">parent_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">category_name <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">slug <FONT COLOR="#777777">(SlugField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    // ---------------------------------------------------------
+    // PRODUCTS APP
+    // ---------------------------------------------------------
+
+    Product [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Product</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">category_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">product_name <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">price <FONT COLOR="#777777">(IntegerField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">stock <FONT COLOR="#777777">(IntegerField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    Variation [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Variation</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">product_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">variation_category <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">variation_value <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    ReviewRating [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>ReviewRating</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">product_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">user_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">rating <FONT COLOR="#777777">(FloatField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">subject <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+    
+    ProductGallery [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>ProductGallery</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">product_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">image <FONT COLOR="#777777">(ImageField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    // ---------------------------------------------------------
+    // CARTS APP
+    // ---------------------------------------------------------
+
+    Cart [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Cart</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">cart_id <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">date_added <FONT COLOR="#777777">(DateField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    CartItem [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>CartItem</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">user_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">product_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">cart_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">quantity <FONT COLOR="#777777">(IntegerField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    // ---------------------------------------------------------
+    // ORDERS APP
+    // ---------------------------------------------------------
+
+    Payment [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Payment</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">user_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">payment_id <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">amount_paid <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">status <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    Order [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Order</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">user_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">payment_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">order_number <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">order_total <FONT COLOR="#777777">(FloatField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">status <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    OrderProduct [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>OrderProduct</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">order_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">payment_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">user_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">product_id <FONT COLOR="#777777">(ForeignKey)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">quantity <FONT COLOR="#777777">(IntegerField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    // ---------------------------------------------------------
+    // SMARTSHOP APP
+    // ---------------------------------------------------------
+
+    Contact [label=<
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
+            <TR><TD COLSPAN="2" BGCOLOR="#1b563f"><FONT COLOR="#FFFFFF"><B>Contact</B></FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id <FONT COLOR="#777777">(BigAutoField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">email <FONT COLOR="#777777">(EmailField)</FONT></TD></TR>
+            <TR><TD ALIGN="LEFT"></TD><TD ALIGN="LEFT">subject <FONT COLOR="#777777">(CharField)</FONT></TD></TR>
+        </TABLE>
+    >];
+
+    // ---------------------------------------------------------
+    // RELATIONSHIPS
+    // ---------------------------------------------------------
+    
+    // Account Relationships
+    UserProfile -> Account [arrowhead=none arrowtail=tee label="OneToOne"]; // UserProfile has OneToOne to Account
+    
+    // Category Relationships
+    Category -> Category [label="Parent"];
+    
+    // Product Relationships
+    Product -> Category [arrowhead=none arrowtail=crow]; // Product has FK to Category
+    Variation -> Product [arrowhead=none arrowtail=crow]; // Variation has FK to Product
+    ReviewRating -> Product [arrowhead=none arrowtail=crow];
+    ReviewRating -> Account [arrowhead=none arrowtail=crow];
+    ProductGallery -> Product [arrowhead=none arrowtail=crow];
+    
+    // Cart Relationships
+    CartItem -> Cart [arrowhead=none arrowtail=crow];
+    CartItem -> Product [arrowhead=none arrowtail=crow];
+    CartItem -> Account [arrowhead=none arrowtail=crow];
+    CartItem -> Variation [arrowhead=none arrowtail=crow label="M2M/FK"];
+    
+    // Order Relationships
+    Payment -> Account [arrowhead=none arrowtail=crow];
+    Order -> Account [arrowhead=none arrowtail=crow];
+    Order -> Payment [arrowhead=none arrowtail=crow];
+    OrderProduct -> Order [arrowhead=none arrowtail=crow];
+    OrderProduct -> Payment [arrowhead=none arrowtail=crow];
+    OrderProduct -> Account [arrowhead=none arrowtail=crow];
+    OrderProduct -> Product [arrowhead=none arrowtail=crow];
+    OrderProduct -> Variation [arrowhead=none arrowtail=crow label="M2M"];
+
+}

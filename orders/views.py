@@ -350,12 +350,12 @@ def order_tracking(request, order_number):
     """Display order tracking page with status timeline."""
     try:
         order = Order.objects.get(
-            order_number=order_number, 
-            user=request.user, 
+            order_number=order_number,
+            user=request.user,
             is_ordered=True
         )
         order_products = OrderProduct.objects.filter(order_id=order.id)
-        
+
         context = {
             'order': order,
             'order_products': order_products,
@@ -364,4 +364,3 @@ def order_tracking(request, order_number):
     except Order.DoesNotExist:
         messages.error(request, 'Order not found.')
         return redirect('my_orders')
-

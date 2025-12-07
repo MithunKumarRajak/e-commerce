@@ -108,7 +108,8 @@ def add_cart(request, product_id):
                 cart_item.variations.clear()
                 cart_item.variations.add(*product_variation)
             cart_item.save()
-            print(f"DEBUG: Created new CartItem for user {current_user}: {cart_item}")
+            print(
+                f"DEBUG: Created new CartItem for user {current_user}: {cart_item}")
         return redirect('cart')
     # If the user is not authenticated
     else:
@@ -235,7 +236,8 @@ def increment_cart(request, cart_item_id):
     """Increase quantity of a specific CartItem (by id)."""
     try:
         if request.user.is_authenticated:
-            cart_item = CartItem.objects.get(id=cart_item_id, user=request.user)
+            cart_item = CartItem.objects.get(
+                id=cart_item_id, user=request.user)
         else:
             cart = Cart.objects.get(cart_id=_cart_id(request))
             cart_item = CartItem.objects.get(id=cart_item_id, cart=cart)

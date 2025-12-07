@@ -1,53 +1,290 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container py-5">
-  <h1>Terms &amp; Conditions</h1>
-  <p>
-    These Terms & Conditions govern your use of SmartShop. By using our site you
-    accept these terms. Please read them carefully.
-  </p>
+{% extends 'base.html' %}
+{% load static %}
 
-  <h2>Using the Site</h2>
-  <p>
-    You agree to provide accurate information when creating an account or
-    placing orders. You are responsible for keeping your account credentials
-    secure.
-  </p>
+{% block content %}
 
-  <h2>Orders & Payment</h2>
-  <p>
-    All orders are subject to product availability and acceptance of payment.
-    Prices and promotions may change; confirmed orders will reflect the price at
-    checkout.
-  </p>
+<section class="terms-section py-5">
+  <div class="container">
+    <!-- Header -->
+    <div class="terms-header text-center mb-5">
+      <div class="terms-icon mb-3">
+        <i class="fa fa-file-contract fa-3x text-primary"></i>
+      </div>
+      <h1 class="display-4 fw-bold mb-3">Terms & Conditions</h1>
+      <p class="lead text-muted">Last Updated: December 2024</p>
+      <div class="terms-divider mx-auto"></div>
+    </div>
 
-  <h2>Shipping & Returns</h2>
-  <p>
-    Shipping, delivery times, and return policies are displayed on product pages
-    and during checkout. Please review our return policy before purchasing.
-  </p>
+    <!-- Content Card -->
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4 p-md-5">
+            
+            <!-- Introduction -->
+            <div class="terms-intro mb-5">
+              <p class="fs-5 text-secondary lh-lg">
+                These Terms & Conditions govern your use of <strong>SmartShop</strong>. By accessing or using our website and services, you accept and agree to be bound by these terms. Please read them carefully before proceeding.
+              </p>
+            </div>
 
-  <h2>Intellectual Property</h2>
-  <p>
-    All content on the SmartShop site (text, images, logos) is owned by
-    SmartShop or licensors. You may not reuse our content without permission.
-  </p>
+            <!-- Terms Sections -->
+            <div class="terms-content">
+              
+              <!-- Section 1 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">1</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-desktop me-2 text-primary"></i>Using the Site
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  You agree to provide accurate, current, and complete information when creating an account or placing orders on our platform. You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. Please notify us immediately of any unauthorized use of your account.
+                </p>
+              </div>
 
-  <h2>Limitation of Liability</h2>
-  <p>
-    To the maximum extent permitted by law, SmartShop is not liable for indirect
-    or consequential losses arising from use of the site.
-  </p>
+              <!-- Section 2 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">2</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-shopping-cart me-2 text-primary"></i>Orders & Payment
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  All orders placed through SmartShop are subject to product availability and acceptance of payment. We reserve the right to refuse or cancel any order for any reason. Prices and promotional offers displayed on our site are subject to change without notice; however, confirmed orders will reflect the price shown at the time of checkout.
+                </p>
+              </div>
 
-  <h2>Governing Law</h2>
-  <p>
-    These terms are governed by the laws of the jurisdiction where SmartShop
-    operates. Disputes will be handled in the appropriate courts.
-  </p>
+              <!-- Section 3 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">3</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-shipping-fast me-2 text-primary"></i>Shipping & Returns
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  Shipping costs, delivery times, and return policies are clearly displayed on product pages and during the checkout process. We strive to deliver products in a timely manner, but delivery times are estimates and not guaranteed. Please review our comprehensive return and refund policy before making a purchase.
+                </p>
+              </div>
 
-  <h2>Contact</h2>
-  <p>
-    Questions about these terms? Email
-    <a href="mailto:support@smartshop.example">support@smartshop.example</a>.
-  </p>
-</div>
+              <!-- Section 4 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">4</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-copyright me-2 text-primary"></i>Intellectual Property
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  All content displayed on the SmartShop website, including but not limited to text, graphics, images, logos, button icons, audio clips, digital downloads, and software, is the property of SmartShop or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, modify, or create derivative works without our express written permission.
+                </p>
+              </div>
+
+              <!-- Section 5 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">5</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-shield-alt me-2 text-primary"></i>Limitation of Liability
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  To the maximum extent permitted by applicable law, SmartShop shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, goodwill, or other intangible losses, arising from or related to your use of or inability to use our services.
+                </p>
+              </div>
+
+              <!-- Section 6 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">6</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-gavel me-2 text-primary"></i>Governing Law
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  These Terms & Conditions shall be governed by and construed in accordance with the laws of the jurisdiction where SmartShop operates, without regard to its conflict of law provisions. Any disputes arising from these terms will be handled exclusively in the courts of the appropriate jurisdiction.
+                </p>
+              </div>
+
+              <!-- Section 7 -->
+              <div class="terms-item mb-5">
+                <div class="d-flex align-items-start mb-3">
+                  <div class="terms-number me-3">
+                    <span class="badge bg-primary rounded-circle p-3">7</span>
+                  </div>
+                  <div>
+                    <h2 class="h4 fw-bold mb-3">
+                      <i class="fa fa-edit me-2 text-primary"></i>Changes to Terms
+                    </h2>
+                  </div>
+                </div>
+                <p class="text-secondary lh-lg ms-5">
+                  We reserve the right to modify or replace these Terms & Conditions at any time at our sole discretion. We will provide notice of any significant changes by posting the new terms on this page and updating the "Last Updated" date. Your continued use of the site after any such changes constitutes your acceptance of the new terms.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Contact Section -->
+            <div class="terms-contact mt-5 p-4 bg-light rounded">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h3 class="h5 fw-bold mb-2">
+                    <i class="fa fa-envelope me-2 text-primary"></i>Have Questions?
+                  </h3>
+                  <p class="text-secondary mb-0">
+                    If you have any questions or concerns about these Terms & Conditions, please don't hesitate to contact us.
+                  </p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                  <a href="mailto:support@smartshop.example" class="btn btn-primary btn-lg">
+                    <i class="fa fa-paper-plane me-2"></i>Contact Us
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Back to Home -->
+            <div class="text-center mt-4">
+              <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                <i class="fa fa-arrow-left me-2"></i>Back to Home
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom CSS for Terms Page -->
+<style>
+  .terms-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+  }
+
+  .terms-header .terms-icon {
+    animation: fadeInDown 0.8s ease-in-out;
+  }
+
+  .terms-header h1 {
+    color: #212121;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .terms-divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2874f0, #5b9cf5);
+    border-radius: 2px;
+    margin-top: 1rem;
+  }
+
+  .terms-intro {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid #2874f0;
+  }
+
+  .terms-item {
+    padding: 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .terms-item:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+  }
+
+  .terms-number .badge {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .terms-item h2 {
+    color: #212121;
+    margin-bottom: 0;
+  }
+
+  .terms-item p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .terms-contact {
+    border-left: 4px solid #2874f0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .card {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .terms-header h1 {
+      font-size: 2rem;
+    }
+    
+    .terms-item p {
+      font-size: 1rem;
+    }
+    
+    .terms-number .badge {
+      width: 35px;
+      height: 35px;
+      font-size: 1rem;
+    }
+  }
+</style>
+
 {% endblock %}

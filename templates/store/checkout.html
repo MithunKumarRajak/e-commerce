@@ -74,58 +74,51 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-borderless table-shopping-cart">
-                            <thead class="text-muted">
-                                <tr class="small text-uppercase">
-                                    <th scope="col">Product</th>
-                                    <th scope="col" width="120">Quantity</th>
-                                    <th scope="col" width="120">Price</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                {% for cart_item in cart_items %}
-                                <tr>
-                                    <td>
-                                        <figure class="itemside align-items-center">
-                                            <div class="aside">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th width="120" class="text-center">Quantity</th>
+                                        <th width="120" class="text-end">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cart_item in cart_items %}
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
                                                 {% if cart_item.product.product_image %}
-                                                    <img src="{{ cart_item.product.product_image.url }}" class="img-sm">
+                                                <img src="{{ cart_item.product.product_image.url }}" width="70" height="70" 
+                                                     style="object-fit: cover; border-radius: 4px;" />
                                                 {% else %}
-                                                    <img src="{% static 'images/placeholder.svg' %}" class="img-sm">
+                                                <div style="width: 70px; height: 70px; background: #e0e0e0; border-radius: 4px;"></div>
                                                 {% endif %}
-                                            </div>
-                                            <figcaption class="info">
-                                                <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-                                                <p class="text-muted small">
+                                                <div>
+                                                    <a href="{{ cart_item.product.get_url }}" class="text-decoration-none fw-semibold text-dark">
+                                                        {{ cart_item.product.product_name }}
+                                                    </a>
+                                                    <div class="text-success fw-bold">₹{{ cart_item.product.price }}</div>
                                                     {% if cart_item.variations.all %}
-                                                        {% for variation in cart_item.variations.all %}
-                                                            {{ variation.variation_category|capfirst }} : {{ variation.variation_value|capfirst }} <br>
-                                                        {% endfor %}
+                                                        <small class="text-muted">
+                                                            {% for variation in cart_item.variations.all %}
+                                                                {{ variation.variation_category|title }}: <strong>{{ variation.variation_value|title }}</strong>
+                                                                {% if not forloop.last %}, {% endif %}
+                                                            {% endfor %}
+                                                        </small>
                                                     {% endif %}
-                                                </p>
-                                            </figcaption>
-                                        </figure>
-                                    </td>
-                                    <td>
-                                        <!-- col.// -->
-                                        <label for="">{{cart_item.quantity}}</label>
-                                    </td>
-                                    <td>
-                                            <div class="price-wrap">
-                                                <var class="price">₹ {{ cart_item.sub_total }}</var>
-                                                {% if cart_item.quantity > 1 %}
-                                                    <small class="text-muted"> ₹ {{ cart_item.product.price }} each </small>
-                                                {% endif %}
-                                            </div> <!-- price-wrap .// -->
-                                    </td>
-
-                                </tr>
-                                {% endfor %}
-
-                            </tbody>
-                        </table>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span class="fw-bold">{{ cart_item.quantity }}</span>
+                                        </td>
+                                        <td class="fw-bold text-end align-middle">₹{{ cart_item.sub_total }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div class="d-grid gap-2">
                             <button type="submit" name="payment_method" value="PayPal" class="btn btn-primary btn-block">Pay Online</button>

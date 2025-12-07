@@ -344,6 +344,7 @@ def dashboard(request):
 
 
 #
+@login_required(login_url='login')
 def my_orders(request):
     """List completed orders for the logged-in user."""
     orders = Order.objects.filter(

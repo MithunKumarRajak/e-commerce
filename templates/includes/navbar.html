@@ -187,9 +187,16 @@
 </nav>
 
 <!-- Category Mega Menu -->
-<nav class="bg-white shadow-sm border-bottom">
-  <div class="container">
-    <div class="d-flex flex-nowrap overflow-auto py-2" style="scrollbar-width: none; -ms-overflow-style: none;">
+<nav class="bg-white shadow-sm border-bottom category-nav-wrapper">
+  <div class="container position-relative">
+    <!-- Left Scroll Button -->
+    <button class="category-scroll-btn category-scroll-left" id="scrollLeftBtn" aria-label="Scroll Left">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <!-- Categories Container -->
+    <div class="d-flex flex-nowrap overflow-auto py-2 category-scroll-container" id="categoryScrollContainer" 
+         style="scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;">
       {% for category in links %}
       <div class="nav-item dropdown px-3">
         <a
@@ -225,6 +232,11 @@
       </div>
       {% endfor %}
     </div>
+
+    <!-- Right Scroll Button -->
+    <button class="category-scroll-btn category-scroll-right" id="scrollRightBtn" aria-label="Scroll Right">
+      <i class="fa fa-chevron-right"></i>
+    </button>
   </div>
 </nav>
 
@@ -233,4 +245,160 @@
   .overflow-auto::-webkit-scrollbar {
     display: none;
   }
+
+  /* Category Navigation Wrapper */
+  .category-nav-wrapper {
+    position: relative;
+  }
+
+  .category-nav-wrapper:hover .category-scroll-btn {
+    opacity: 1;
+  }
+
+  /* Scroll Buttons */
+  .category-scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: white;
+    color: #424242;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-scroll-btn:hover {
+    background: #f5f5f5;
+    border-color: #bdbdbd;
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #212121;
+  }
+
+  .category-scroll-btn:active {
+    transform: translateY(-50%) scale(0.95);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-scroll-left {
+    left: 20px;
+  }
+
+  .category-scroll-right {
+    right: 20px;
+  }
+
+  .category-scroll-btn i {
+    font-size: 16px;
+  }
+
+  /* Show buttons when they're usable */
+  .category-scroll-btn.active {
+    opacity: 1;
+  }
+
+  .category-scroll-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: #fafafa;
+    color: #bdbdbd;
+  }
+
+  /* Category container */
+  .category-scroll-container {
+    scroll-behavior: smooth;
+    padding: 0 60px; /* Add padding to prevent overlap with buttons */
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .category-scroll-btn {
+      width: 35px;
+      height: 35px;
+    }
+
+    .category-scroll-btn i {
+      font-size: 14px;
+    }
+
+    .category-scroll-left {
+      left: 5px;
+    }
+
+    .category-scroll-right {
+      right: 5px;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainer = document.getElementById('categoryScrollContainer');
+    const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+    const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+    if (!scrollContainer || !scrollLeftBtn || !scrollRightBtn) return;
+
+    // Scroll amount (adjust as needed)
+    const scrollAmount = 300;
+
+    // Function to update button states
+    function updateButtonStates() {
+      const scrollLeft = scrollContainer.scrollLeft;
+      const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+      // Disable/enable left button
+      if (scrollLeft <= 0) {
+        scrollLeftBtn.disabled = true;
+        scrollLeftBtn.classList.remove('active');
+      } else {
+        scrollLeftBtn.disabled = false;
+        scrollLeftBtn.classList.add('active');
+      }
+
+      // Disable/enable right button
+      if (scrollLeft >= maxScroll - 5) { // -5 for small tolerance
+        scrollRightBtn.disabled = true;
+        scrollRightBtn.classList.remove('active');
+      } else {
+        scrollRightBtn.disabled = false;
+        scrollRightBtn.classList.add('active');
+      }
+    }
+
+    // Scroll left
+    scrollLeftBtn.addEventListener('click', function() {
+      scrollContainer.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+
+    // Scroll right
+    scrollRightBtn.addEventListener('click', function() {
+      scrollContainer.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    });
+
+    // Update button states on scroll
+    scrollContainer.addEventListener('scroll', updateButtonStates);
+
+    // Initial update
+    updateButtonStates();
+
+    // Update on window resize
+    window.addEventListener('resize', updateButtonStates);
+  });
+</script>
+
