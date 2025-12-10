@@ -7,9 +7,19 @@
   <header class="border-bottom mb-4 pb-3">
     <div class="d-flex justify-content-between align-items-center">
       {% if 'search' in request.path %}
-        <h3 class="section-heading mb-0"><b>{{ product_count }}</b> Search Results</h3>
+        <div>
+          <h3 class="section-heading mb-0">
+            <b>{{ product_count }}</b> Search Result{% if product_count != 1 %}s{% endif %}
+            {% if keyword %}
+              <span class="text-muted" style="font-size: 0.9em;">for "{{ keyword }}"</span>
+            {% endif %}
+          </h3>
+          {% if keyword %}
+            <small class="text-muted">Searching in: Product names, Descriptions, and Categories</small>
+          {% endif %}
+        </div>
       {% else %}
-        <h3 class="section-heading mb-0"><b>{{ product_count }}</b> Products</h3>
+        <h3 class="section-heading mb-0"><b>{{ product_count }}</b> Product{% if product_count != 1 %}s{% endif %}</h3>
       {% endif %}
     </div>
   </header>
@@ -77,8 +87,14 @@
         {% empty %}
         <!-- IF NO PRODUCTS FOUND -->
         <div class="col-12">
-          <div class="alert alert-warning text-center mt-4">
-            <i class="fa fa-exclamation-triangle me-2"></i>No products found.
+          <div class="alert alert-info text-center mt-4">
+            <i class="fa fa-search me-2"></i>
+            {% if keyword %}
+              <strong>No products found for "{{ keyword }}"</strong>
+              <p class="mb-0 mt-2">Try searching with different keywords or browse our categories.</p>
+            {% else %}
+              <strong>No products found.</strong>
+            {% endif %}
           </div>
         </div>
         {% endfor %}

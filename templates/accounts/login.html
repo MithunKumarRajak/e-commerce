@@ -8,7 +8,7 @@
 
 <section class="section-content padding-y bg-light" style="min-height:84vh">
 
-    <!-- ============================ COMPONENT LOGIN   ================================= -->
+    <!--  COMPONENT LOGIN   ===== -->
 
     {% if request.GET.command == 'verification' %}
 
@@ -60,7 +60,7 @@
     <p class="text-center mt-4 text-muted">Don't have an account? <a href="{% url 'register' %}" class="fw-bold text-primary">Sign up</a></p>
     <p class="text-center"><a href="{% url 'resend_activation' %}" class="small text-muted">Resend activation email</a></p>
     <br><br>
-    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    <!--  COMPONENT LOGIN  END.// ===== -->
     {% endif %}
 
 </section>

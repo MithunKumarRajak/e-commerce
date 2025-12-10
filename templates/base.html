@@ -46,12 +46,24 @@
       rel="stylesheet"
     />
 
-    <!-- jQuery -->
     <!-- jQuery (CDN) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- PayPal Script (client id from environment via context processor) -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AZcoVlxT3Fb6Zq6A-E-4ZFxLFD14eXqGYqwkuTSV5IxuuUrNDyHEHaTQx2AvKUFZDmZTAqf-KIb7VOt1&currency=USD"></script>
+    <script 
+      src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency=USD"
+      id="paypal-sdk"
+      onload="console.log('PayPal SDK loaded successfully.');"
+      onerror="console.error('PayPal SDK could not be loaded. Check internet or ad blockers.');"
+    ></script>
+
+    <!-- Razorpay Script -->
+    <script 
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      id="razorpay-sdk"
+      onload="console.log('Razorpay SDK loaded successfully.');"
+      onerror="console.error('Razorpay SDK could not be loaded. Check internet or ad blockers.');"
+    ></script>
   </head>
 
   <body>

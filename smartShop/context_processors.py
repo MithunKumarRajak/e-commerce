@@ -1,3 +1,5 @@
+
+
 from decouple import config
 
 
@@ -6,7 +8,20 @@ def paypal(request):
 
     Falls back to a default sandbox id if not provided so local dev keeps working.
     """
-    default_client_id = 'Afc2YSc_RXQxN32Cm3R5uVWthMj-JHB3KSoR3LjVXAH5_e8gpCnFSglhaEJHVUI3CUNITv0V10YIbjxA'
+    client_id = config('PAYPAL_CLIENT_ID', default='sb')
+    if not client_id:
+        client_id = 'sb'
     return {
-        'PAYPAL_CLIENT_ID': config('PAYPAL_CLIENT_ID', default=default_client_id),
+        'PAYPAL_CLIENT_ID': client_id,
+    }
+
+
+def razorpay(request):
+    """Provide Razorpay API key to templates from environment.
+
+    Falls back to empty string if not provided.
+    """
+    key_id = config('RAZORPAY_KEY_ID', default='')
+    return {
+        'RAZORPAY_KEY_ID': key_id,
     }

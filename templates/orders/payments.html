@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% load l10n %} {% block content %}
 
 <section class="section-content padding-y bg">
   <div class="container">
@@ -111,7 +111,12 @@
             </p>
 
             <!-- PAYPAL -->
-            <div id="paypal-button-container" class="mb-3"></div>
+            <div id="paypal-button-container" class="mb-3" style="min-height: 40px; border: 1px dashed red;"></div>
+
+            <!-- RAZORPAY BUTTON -->
+            <button id="razorpay-button" class="btn btn-primary btn-block mb-3" type="button">
+              Pay with Razorpay
+            </button>
 
             <!-- COD BUTTON -->
             <form action="{% url 'cod_payments' %}" method="POST">
@@ -149,65 +154,174 @@
     return cookieValue;
   }
 
-  var amount = "{{ grand_total }}";
+  var amount = "{{ grand_total|unlocalize }}";
   var url = "{% url 'payments' %}";
   var csrftoken = getCookie("csrftoken");
   var orderID = "{{order.order_number}}";
   var payment_method = "PayPal";
   var redirect_url = "{% url 'order_complete' %}";
+  
+  // Debugging
+  console.log("Initializing PayPal Button...");
+  console.log("Amount:", amount);
+  console.log("Order ID:", orderID);
 
-  paypal
-    .Buttons({
-      style: {
-        color: "blue",
-        shape: "rect",
-        label: "pay",
-        height: 40,
-      },
+  if (typeof paypal === 'undefined') {
+      console.error("PayPal SDK not loaded! The 'paypal' object is undefined.");
+      console.error("This usually means the script in base.html failed to load or was blocked.");
+      alert("PayPal SDK failed to load. Please check your internet connection or ad blocker.");
+  } else {
+      paypal
+        .Buttons({
+          style: {
+            color: "blue",
+            shape: "rect",
+            label: "pay",
+            height: 40,
+          },
 
-      createOrder: function (data, actions) {
-        return actions.order.create({
-          purchase_units: [
-            {
-              currency_code: "USD",
-              amount: { value: amount },
-            },
-          ],
-        });
-      },
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  currency_code: "USD",
+                  amount: { value: amount },
+                },
+              ],
+            });
+          },
 
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-          sendData();
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              // Show a success message to the buyer
+              console.log("Payment successful", details);
+              sendData();
 
-          function sendData() {
-            fetch(url, {
+              function sendData() {
+                fetch(url, {
+                  method: "POST",
+                  headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                  },
+                  body: JSON.stringify({
+                    orderID: orderID,
+                    transID: details.id,
+                    payment_method: payment_method,
+                    status: details.status,
+                  }),
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    window.location.href =
+                      redirect_url +
+                      "?order_number=" +
+                      data.order_number +
+                      "&payment_id=" +
+                      data.transID;
+                  });
+              }
+            });
+          },
+          onError: function (err) {
+              console.error('PayPal Button Error:', err);
+              alert("An error occurred with PayPal: " + err);
+          }
+        })
+        .render("#paypal-button-container");
+  }
+
+  // RAZORPAY INTEGRATION
+  if (typeof Razorpay === 'undefined') {
+      console.error("Razorpay SDK not loaded! The 'Razorpay' object is undefined.");
+      console.error("This usually means the script in base.html failed to load or was blocked.");
+      document.getElementById('razorpay-button').disabled = true;
+      document.getElementById('razorpay-button').textContent = 'Razorpay Unavailable';
+  } else {
+      console.log('Razorpay SDK loaded successfully.');
+      
+      document.getElementById('razorpay-button').addEventListener('click', function() {
+          // Create order on server first
+          fetch("{% url 'razorpay_create_order' %}", {
               method: "POST",
               headers: {
-                "Content-type": "application/json",
-                "X-CSRFToken": csrftoken,
+                  "Content-Type": "application/json",
+                  "X-CSRFToken": csrftoken,
               },
               body: JSON.stringify({
-                orderID: orderID,
-                transID: details.id,
-                payment_method: payment_method,
-                status: details.status,
-              }),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                window.location.href =
-                  redirect_url +
-                  "?order_number=" +
-                  data.order_number +
-                  "&payment_id=" +
-                  data.transID;
-              });
-          }
-        });
-      },
-    })
-    .render("#paypal-button-container");
+                  orderID: orderID,
+                  amount: amount
+              })
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.error) {
+                  alert("Error creating order: " + data.error);
+                  return;
+              }
+
+              // Open Razorpay checkout
+              var options = {
+                  key: "{{ RAZORPAY_KEY_ID }}",
+                  amount: data.amount,
+                  currency: "INR",
+                  name: "E-Commerce Store",
+                  description: "Order #" + orderID,
+                  order_id: data.razorpay_order_id,
+                  handler: function (response) {
+                      // Payment successful, send to server for verification
+                      fetch("{% url 'razorpay_callback' %}", {
+                          method: "POST",
+                          headers: {
+                              "Content-Type": "application/json",
+                              "X-CSRFToken": csrftoken,
+                          },
+                          body: JSON.stringify({
+                              orderID: orderID,
+                              razorpay_payment_id: response.razorpay_payment_id,
+                              razorpay_order_id: response.razorpay_order_id,
+                              razorpay_signature: response.razorpay_signature
+                          })
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                          if (data.success) {
+                              window.location.href = redirect_url + 
+                                  "?order_number=" + data.order_number + 
+                                  "&payment_id=" + data.payment_id;
+                          } else {
+                              alert("Payment verification failed: " + data.error);
+                          }
+                      })
+                      .catch(error => {
+                          console.error('Error:', error);
+                          alert("An error occurred while processing your payment.");
+                      });
+                  },
+                  prefill: {
+                      name: "{{ order.full_name }}",
+                      email: "{{ order.email }}",
+                      contact: "{{ order.phone }}"
+                  },
+                  theme: {
+                      color: "#3399cc"
+                  },
+                  modal: {
+                      ondismiss: function() {
+                          console.log('Razorpay checkout cancelled by user.');
+                      }
+                  }
+              };
+
+              var rzp = new Razorpay(options);
+              rzp.open();
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert("An error occurred while creating the order.");
+          });
+      });
+  }
 </script>
 
 {% endblock %}

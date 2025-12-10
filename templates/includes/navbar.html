@@ -63,22 +63,32 @@
         </li>
       </ul>
 
-      <!-- Search Bar -->
-      <form
-        class="d-flex mx-lg-3 my-2 my-lg-0 flex-grow-1"
-        action="{% url 'search' %}"
-        method="GET"
-      >
-        <input
-          class="form-control rounded-start"
-          type="text"
-          name="keyword"
-          placeholder="Search for products..."
-        />
-        <button class="btn btn-light rounded-end" type="submit">
-          <i class="fa fa-search"></i>
-        </button>
-      </form>
+      <!-- Enhanced Search Bar with Autocomplete -->
+      <div class="d-flex mx-lg-3 my-2 my-lg-0 flex-grow-1 position-relative" id="searchWrapper">
+        <form
+          class="d-flex flex-grow-1"
+          action="{% url 'search' %}"
+          method="GET"
+          id="searchForm"
+        >
+          <input
+            class="form-control rounded-start"
+            type="text"
+            name="keyword"
+            id="searchInput"
+            placeholder="Search for products..."
+            autocomplete="off"
+          />
+          <button class="btn btn-light rounded-end" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+        
+        <!-- Autocomplete Suggestions Dropdown -->
+        <div id="searchSuggestions" class="search-suggestions-dropdown">
+          <!-- Suggestions will be populated here by JavaScript -->
+        </div>
+      </div>
 
       <!-- Right Section -->
       <ul class="navbar-nav ms-lg-3 mb-2 mb-lg-0 align-items-center">
@@ -338,6 +348,134 @@
       right: 5px;
     }
   }
+
+  /* ========== SEARCH AUTOCOMPLETE STYLES ========== */
+  #searchWrapper {
+    position: relative;
+  }
+
+  .search-suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    margin-top: 8px;
+  }
+
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    color: #212121;
+  }
+
+  .suggestion-item:last-child {
+    border-bottom: none;
+  }
+
+  .suggestion-item:hover {
+    background-color: #f5f7fa;
+  }
+
+  .suggestion-item.no-results {
+    justify-content: center;
+    color: #757575;
+    font-style: italic;
+  }
+
+  .suggestion-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 12px;
+    border: 1px solid #e0e0e0;
+  }
+
+  .suggestion-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .suggestion-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #212121;
+    line-height: 1.4;
+  }
+
+  .suggestion-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .suggestion-category {
+    color: #757575;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .suggestion-price {
+    color: #2874f0;
+    font-weight: 600;
+  }
+
+  /* Scrollbar styling for suggestions */
+  .search-suggestions-dropdown::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .search-suggestions-dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+  }
+
+  .search-suggestions-dropdown::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 8px;
+  }
+
+  .search-suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .search-suggestions-dropdown {
+      left: 15px;
+      right: 15px;
+    }
+
+    .suggestion-img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .suggestion-name {
+      font-size: 13px;
+    }
+
+    .suggestion-meta {
+      font-size: 11px;
+    }
+  }
 </style>
 
 <script>
@@ -400,5 +538,95 @@
     // Update on window resize
     window.addEventListener('resize', updateButtonStates);
   });
+
+  // ========== SEARCH AUTOCOMPLETE FUNCTIONALITY ==========
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsContainer = document.getElementById('searchSuggestions');
+    const searchForm = document.getElementById('searchForm');
+    let searchTimeout = null;
+
+    if (!searchInput || !suggestionsContainer) return;
+
+    // Function to fetch suggestions from API
+    function fetchSuggestions(query) {
+      if (query.length < 2) {
+        suggestionsContainer.innerHTML = '';
+        suggestionsContainer.style.display = 'none';
+        return;
+      }
+
+      // Debounce the search request
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        fetch(`/products/search-suggestions/?q=${encodeURIComponent(query)}`)
+          .then(response => response.json())
+          .then(data => {
+            displaySuggestions(data.suggestions);
+          })
+          .catch(error => {
+            console.error('Error fetching suggestions:', error);
+          });
+      }, 300); // Wait 300ms after user stops typing
+    }
+
+    // Function to display suggestions
+    function displaySuggestions(suggestions) {
+      if (!suggestions || suggestions.length === 0) {
+        suggestionsContainer.innerHTML = '<div class="suggestion-item no-results">No products found</div>';
+        suggestionsContainer.style.display = 'block';
+        return;
+      }
+
+      let html = '';
+      suggestions.forEach(product => {
+        const imageUrl = product.image || '{% static "images/placeholder.svg" %}';
+        html += `
+          <a href="${product.url}" class="suggestion-item">
+            <img src="${imageUrl}" alt="${product.name}" class="suggestion-img">
+            <div class="suggestion-details">
+              <div class="suggestion-name">${product.name}</div>
+              <div class="suggestion-meta">
+                <span class="suggestion-category">${product.category}</span>
+                <span class="suggestion-price">₹${product.price}</span>
+              </div>
+            </div>
+          </a>
+        `;
+      });
+
+      suggestionsContainer.innerHTML = html;
+      suggestionsContainer.style.display = 'block';
+    }
+
+    // Event listener for input
+    searchInput.addEventListener('input', function(e) {
+      const query = e.target.value.trim();
+      fetchSuggestions(query);
+    });
+
+    // Focus event
+    searchInput.addEventListener('focus', function(e) {
+      const query = e.target.value.trim();
+      if (query.length >= 2 && suggestionsContainer.innerHTML) {
+        suggestionsContainer.style.display = 'block';
+      }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
+        suggestionsContainer.style.display = 'none';
+      }
+    });
+
+    // Escape key to close
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        suggestionsContainer.style.display = 'none';
+      }
+    });
+  });
+
 </script>
 

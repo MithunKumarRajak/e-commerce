@@ -9,6 +9,7 @@ from django.contrib import messages
 from products.forms import ReviewForm
 from products.models import ReviewRating
 from orders.models import OrderProduct
+from django.http import JsonResponse
 
 
 def products(request, category_slug=None):
@@ -66,26 +67,61 @@ def product_detail(request, category_slug, product_slug):
 
 
 def search(request):
+
     keyword = request.GET.get('keyword') or request.GET.get('search')
+    
+    # Clean up keyword (remove extra whitespace)
+    if keyword:
+        keyword = keyword.strip()
 
     if keyword:
+        # Search across product name, description, and category name
         products = Product.objects.filter(
+            Q(product_name__icontains=keyword) |
             Q(description__icontains=keyword) |
-            Q(product_name__icontains=keyword),
+            Q(category__category_name__icontains=keyword),
             is_available=True
-        ).order_by('-created_date')
+        ).order_by('-created_date').distinct()
     else:
         products = Product.objects.none()  # no keyword → no results
 
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 6)  # Increased from 3 to 6 items per page
     page = request.GET.get('page')
     paged_products = paginator.get_page(page)
 
     context = {
         'products': paged_products,
         'product_count': products.count(),
+        'keyword': keyword,  # Pass keyword to template for display
     }
     return render(request, 'store/store.html', context)
+
+
+def search_suggestions(request):
+
+    query = request.GET.get('q', '').strip()
+    suggestions = []
+    
+    if query and len(query) >= 2:  # Only search if at least 2 characters
+        # Get matching products (limit to 8 suggestions)
+        products = Product.objects.filter(
+            Q(product_name__icontains=query) |
+            Q(description__icontains=query) |
+            Q(category__category_name__icontains=query),
+            is_available=True
+        ).distinct()[:8]
+        
+        # Build suggestions list
+        for product in products:
+            suggestions.append({
+                'name': product.product_name,
+                'category': product.category.category_name,
+                'price': str(product.price),
+                'url': product.get_url(),
+                'image': product.product_image.url if product.product_image else None,
+            })
+    
+    return JsonResponse({'suggestions': suggestions})
 
 
 # Submit Review View

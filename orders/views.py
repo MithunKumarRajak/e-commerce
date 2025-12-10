@@ -12,6 +12,10 @@ from django.template.loader import render_to_string
 import datetime
 import json
 from django.contrib.auth.decorators import login_required
+import razorpay
+from decouple import config
+import hmac
+import hashlib
 
 
 @login_required
@@ -364,3 +368,152 @@ def order_tracking(request, order_number):
     except Order.DoesNotExist:
         messages.error(request, 'Order not found.')
         return redirect('my_orders')
+
+
+@login_required
+def razorpay_create_order(request):
+    """Create a Razorpay order for payment processing."""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+    try:
+        body = json.loads(request.body)
+        order_id = body.get('orderID')
+        amount = float(body.get('amount'))
+        
+        # Get the order from database
+        order = Order.objects.get(
+            user=request.user, 
+            is_ordered=False, 
+            order_number=order_id
+        )
+        
+        # Initialize Razorpay client
+        razorpay_key_id = config('RAZORPAY_KEY_ID')
+        razorpay_key_secret = config('RAZORPAY_KEY_SECRET')
+        client = razorpay.Client(auth=(razorpay_key_id, razorpay_key_secret))
+        
+        # Create Razorpay order
+        # Amount should be in paise (multiply by 100)
+        razorpay_order = client.order.create({
+            'amount': int(amount * 100),
+            'currency': 'INR',
+            'payment_capture': 1
+        })
+        
+        return JsonResponse({
+            'razorpay_order_id': razorpay_order['id'],
+            'amount': razorpay_order['amount'],
+            'currency': razorpay_order['currency']
+        })
+        
+    except Order.DoesNotExist:
+        return JsonResponse({'error': 'Order not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+
+@login_required
+def razorpay_callback(request):
+    """Handle Razorpay payment callback and verify signature."""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+    try:
+        body = json.loads(request.body)
+        order_id = body.get('orderID')
+        razorpay_payment_id = body.get('razorpay_payment_id')
+        razorpay_order_id = body.get('razorpay_order_id')
+        razorpay_signature = body.get('razorpay_signature')
+        
+        # Get the order
+        order = Order.objects.get(
+            user=request.user,
+            is_ordered=False,
+            order_number=order_id
+        )
+        
+        # Verify payment signature
+        razorpay_key_secret = config('RAZORPAY_KEY_SECRET')
+        
+        # Generate signature to verify
+        generated_signature = hmac.new(
+            razorpay_key_secret.encode(),
+            f"{razorpay_order_id}|{razorpay_payment_id}".encode(),
+            hashlib.sha256
+        ).hexdigest()
+        
+        if generated_signature != razorpay_signature:
+            return JsonResponse({
+                'success': False,
+                'error': 'Payment signature verification failed'
+            }, status=400)
+        
+        # Payment verified successfully, create Payment record
+        payment = Payment(
+            user=request.user,
+            payment_id=razorpay_payment_id,
+            payment_method='Razorpay',
+            amount_paid=order.order_total,
+            status='COMPLETED',
+        )
+        payment.save()
+        
+        # Update order
+        order.payment = payment
+        order.is_ordered = True
+        order.save()
+        
+        # Move cart items to OrderProduct table
+        cart_items = CartItem.objects.filter(user=request.user)
+        for item in cart_items:
+            orderproduct = OrderProduct()
+            orderproduct.order_id = order.id
+            orderproduct.payment = payment
+            orderproduct.user_id = request.user.id
+            orderproduct.product_id = item.product_id
+            orderproduct.quantity = item.quantity
+            orderproduct.product_price = item.product.price
+            orderproduct.ordered = True
+            orderproduct.save()
+            
+            # Set variations
+            product_variation = item.variations.all()
+            orderproduct = OrderProduct.objects.get(id=orderproduct.id)
+            orderproduct.variations.set(product_variation)
+            orderproduct.save()
+            
+            # Reduce stock
+            product = Product.objects.get(id=item.product_id)
+            product.stock -= item.quantity
+            product.save()
+        
+        # Clear cart
+        CartItem.objects.filter(user=request.user).delete()
+        
+        # Send confirmation email
+        mail_subject = 'Thank you for your order!'
+        message = render_to_string('orders/order_recieved_email.html', {
+            'user': request.user,
+            'order': order,
+        })
+        to_email = request.user.email
+        send_email = EmailMessage(mail_subject, message, to=[to_email])
+        send_email.send()
+        
+        return JsonResponse({
+            'success': True,
+            'order_number': order.order_number,
+            'payment_id': payment.payment_id
+        })
+        
+    except Order.DoesNotExist:
+        return JsonResponse({
+            'success': False,
+            'error': 'Order not found'
+        }, status=404)
+    except Exception as e:
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+        }, status=500)
