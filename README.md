@@ -106,7 +106,7 @@ Before you begin, ensure you have the following installed:
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/e-commerce.git
+git clone https://github.com/MithunKumarRajak/e-commerce.git
 cd e-commerce
 ```
 
@@ -368,7 +368,7 @@ heroku open
 2. **Upload your code:**
    ```bash
    # In PythonAnywhere Bash console
-   git clone https://github.com/yourusername/e-commerce.git
+   git clone https://github.com/MithunKumarRajak/e-commerce.git
    cd e-commerce
    ```
 
@@ -395,14 +395,14 @@ heroku open
 6. **Configure Web App:**
    - Go to Web → Add a new web app
    - Choose Manual Configuration → Python 3.11
-   - Set virtualenv path: `/home/yourusername/e-commerce/env`
+   - Set virtualenv path: `/home/MithunKumarRajak/e-commerce/env`
 
 7. **Edit WSGI file:**
    ```python
    import os
    import sys
    
-   path = '/home/yourusername/e-commerce'
+   path = '/home/MithunKumarRajak/e-commerce'
    if path not in sys.path:
        sys.path.append(path)
    
@@ -414,9 +414,9 @@ heroku open
 
 8. **Configure static files:**
    - URL: `/static/`
-   - Directory: `/home/yourusername/e-commerce/staticfiles/`
+   - Directory: `/home/MithunKumarRajak/e-commerce/staticfiles/`
    - URL: `/media/`
-   - Directory: `/home/yourusername/e-commerce/media/`
+   - Directory: `/home/MithunKumarRajak/e-commerce/media/`
 
 9. **Reload web app**
 
@@ -442,7 +442,7 @@ sudo apt install python3.11 python3.11-venv python3-pip nginx postgresql postgre
 
 # Create project directory
 cd /var/www
-sudo git clone https://github.com/yourusername/e-commerce.git
+sudo git clone https://github.com/MithunKumarRajak/e-commerce.git
 cd e-commerce
 
 # Create virtual environment
@@ -772,8 +772,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact & Support
 
 - **Author:** SmartShop
-- **Email:** your.email@example.com
-- **GitHub:** [@yourusername](https://github.com/yourusername)
+- **Email:** esmartshopoffical@gmail.com
+- **GitHub:** [@MithunKumarRajak](https://github.com/MithunKumarRajak)
 - **Website:** [your-website.com](https://your-website.com)
 
 ---
