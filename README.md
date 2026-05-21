@@ -9,6 +9,12 @@ A full-featured e-commerce web application built with Django, offering a seamles
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Project Status](https://img.shields.io/badge/Status-Active-success)
 
+### 👥 Team
+| Name | Role | GitHub |
+|------|------|--------|
+| **Mithun Kumar Rajak** | Backend, Payments, Deployment | [@MithunKumarRajak](https://github.com/MithunKumarRajak) |
+| **Sanket Raikwar** | Frontend, Product Content | [@Sanket-Raikwar](https://github.com/Sanket-Raikwar) |
+
 ---
 
 ## 📋 Table of Contents
@@ -373,12 +379,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact & Support
 
-- **Author:** Mithun Kumar Rajak
-- **GitHub:** [@MithunKumarRajak](https://github.com/MithunKumarRajak)
-- **Live Demo:** [mithunkumarrajak.pythonanywhere.com](https://mithunkumarrajak.pythonanywhere.com/)
+| Team Member | GitHub | Email |
+|-------------|--------|-------|
+| **Mithun Kumar Rajak** | [@MithunKumarRajak](https://github.com/MithunKumarRajak) | mithunkumarrajak01012005@gmail.com |
+| **Sanket Raikwar** | [@Sanket-Raikwar](https://github.com/Sanket-Raikwar) | raikwarsanket97@gmail.com |
+
+🔗 **Live Demo:** [mithunkumarrajak.pythonanywhere.com](https://mithunkumarrajak.pythonanywhere.com/)
 
 ---
 
 <div align="center">
-Made with ❤️ by Mithun Kumar Rajak
+Made with ❤️ by Mithun Kumar Rajak & Sanket Raikwar
 </div>
