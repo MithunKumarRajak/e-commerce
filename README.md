@@ -184,9 +184,6 @@ SECRET_KEY=your-secret-key-here-minimum-50-characters
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
 
-# Database (Optional - defaults to SQLite)
-# DATABASE_URL=postgresql://username:password@host:5432/database_name
-
 # Email Configuration
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
@@ -197,8 +194,10 @@ EMAIL_USE_TLS=True
 # Optional: Override email backend
 # EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 
-# Security Settings (Production Only)
-# SECURE_SSL_REDIRECT=True
+# Twilio SMS Configuration (for Order Notifications)
+TWILIO_ACCOUNT_SID=your-twilio-account-sid
+TWILIO_AUTH_TOKEN=your-twilio-auth-token
+TWILIO_PHONE_NUMBER=your-twilio-phone-number
 ```
 
 ### Generating a Secret Key
