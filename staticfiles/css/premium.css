@@ -39,8 +39,8 @@
     --bg-navbar: #030712;
     --navbar-gradient: linear-gradient(135deg, #030712 0%, #111827 100%);
     --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
     --border-color: #1f2937;
     --accent: #3b82f6;
     --accent-hover: #60a5fa;
@@ -894,5 +894,61 @@ label {
 
 .table-hover tbody tr:hover {
     background-color: var(--bg-primary) !important;
+}
+
+/* ===== NEW PREMIUM CONTRAST & ADAPTIVITY OVERRIDES ===== */
+
+/* Placeholder visibility */
+.form-control::placeholder, 
+.form-select::placeholder, 
+textarea::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.85 !important;
+}
+
+/* Ensure Bootstrap text-muted utility adapts in dark mode */
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .text-muted-custom,
+[data-theme="dark"] small.text-muted {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+/* Form label contrast */
+.form-label, label, .form-check-label {
+    color: var(--text-secondary) !important;
+}
+
+/* Ensure Bootstrap bg-light and bg classes adapt to Dark Mode */
+[data-theme="dark"] .bg-light,
+[data-theme="dark"] .bg {
+    background-color: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] .bg-white {
+    background-color: var(--bg-card) !important;
+}
+
+/* Premium Input Group Styles */
+.input-group .input-group-text {
+    border-right: none !important;
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+.input-group .form-control {
+    border-left: none !important;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: var(--accent) !important;
+}
+
+.input-group:focus-within .input-group-text i {
+    color: var(--accent) !important;
 }
 
