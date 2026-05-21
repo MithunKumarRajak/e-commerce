@@ -26,9 +26,7 @@ digraph model_graph {
     // Helper to create HTML-like labels
     // Format: Table with Title, PKs, FKs, Attributes
     
-    // ---------------------------------------------------------
     // ACCOUNTS APP
-    // ---------------------------------------------------------
     
     Account [label=<
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
@@ -52,9 +50,7 @@ digraph model_graph {
         </TABLE>
     >];
 
-    // ---------------------------------------------------------
     // CATEGORY APP
-    // ---------------------------------------------------------
 
     Category [label=<
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
@@ -66,9 +62,7 @@ digraph model_graph {
         </TABLE>
     >];
 
-    // ---------------------------------------------------------
     // PRODUCTS APP
-    // ---------------------------------------------------------
 
     Product [label=<
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
@@ -111,9 +105,7 @@ digraph model_graph {
         </TABLE>
     >];
 
-    // ---------------------------------------------------------
     // CARTS APP
-    // ---------------------------------------------------------
 
     Cart [label=<
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
@@ -135,9 +127,7 @@ digraph model_graph {
         </TABLE>
     >];
 
-    // ---------------------------------------------------------
     // ORDERS APP
-    // ---------------------------------------------------------
 
     Payment [label=<
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
@@ -174,9 +164,7 @@ digraph model_graph {
         </TABLE>
     >];
 
-    // ---------------------------------------------------------
     // SMARTSHOP APP
-    // ---------------------------------------------------------
 
     Contact [label=<
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#FFFFFF">
@@ -187,9 +175,7 @@ digraph model_graph {
         </TABLE>
     >];
 
-    // ---------------------------------------------------------
     // RELATIONSHIPS
-    // ---------------------------------------------------------
     
     // Account Relationships
     UserProfile -> Account [arrowhead=none arrowtail=tee label="OneToOne"]; // UserProfile has OneToOne to Account
