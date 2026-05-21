@@ -2,9 +2,12 @@
 
 A full-featured e-commerce web application built with Django, offering a seamless shopping experience with modern UI/UX, secure payment processing, and comprehensive order management.
 
+🔗 **Live Demo:** [mithunkumarrajak.pythonanywhere.com](https://mithunkumarrajak.pythonanywhere.com/)
+
 [![Django](https://img.shields.io/badge/Django-5.2.7-green.svg)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Project Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
@@ -12,10 +15,14 @@ A full-featured e-commerce web application built with Django, offering a seamles
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
+- [Quick Start](#-quick-start)
+- [Environment Configuration](#-environment-configuration)
 - [Project Structure](#-project-structure)
 - [API Documentation](#-api-documentation)
+- [Testing](#-testing)
 - [Contributing](#-contributing)
 - [License](#-license)
+- [Contact](#-contact--support)
 
 ---
 
@@ -23,37 +30,35 @@ A full-featured e-commerce web application built with Django, offering a seamles
 
 ### 🛒 **Shopping Experience**
 - Browse products by categories
-- Advanced product search and filtering
+- Advanced product search with live autocomplete suggestions
 - Product details with image gallery
 - Shopping cart with quantity management
-- Wishlist functionality
 - Real-time cart updates
 
 ### 👤 **User Management**
 - User registration and authentication
-- Profile management
+- Profile management with avatar
 - Order history tracking
 - Address management
 
 ### 📦 **Order Management**
 - Seamless checkout process
-- Multiple payment options
+- Multiple payment options (PayPal & Razorpay)
+- SMS order notifications via Twilio
+- Email confirmations
 - Order tracking
-- Email notifications
-- Invoice generation
 
 ### 🔒 **Security**
-- Secure password handling
-- CSRF protection
-- XSS protection
-- SQL injection prevention
-- HTTPS enforcement in production
+- Secure password handling with Django validators
+- CSRF & XSS protection
+- SQL injection prevention (Django ORM)
+- Clickjacking protection (X-Frame-Options)
 - Session security
 
 ### 📱 **Responsive Design**
 - Mobile-first approach
 - Works on all devices
-- Modern and intuitive UI
+- Modern and intuitive UI with Bootstrap 5
 
 ---
 
@@ -61,25 +66,22 @@ A full-featured e-commerce web application built with Django, offering a seamles
 
 ### **Backend**
 - **Framework:** Django 5.2.7
-- **Database:** SQLite (development) / PostgreSQL (production)
-- **Authentication:** Django Auth System
-- **API:** Django REST Framework
-- **Task Queue:** Uvicorn (ASGI)
+- **Database:** SQLite
+- **Authentication:** Django Auth System (Custom User Model)
+- **API:** Django REST Framework + SimpleJWT
 
 ### **Frontend**
 - **Template Engine:** Django Templates
 - **Styling:** Bootstrap 5 + Custom CSS
 - **JavaScript:** Vanilla JS + jQuery
 
-### **Deployment**
-- **WSGI Server:** Gunicorn
-- **Static Files:** WhiteNoise
-- **Database Adapter:** dj-database-url
+### **Integrations**
+- **Payments:** PayPal SDK + Razorpay
+- **SMS Notifications:** Twilio
 - **Environment Variables:** python-decouple
 
 ### **Additional Libraries**
 - **Image Processing:** Pillow
-- **JWT:** djangorestframework-simplejwt
 - **Admin Enhancements:** django-admin-thumbnails
 
 ---
@@ -88,7 +90,6 @@ A full-featured e-commerce web application built with Django, offering a seamles
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
 - **Python 3.11+** ([Download](https://www.python.org/downloads/))
 - **Git** ([Download](https://git-scm.com/downloads))
 - **pip** (comes with Python)
@@ -150,13 +151,7 @@ python manage.py loaddata fixtures/categories.json
 python manage.py loaddata fixtures/products.json
 ```
 
-#### 6. Collect Static Files
-
-```bash
-python manage.py collectstatic --noinput
-```
-
-#### 7. Run Development Server
+#### 6. Run Development Server
 
 ```bash
 python manage.py runserver
@@ -164,7 +159,7 @@ python manage.py runserver
 
 Visit **http://127.0.0.1:8000** in your browser 🎉
 
-#### 8. Access Admin Panel
+#### 7. Access Admin Panel
 
 Visit **http://127.0.0.1:8000/admin**
 - Username: Your superuser username
@@ -212,6 +207,7 @@ python -c "from django.core.management.utils import get_random_secret_key; print
 2. Go to: https://myaccount.google.com/apppasswords
 3. Generate an app password for "Mail"
 4. Use this password in `EMAIL_HOST_PASSWORD`
+
 ---
 
 ## 📁 Project Structure
@@ -220,7 +216,7 @@ python -c "from django.core.management.utils import get_random_secret_key; print
 e-commerce/
 │
 ├── 📂 accounts/              # User authentication & management
-│   ├── models.py            # Custom user model
+│   ├── models.py            # Custom user model (Account)
 │   ├── views.py             # Auth views (login, register, profile)
 │   ├── forms.py             # User forms
 │   └── urls.py              # Account routes
@@ -239,6 +235,7 @@ e-commerce/
 ├── 📂 orders/               # Order management
 │   ├── models.py            # Order & OrderProduct models
 │   ├── views.py             # Checkout & order processing
+│   ├── sms_service.py       # Twilio SMS integration
 │   └── urls.py
 │
 ├── 📂 products/             # Product catalog
@@ -250,19 +247,16 @@ e-commerce/
 │   ├── settings.py          # Django settings
 │   ├── urls.py              # Root URL configuration
 │   ├── wsgi.py              # WSGI config
-│   └── views.py             # Core views (home, about, etc.)
+│   └── views.py             # Core views (home, etc.)
 │
 ├── 📂 static/               # Static files (CSS, JS, images)
 │   ├── css/
 │   ├── js/
 │   └── images/
 │
-├── 📂 staticfiles/          # Collected static files (production)
-│
 ├── 📂 templates/            # HTML templates
 │   ├── base.html           # Base template
 │   ├── home.html           # Homepage
-│   ├── pages/              # Static pages
 │   └── ...
 │
 ├── 📂 media/                # User-uploaded files
@@ -271,12 +265,9 @@ e-commerce/
 │   ├── categories.json
 │   └── products.json
 │
-├── 📄 .env                  # Environment variables (not in repo)
 ├── 📄 .env.example          # Environment template
 ├── 📄 .gitignore            # Git ignore rules
 ├── 📄 manage.py             # Django management script
-├── 📄 Procfile              # Heroku process file
-├── 📄 runtime.txt           # Python version specification
 ├── 📄 requirements.txt      # Python dependencies
 └── 📄 README.md             # This file
 ```
@@ -289,7 +280,7 @@ This project includes a REST API built with Django REST Framework.
 
 ### Base URL
 - Development: `http://127.0.0.1:8000/api/`
-- Production: `https://your-domain.com/api/`
+- Production: `https://mithunkumarrajak.pythonanywhere.com/api/`
 
 ### Authentication
 Uses JWT (JSON Web Tokens) for API authentication.
@@ -346,72 +337,9 @@ coverage report
 
 ---
 
-## 🛡️ Security Features
-
-### Production Security Checklist
-
-- ✅ **DEBUG = False** in production
-- ✅ **SECRET_KEY** unique and secure
-- ✅ **HTTPS enforcement** via `SECURE_SSL_REDIRECT`
-- ✅ **Secure cookies** (SESSION_COOKIE_SECURE, CSRF_COOKIE_SECURE)
-- ✅ **HSTS** enabled with 1-year duration
-- ✅ **XSS protection** enabled
-- ✅ **CSRF protection** on all forms
-- ✅ **Content-Type sniffing** prevention
-- ✅ **Clickjacking protection** (X-Frame-Options)
-- ✅ **Password validation** enforced
-- ✅ **SQL injection** prevention (Django ORM)
-
-### Running Security Checks
-
-```bash
-python manage.py check --deploy
-```
-
----
-
-## 🔍 Troubleshooting
-
-### Common Issues
-
-#### Issue: Static files not loading in production
-**Solution:**
-```bash
-python manage.py collectstatic --noinput
-# Ensure WhiteNoise is properly configured in settings.py
-```
-
-#### Issue: Database connection errors
-**Solution:**
-```bash
-# Check DATABASE_URL in .env
-# Ensure PostgreSQL is running
-# Verify database credentials
-```
-
-#### Issue: Email not sending
-**Solution:**
-```bash
-# Check email settings in .env
-# For Gmail, use App Password, not regular password
-# Verify EMAIL_USE_TLS=True for port 587
-```
-
-#### Issue: ModuleNotFoundError
-**Solution:**
-```bash
-# Reinstall dependencies
-pip install -r requirements.txt
-
-# Clear Python cache
-find . -type d -name __pycache__ -exec rm -r {} +
-```
-
----
-
 ## 🤝 Contributing
 
-We welcome contributions! Please follow these steps:
+Contributions are welcome! Please follow these steps:
 
 1. **Fork the repository**
 2. **Create a feature branch**
@@ -445,31 +373,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact & Support
 
-- **Author:** SmartShop
-- **Email:** esmartshopoffical@gmail.com
+- **Author:** Mithun Kumar Rajak
 - **GitHub:** [@MithunKumarRajak](https://github.com/MithunKumarRajak)
-- **Website:** [your-website.com](https://your-website.com)
-
----
-
-## 🙏 Acknowledgments
-
-- Django Documentation
-- Bootstrap Team
-- All contributors and supporters
-
----
-
-## 📊 Project Status
-
-![Project Status](https://img.shields.io/badge/Status-Active-success)
-![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)
-
-**Version:** 1.0.0  
-**Last Updated:** November 2025
+- **Live Demo:** [mithunkumarrajak.pythonanywhere.com](https://mithunkumarrajak.pythonanywhere.com/)
 
 ---
 
 <div align="center">
-Made with ❤️ by SmartShop
+Made with ❤️ by Mithun Kumar Rajak
 </div>
