@@ -35,6 +35,9 @@
           {% else %}
           <img src="{% static 'images/placeholder.svg' %}" alt="No image">
           {% endif %}
+          <div class="quick-view-overlay">
+            <span class="quick-view-btn"><i class="fa fa-eye me-1"></i>Quick View</span>
+          </div>
         </a>
         <div class="info-wrap">
           <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>

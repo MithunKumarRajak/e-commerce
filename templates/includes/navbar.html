@@ -92,13 +92,20 @@
 
       <!-- Right Section -->
       <ul class="navbar-nav ms-lg-3 mb-2 mb-lg-0 align-items-center">
+        <!-- Dark Mode Toggle -->
+        <li class="nav-item me-2">
+          <button class="dark-mode-toggle" id="darkModeToggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+            <i class="fa fa-moon"></i>
+          </button>
+        </li>
+
         <!-- Cart -->
         <li class="nav-item position-relative">
           <a href="{% url 'cart' %}" class="nav-link text-white fw-semibold">
             <i class="fa fa-shopping-cart fs-5"></i>
             {% if cart_count > 0 %}
             <span
-              class="badge bg-danger position-absolute top-0 start-100 translate-middle"
+              class="badge bg-danger cart-badge position-absolute top-0 start-100 translate-middle"
             >
               {{ cart_count }}
             </span>

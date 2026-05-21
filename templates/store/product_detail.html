@@ -6,21 +6,24 @@
     <div class="col-md-5">
       <!-- Main Image -->
       <div class="card shadow-sm">
-        {% if product.product_image %}
-        <img
-          id="main-img"
-          src="{{ product.product_image.url }}"
-          class="card-img-top"
-          style="height: 450px; object-fit: cover"
-        />
-        {% else %}
-        <img
-          id="main-img"
-          src="{% static 'images/placeholder.svg' %}"
-          class="card-img-top"
-          style="height: 450px; object-fit: cover"
-        />
-        {% endif %}
+        <div class="product-zoom-container">
+          {% if product.product_image %}
+          <img
+            id="main-img"
+            src="{{ product.product_image.url }}"
+            class="card-img-top"
+            style="height: 450px; object-fit: cover"
+          />
+          {% else %}
+          <img
+            id="main-img"
+            src="{% static 'images/placeholder.svg' %}"
+            class="card-img-top"
+            style="height: 450px; object-fit: cover"
+          />
+          {% endif %}
+          <span class="zoom-hint"><i class="fa fa-search-plus me-1"></i>Hover to zoom</span>
+        </div>
       </div>
 
       <!-- Thumbnails -->
