@@ -792,18 +792,45 @@ body {
 .list-group-item {
     background-color: var(--bg-card) !important;
     border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
     padding: 12px 20px !important;
     transition: all var(--transition-fast) !important;
+    text-decoration: none !important;
 }
 
 .list-group-item:hover {
     background-color: var(--accent-light) !important;
+    color: var(--accent) !important;
+}
+
+.list-group-item.active {
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.list-group-item.active i {
+    color: #ffffff !important;
+}
+
+.list-group-item i {
+    width: 20px;
+    text-align: center;
+    color: var(--text-muted) !important;
+    margin-right: 8px;
+    transition: color var(--transition-fast) !important;
+}
+
+.list-group-item:hover i {
+    color: var(--accent) !important;
 }
 
 .list-group-item a {
     color: var(--text-secondary) !important;
     font-weight: 500;
     transition: color var(--transition-fast);
+    text-decoration: none !important;
 }
 
 .list-group-item:hover a {
@@ -835,11 +862,26 @@ label {
     margin-bottom: 6px !important;
 }
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: var(--text-primary) !important;
+}
+
+hr {
+    border-color: var(--border-color) !important;
+    opacity: 0.15 !important;
+}
+
+.section-heading, .section-heading-premium {
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
 .card {
     background-color: var(--bg-card) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: var(--border-radius-md) !important;
     box-shadow: var(--shadow-sm) !important;
+    color: var(--text-primary) !important;
 }
 
 .card-body {
@@ -849,6 +891,49 @@ label {
 .card-title {
     color: var(--text-primary) !important;
     font-weight: 700 !important;
+}
+
+/* Premium Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    transition: all var(--transition-normal) !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+}
+
+.btn-secondary, .btn-outline-secondary {
+    background-color: transparent !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-secondary) !important;
+    font-weight: 600 !important;
+    transition: all var(--transition-normal) !important;
+}
+
+.btn-secondary:hover, .btn-outline-secondary:hover {
+    background-color: var(--accent-light) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    transform: translateY(-1px) !important;
+}
+
+.btn-light {
+    background-color: var(--bg-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    transition: all var(--transition-normal) !important;
+}
+
+.btn-light:hover {
+    background-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+    transform: translateY(-1px) !important;
 }
 
 /* Premium Dropdown Menu Styles */
