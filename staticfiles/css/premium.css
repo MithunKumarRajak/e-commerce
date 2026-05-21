@@ -655,7 +655,8 @@ body {
 .footer-section {
     background-color: #0b0f19 !important; /* Premium dark background */
     color: #94a3b8 !important;
-    padding-top: 50px;
+    padding-top: 60px;
+    padding-bottom: 40px;
 }
 
 .footer-section h6 {
@@ -670,7 +671,7 @@ body {
 .footer-section a {
     color: #94a3b8 !important;
     text-decoration: none !important;
-    display: inline-block !important;
+    display: block !important;
     margin-bottom: 10px;
     font-size: 14px;
     transition: all var(--transition-fast) !important;
@@ -700,24 +701,198 @@ body {
     transform: translateY(-3px);
 }
 
+.newsletter-form {
+    display: flex !important;
+    align-items: stretch !important;
+}
+
 .newsletter-form .form-control {
     background-color: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     color: #ffffff !important;
     border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm) !important;
+    height: 42px !important;
+}
+
+.newsletter-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.newsletter-form .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px var(--accent-light) !important;
 }
 
 .newsletter-form .btn-primary {
     border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0 !important;
     background: var(--accent) !important;
     border: none !important;
+    height: 42px !important;
+    padding: 0 20px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    margin-top: 40px;
+    padding-top: 24px;
 }
 
 .footer-bottom p {
     color: #64748b !important;
+    margin-bottom: 0;
+}
+
+.footer-bottom p span.mx-3 {
+    color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ===== NEW PREMIUM OVERRIDES FOR VISUAL PERFECTION ===== */
+
+/* Dark Mode Text Contrast Fix */
+[data-theme="dark"] .text-dark {
+    color: var(--text-primary) !important;
+}
+
+/* Category scroll button styling */
+.category-scroll-btn {
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.category-scroll-btn:hover {
+    background: var(--bg-primary) !important;
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+.category-scroll-btn:disabled {
+    background: var(--bg-primary) !important;
+    color: var(--text-muted) !important;
+    border-color: var(--border-color) !important;
+    opacity: 0.3 !important;
+}
+
+/* Sidebar premium styling */
+.card .card-header.bg-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%) !important;
+    border-bottom: none !important;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding: 14px 20px;
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0 !important;
+}
+
+.list-group-item {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    padding: 12px 20px !important;
+    transition: all var(--transition-fast) !important;
+}
+
+.list-group-item:hover {
+    background-color: var(--accent-light) !important;
+}
+
+.list-group-item a {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.list-group-item:hover a {
+    color: var(--accent) !important;
+}
+
+/* Premium Form Control Styles */
+.form-control, .form-select, textarea {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--border-radius-sm) !important;
+    padding: 10px 16px !important;
+    font-size: 14px !important;
+    transition: all var(--transition-fast) !important;
+}
+
+.form-control:focus, .form-select:focus, textarea:focus {
+    border-color: var(--accent) !important;
+    background-color: var(--bg-card) !important;
+    box-shadow: 0 0 0 4px var(--accent-light) !important;
+    color: var(--text-primary) !important;
+}
+
+label {
+    color: var(--text-secondary) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+}
+
+.card {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--border-radius-md) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.card-body {
+    padding: 24px !important;
+}
+
+.card-title {
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+}
+
+/* Premium Dropdown Menu Styles */
+.dropdown-menu {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-lg) !important;
+    border-radius: var(--border-radius-md) !important;
+    padding: 8px 0 !important;
+}
+
+.dropdown-item {
+    color: var(--text-primary) !important;
+    font-size: 14px;
+    padding: 8px 20px !important;
+    transition: all var(--transition-fast) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--accent-light) !important;
+    color: var(--accent) !important;
+}
+
+.dropdown-divider {
+    border-color: var(--border-color) !important;
+}
+
+/* Premium Table Styles */
+.table {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.table-light {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.table tbody tr {
+    background-color: var(--bg-card) !important;
+    transition: background-color var(--transition-fast);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--bg-primary) !important;
 }
 

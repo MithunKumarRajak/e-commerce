@@ -16,52 +16,52 @@
                         <h4 class="card-title mb-4">Billing Address</h4>
                         <form action="{% url 'place_order' %}" method="POST">
                             {% csrf_token %}
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">First Name</label>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label>First Name</label>
                                     <input type="text" name="first_name" class="form-control" required>
                                 </div>
-                                <div class="col form-group">
-                                    <label for="">Last Name</label>
+                                <div class="col-md-6">
+                                    <label>Last Name</label>
                                     <input type="text" name="last_name" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">Email</label>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label>Email</label>
                                     <input type="email" name="email" class="form-control" required>
                                 </div>
-                                <div class="col form-group">
-                                    <label for="">Phone Number</label>
+                                <div class="col-md-6">
+                                    <label>Phone Number</label>
                                     <input type="text" name="phone" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">Address Line 1</label>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <label>Address Line 1</label>
                                     <input type="text" name="address_line_1" class="form-control" required>
                                 </div>
-                                <div class="col form-group">
-                                    <label for="">Address Line 2</label>
+                                <div class="col-md-6">
+                                    <label>Address Line 2</label>
                                     <input type="text" name="address_line_2" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">City</label>
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-4">
+                                    <label>City</label>
                                     <input type="text" name="city" class="form-control" required>
                                 </div>
-                                <div class="col form-group">
-                                    <label for="">State</label>
+                                <div class="col-md-4">
+                                    <label>State</label>
                                     <input type="text" name="state" class="form-control" required>
                                 </div>
-                                <div class="col form-group">
-                                    <label for="">Country</label>
+                                <div class="col-md-4">
+                                    <label>Country</label>
                                     <input type="text" name="country" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <label for="">Order Note</label>
+                            <div class="mb-3">
+                                <label>Order Note</label>
                                 <textarea name="order_note" rows="2" class="form-control"></textarea>
                             </div>
 
