@@ -379,10 +379,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact & Support
 
-| Team Member | GitHub | Email |
-|-------------|--------|-------|
-| **Mithun Kumar Rajak** | [@MithunKumarRajak](https://github.com/MithunKumarRajak) | mithunkumarrajak01012005@gmail.com |
-| **Sanket Raikwar** | [@Sanket-Raikwar](https://github.com/Sanket-Raikwar) | raikwarsanket97@gmail.com |
+| Team Member | GitHub |
+|-------------|--------|
+| **Mithun Kumar Rajak** | [@MithunKumarRajak](https://github.com/MithunKumarRajak) |
+| **Sanket Raikwar** | [@Sanket-Raikwar](https://github.com/Sanket-Raikwar) |
 
 🔗 **Live Demo:** [mithunkumarrajak.pythonanywhere.com](https://mithunkumarrajak.pythonanywhere.com/)
 
